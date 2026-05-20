@@ -1,10 +1,12 @@
+import { CHECKOUT_BASE_URL, ENDPOINTS, FREE_SHIPPING_THRESHOLD, ROUTE_BASE } from "./constants.js";
+
 export class MhzCartSidebar {
   cartJson = {};
   cardParts = {};
   cartSidebar;
   coutEl = document.querySelector('[data-sidecart-open] .cout__holder')
-  baseUrl = 'index.php?route=checkout/mhz966/';
-  notSoBaseUrl = 'index.php?route=';
+  baseUrl = CHECKOUT_BASE_URL;
+  notSoBaseUrl = ROUTE_BASE;
 
   constructor(cartSidebar) {
     this.cartSidebar = cartSidebar;
@@ -55,7 +57,7 @@ export class MhzCartSidebar {
   }
 
   async getCart() {
-    await fetch(this.baseUrl + 'getCart')
+    await fetch(ENDPOINTS.getCart)
       .then(res => res.json())
       .then(res => {
         this.cartJson = res;
@@ -155,14 +157,14 @@ export class MhzCartSidebar {
       `;
 
       let price = parseInt(cartTotals.total.text.replaceAll(' ', ''));
-      if (price < 15000&&coupunFreeShipping != 1) {
-        let ostalos = 15000 - price;
-        // ${ostalos.toLocaleString()}  ₽
+      if (price < FREE_SHIPPING_THRESHOLD && coupunFreeShipping != 1) {
+        let leftToFreeShipping = FREE_SHIPPING_THRESHOLD - price;
+        // ${leftToFreeShipping.toLocaleString()}  ₽
         str += `
         <div class="summ-cart__row summ-cart__row_small">
           <div class="summ-cart__key">До бесплатной доставки осталось</div>
           <div class="summ-cart__value">
-          ${ostalos.toLocaleString()} руб
+          ${leftToFreeShipping.toLocaleString()} руб
           </div>
         </div>
         `;
@@ -275,7 +277,7 @@ export class MhzCartSidebar {
       let answer;
       let body = new FormData();
       body.append('key', id);
-      await fetch(this.notSoBaseUrl + 'checkout/cart/remove', {
+      await fetch(ENDPOINTS.cartRemove, {
         method: 'POST',
         body,
       })
@@ -314,7 +316,7 @@ export class MhzCartSidebar {
       let body = new FormData();
       body.append('key', id);
       body.append('quantity', quantity);
-      await fetch(this.notSoBaseUrl + 'checkout/cart/edit', {
+      await fetch(ENDPOINTS.cartEdit, {
         method: 'POST',
         body,
       })
@@ -388,7 +390,7 @@ export class MhzCartSidebar {
         let body = new FormData();
         body.append('key', key);
         body.append('quantity', quantity);
-        await fetch(this.notSoBaseUrl + 'checkout/cart/edit', {
+        await fetch(ENDPOINTS.cartEdit, {
           method: 'POST',
           body,
         })

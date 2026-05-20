@@ -2,6 +2,7 @@ import { formValidate } from "./forms/forms.js";
 import { tabs } from "./functions.js";
 import { mhzModules } from "./modules.js";
 import { gotoBlock } from "./scroll/gotoblock.js";
+import { CHECKOUT_BASE_URL, ENDPOINTS, FREE_SHIPPING_THRESHOLD } from "./constants.js";
 
 let md2 = matchMedia('(max-width: 992px)');
 export class MhzCart {
@@ -41,7 +42,7 @@ export class MhzCart {
   isSessionAjaxed = false;
 
 
-  baseUrl = 'index.php?route=checkout/mhz966/';
+  baseUrl = CHECKOUT_BASE_URL;
   dadataToken = 'db2462b55ca9eeb87e43838eb182a1d398c8c23e';
   observerConfig = {
     childList: false,
@@ -397,7 +398,7 @@ export class MhzCart {
     this.cartJson = false;
     let answer = false;
 
-    await fetch(this.baseUrl + 'getCart')
+    await fetch(ENDPOINTS.getCart)
       .then(res=>res.json())
       .then(res => this.cartJson = res)
       .catch(err=> console.error(err));
@@ -495,7 +496,7 @@ export class MhzCart {
     const summ = this.cartParts?.cartSumm;
     const total = this.cartJson?.totals?.total;
     const threeStepSumm = document.querySelector('[data-step="3"] .summ-cart');
-    const toFreeShipping = this.cartJson?.toFreeShipping || 15000;
+    const toFreeShipping = this.cartJson?.toFreeShipping || FREE_SHIPPING_THRESHOLD;
     const coupunFreeShipping = this.cartJson?.coupon_info?.shipping;
 
     if (summ&&total) {
