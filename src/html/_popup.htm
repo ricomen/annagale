@@ -1,0 +1,58 @@
+<script src="//api-maps.yandex.ru/2.1/?lang=ru_RU&amp;ns=cdekymap"></script>
+<a href="#" data-popup="#pvzPopup"></a>
+<div id="pvzPopup" aria-hidden="true" class="mhz-popup" data-nohash data-da="body, 99999, last">
+	<div class="mhz-popup__wrapper">
+		<div class="mhz-popup__content">
+			<button data-close type="button" class="mhz-popup__close">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.3337 13.3332L2.66699 2.6665M13.3337 2.6665L2.66699 13.3332" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <h2 class="mhz-popup__title">Выбор ПВЗ в городе <span data-sdek-city>Таком-то</span></h2>
+      <div class="form-deliveryCart__row mhz-popup__search" >
+        <label class="form-deliveryCart__label">Введите название или адрес</label>
+        <input type="text" class="form-deliveryCart__input" placeholder="Введите название или адрес" data-sdek-search>
+      </div>
+      <div class="mhz-popup__quantity">Доступно <span data-sdek-quantity>596</span> пунктов выдачи</div>
+      <div data-tabs class="mhz-popup__tabs mhz-popupTabs">
+        <nav data-tabs-titles class="mhz-popupTabs__navigation">
+          <button type="button" class="mhz-popupTabs__title">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line y1="1.9" x2="12" y2="1.9" stroke="black" stroke-width="0.7"></line>
+              <line y1="4.9" x2="9.75" y2="4.9" stroke="black" stroke-width="0.7"></line>
+              <line y1="7.9" x2="12" y2="7.9" stroke="black" stroke-width="0.7"></line>
+              <line y1="10.9" x2="9.75" y2="10.9" stroke="black" stroke-width="0.7"></line>
+            </svg>
+            <span>Списком</span>
+          </button>
+          <button type="button" class="mhz-popupTabs__title _tab-active">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.23966 4.43093C9.23066 2.39782 7.61257 0.75 5.60506 0.75C3.59755 0.75 1.97046 2.39782 1.97046 4.43093C1.97046 7.06202 5.599 11.25 5.599 11.25C5.599 11.25 9.2516 7.06202 9.23966 4.43093Z" stroke="black" stroke-width="0.7" stroke-miterlimit="10"></path>
+              <path d="M5.60509 5.59617C6.27421 5.59617 6.81663 5.05375 6.81663 4.38463C6.81663 3.71552 6.27421 3.1731 5.60509 3.1731C4.93598 3.1731 4.39355 3.71552 4.39355 4.38463C4.39355 5.05375 4.93598 5.59617 5.60509 5.59617Z" stroke="black" stroke-width="0.7" stroke-miterlimit="10"></path>
+            </svg>
+            <span>На карте</span>
+          </button>
+        </nav>
+        <div data-tabs-body class="mhz-popupTabs__content" data-sdek-offices="features.json">
+          <div class="mhz-popupTabs__body mhz-popupTabs__list"  data-sdek-list data-simplebar>
+            <div class="mhz-baloon" data-coords="59.733055,30.086403">
+              <h4 class="mhz-baloon__title">
+                <img src="https://annagale.ru/image/catalog/ll_cdek/logo_small.png">
+                <b>Почтовый индекс</b> Название ПВЗ
+              </h4>
+              <div class="mhz-baloon__body">
+                <div class="mhz-baloon__address">Адрес точки</div>
+                <a href="tel:Контактный телефон" class="mhz-baloon__phone">Контактный телефон</a>
+                <div class="mhz-baloon__time">Время работы</div>
+                <div class="mhz-baloon__nearest">Ближайшая остановка</div>
+              </div>
+              <button class="mhz-baloon__choice mhz-btn" data-choice="Адрес точки" hidden></button>
+            </div>
+          </div>
+          <div class="mhz-popupTabs__body mhz-popupTabs__map" data-sdek-map>
+          </div>
+        </div>
+      </div>
+		</div>
+	</div>
+</div>

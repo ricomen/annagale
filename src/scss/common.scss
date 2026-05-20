@@ -1,0 +1,53 @@
+// Заголовки, общие БЄМ блоки и проче...
+
+[hidden] {
+  display: none !important;
+}
+
+._md1dn {
+  @media (max-width:$pc){
+    display: none !important;
+  }
+}
+
+._mmd1dn {
+  @media (min-width:$pc){
+    display: none !important;
+  }
+}
+
+._md2dn {
+  @media (max-width:$tablet){
+    display: none !important;
+  }
+}
+
+._mmd2dn {
+  @media (min-width:$tablet){
+    display: none !important;
+  }
+}
+
+._md3dn {
+  @media (max-width:$mobile){
+    display: none !important;
+  }
+}
+
+._mmd3dn {
+  @media (min-width:$mobile){
+    display: none !important;
+  }
+}
+
+._md4dn {
+  @media (max-width:$mobileSmall){
+    display: none !important;
+  }
+}
+
+._mmd4dn {
+  @media (min-width:$mobileSmall){
+    display: none !important;
+  }
+}

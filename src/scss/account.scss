@@ -1,0 +1,102 @@
+.mhz-acctabs {
+
+  &__navigation {
+    display: flex;
+    max-width: calc(100vw - rem(20));
+    overflow: auto;
+  }
+
+  &__title {
+    transition: all 0.3s ease 0s;
+    flex: 1 0 auto;
+    // flex-shrink: 0;
+    border: none;
+    padding: rem(12);
+    color: #424242;
+    background-color: #f0f4f3;
+    font-size: rem(16);
+    text-align: center;
+    cursor: pointer;
+    @media (any-hover: hover){
+      &:hover{
+        color: #fff;
+        background-color: rgba(90, 140, 50, 1);
+      }
+    }
+    &._tab-active {
+      color: #fff;
+      background-color: #5b8c32;
+    }
+  }
+
+  &__content {
+  }
+
+  &__body {
+    max-width: none;
+    padding: rem(40) 0;
+  }
+}
+
+.mhz-spollers {
+
+  &__item {
+    &:not(:last-child) {margin-bottom: rem(10);}
+    padding-bottom: rem(10);
+    border-bottom: 1px solid rgba(66, 66, 66, 0.1);
+  }
+
+  &__title {
+    border: none;
+    background: transparent;
+    text-align: left;
+    padding: rem(10);
+    padding-right: rem(40);
+    position: relative;
+    color: #424242;
+    width: 100%;
+    font-size: rem(16);
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(90, 140, 50, 0);
+    transition: all 0.3s ease 0s;
+    &::before,&::after{
+      content:'';
+      position: absolute;
+      top: 50%;
+      right: rem(5);
+      width: rem(12);
+      height: rem(1);
+      background-color: #424242;
+      transform: translateY(-50%);
+      transition: all 0.3s ease 0s;
+    }
+    &::after{
+      content:'';
+      transform: translateY(-50%) rotate(90deg);
+    }
+
+    @media (any-hover: hover){
+      &:hover{
+        color: rgba(90, 140, 50, 0.75);
+        &::before,&::after{
+          background-color: rgba(90, 140, 50, 0.75);
+        }
+      }
+    }
+    &._spoller-active {
+      color: #5b8c32;
+      border-color: rgba(90, 140, 50, 0.1);
+      &::before,&::after{
+        background-color: #5b8c32;
+      }
+      &::after{
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &__body {
+    padding: rem(10);
+  }
+}
