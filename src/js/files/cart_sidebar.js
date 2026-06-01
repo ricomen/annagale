@@ -1,4 +1,4 @@
-import { CHECKOUT_BASE_URL, ENDPOINTS, FREE_SHIPPING_THRESHOLD, ROUTE_BASE } from "./constants.js";
+import { CHECKOUT_BASE_URL, ENDPOINTS, ROUTE_BASE } from "./constants.js";
 
 export class MhzCartSidebar {
   cartJson = {};
@@ -123,6 +123,7 @@ export class MhzCartSidebar {
   renderCartSumm() {
     const cartSummEl = this.cardParts.cartSumm;
     const cartTotals = this.cartJson.totals;
+    const toFreeShipping = this.cartJson?.toFreeShipping;
     const coupunFreeShipping = this.cartJson?.coupon_info?.shipping;
 
     if (cartSummEl&&cartTotals) {
@@ -157,8 +158,8 @@ export class MhzCartSidebar {
       `;
 
       let price = parseInt(cartTotals.total.text.replaceAll(' ', ''));
-      if (price < FREE_SHIPPING_THRESHOLD && coupunFreeShipping != 1) {
-        let leftToFreeShipping = FREE_SHIPPING_THRESHOLD - price;
+      if (toFreeShipping > 0 && price < toFreeShipping && coupunFreeShipping != 1) {
+        let leftToFreeShipping = toFreeShipping - price;
         // ${leftToFreeShipping.toLocaleString()}  ₽
         str += `
         <div class="summ-cart__row summ-cart__row_small">

@@ -2,7 +2,7 @@ import { formValidate } from "./forms/forms.js";
 import { tabs } from "./functions.js";
 import { mhzModules } from "./modules.js";
 import { gotoBlock } from "./scroll/gotoblock.js";
-import { CHECKOUT_BASE_URL, ENDPOINTS, FREE_SHIPPING_THRESHOLD } from "./constants.js";
+import { CHECKOUT_BASE_URL, ENDPOINTS } from "./constants.js";
 
 let md2 = matchMedia('(max-width: 992px)');
 export class MhzCart {
@@ -496,7 +496,7 @@ export class MhzCart {
     const summ = this.cartParts?.cartSumm;
     const total = this.cartJson?.totals?.total;
     const threeStepSumm = document.querySelector('[data-step="3"] .summ-cart');
-    const toFreeShipping = this.cartJson?.toFreeShipping || FREE_SHIPPING_THRESHOLD;
+    const toFreeShipping = this.cartJson?.toFreeShipping;
     const coupunFreeShipping = this.cartJson?.coupon_info?.shipping;
 
     if (summ&&total) {
@@ -514,7 +514,7 @@ export class MhzCart {
       // let shippingCondition = totalCouponText ? !freeShippingArr.includes(totalCouponText) : true;
       let shippingCondition = coupunFreeShipping != 1;
 
-      if (parseInt(total.text.replaceAll(' ', '')) < toFreeShipping&&condition&&shippingCondition) {
+      if (toFreeShipping > 0 && parseInt(total.text.replaceAll(' ', '')) < toFreeShipping && condition && shippingCondition) {
         let ostalos = toFreeShipping - parseInt(total.text.replaceAll(' ', ''));
         str += `
         <div class="summ-cart__row summ-cart__row_small">

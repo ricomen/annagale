@@ -1,5 +1,3 @@
-export const FREE_SHIPPING_THRESHOLD = 5000;
-
 export const ROUTE_BASE = 'index.php?route=';
 export const CHECKOUT_BASE_URL = `${ROUTE_BASE}checkout/mhz966/`;
 
