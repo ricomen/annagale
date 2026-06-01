@@ -513,9 +513,10 @@ export class MhzCart {
       let condition = !internationalDelivery||(internationalDelivery&&(internationalDelivery.hidden||internationalDelivery.closest('[hidden]')));
       // let shippingCondition = totalCouponText ? !freeShippingArr.includes(totalCouponText) : true;
       let shippingCondition = coupunFreeShipping != 1;
+      const cartTotal = parseInt(total.text.replaceAll(' ', ''));
 
-      if (toFreeShipping > 0 && parseInt(total.text.replaceAll(' ', '')) < toFreeShipping && condition && shippingCondition) {
-        let ostalos = toFreeShipping - parseInt(total.text.replaceAll(' ', ''));
+      if (toFreeShipping > 0 && cartTotal < toFreeShipping && condition && shippingCondition) {
+        let ostalos = toFreeShipping - cartTotal;
         str += `
         <div class="summ-cart__row summ-cart__row_small">
           <div class="summ-cart__key">До бесплатной доставки осталось</div>
