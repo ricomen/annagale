@@ -1,3 +1,162 @@
 //====================================================================================================
-
+.footer {
+    &__container {
+      padding: 28px 106px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @include response(1679px){
+        padding: 28px 50px;
+      }
+      @include response(1023px){
+        flex-direction: column;
+        padding: 20px 15px;
+      }
+    }
+    &__col {
+      max-width: 33.3333%;
+      max-width: 40%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:first-child {
+        @include response(1439px){
+          justify-content: flex-start;
+        }
+        @include response(1023px){
+          order: 1;
+          max-width: 100%;
+          justify-content: center;
+          flex-direction: column-reverse;
+          margin-bottom: 15px;
+        }
+      }
+      &:nth-child(2) {
+        max-width: 20%;
+        @include response(1023px){
+          order: 2;
+          max-width: 100%;
+          margin-bottom: 15px;
+        }
+      }
+      &:last-child {
+        @include response(1439px){
+          justify-content: flex-end;
+        }
+        @include response(1023px){
+          order: 3;
+          max-width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+  }
+  
+  .anna-gale {
+    font-size: 12px;
+    line-height: 18px;
+    color: $d-gray;
+    margin-right: 23px;
+    @include response(1023px){
+      margin: 0;
+      text-align: center;
+    }
+  }
+  
+  .privacy-policy {
+    @include response(1023px){
+      margin-bottom: 12px;
+    }
+    &__link {
+      font-size: 12px;
+      line-height: 18px;
+      color: $d-gray;
+      transition: .3s ease-out;
+      @include hover() {
+        color: $apple;
+      }
+    }
+  }
+  
+  .btn-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    max-width: 40px;
+    height: 33px;
+    overflow: hidden;
+    position: relative;
+    @include hover() {
+      .btn-up__icon {
+        transform: translateY(-10px);
+      }
+      .btn-up__hover {
+        top: 0;
+        transform: translateX(-50%);
+      }
+      .btn-up__text {
+        color: $apple;
+      }
+    }
+    &__icon {
+      display: flex;
+      margin-bottom: 8px;
+      transform: translateY(0);
+      transition: .3s ease-out;
+    }
+    &__hover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      transition: top 0.3s ease-out;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 16px;
+      width: 17px;
+      border-radius: 50%;
+      background-color: $apple;
+    }
+    &__text {
+      font-size: 12px;
+      line-height: 18px;
+      color: $d-gray;
+      transition: .3s ease-out;
+    }
+  }
+  
+  .dev {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include hover() {
+      .lemon-icon {
+        transform: translate(0,-100%);
+      }
+      .lemon-icon-hover {
+        transform: translate(0,-100%);
+      }
+    }
+    &__text {
+      font-size: 12px;
+      line-height: 16px;
+      margin-right: 12px;
+      font-weight: 400;
+      color: $d-gray;
+    }
+  }
+  .lemon {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    width: 93px;
+    height: 14px;
+    > img {
+      transition: .3s ease-in-out;
+    }
+  }
 //====================================================================================================
