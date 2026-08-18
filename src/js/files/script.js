@@ -8,6 +8,7 @@ import  "./modules.js";
 let cartSidebar = null;
 
 document.addEventListener("DOMContentLoaded", function () {
+  initSocialFixed();
   const header = document.querySelector('.header');
   const wrapper = document.querySelector('.wrapper');
   header&&wrapper ? setWrapperPadding(header, wrapper) : null;
@@ -37,6 +38,32 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 })
 
+
+function initSocialFixed() {
+  const root = document.querySelector('.social-fixed');
+  if (!root) return;
+
+  const toggle = root.querySelector('.social-fixed__toggle');
+  if (!toggle) return;
+
+  const setOpen = (open) => {
+    root.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть чат');
+  };
+
+  toggle.addEventListener('click', () => {
+    setOpen(!root.classList.contains('is-open'));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!root.contains(e.target)) setOpen(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+}
 
 function setWrapperPadding(header, wrapper) {
   document.body.style.setProperty('--pt', header.offsetHeight + 'px');
