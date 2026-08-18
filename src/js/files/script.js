@@ -46,23 +46,72 @@ function initSocialFixed() {
   const toggle = root.querySelector('.social-fixed__toggle');
   if (!toggle) return;
 
+  const bubble = root.querySelector('.social-fixed__bubble');
+  const bubbleClose = root.querySelector('.social-fixed__bubble-close');
+  const storageKey = 'socialGreetingDismissed';
+  const greetingDelay = 3000;
+
+  const hideGreeting = (persist) => {
+    root.classList.remove('has-greeting');
+    if (bubble) bubble.setAttribute('aria-hidden', 'true');
+    if (persist) {
+      try {
+        sessionStorage.setItem(storageKey, '1');
+      } catch (e) {}
+    }
+  };
+
   const setOpen = (open) => {
     root.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть чат');
+    if (open) hideGreeting(true);
   };
 
   toggle.addEventListener('click', () => {
     setOpen(!root.classList.contains('is-open'));
   });
 
+  if (bubbleClose) {
+    bubbleClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      hideGreeting(true);
+    });
+  }
+
+  if (bubble) {
+    bubble.addEventListener('click', (e) => {
+      if (e.target.closest('.social-fixed__bubble-close')) return;
+      setOpen(true);
+    });
+  }
+
   document.addEventListener('click', (e) => {
     if (!root.contains(e.target)) setOpen(false);
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setOpen(false);
+    if (e.key !== 'Escape') return;
+    if (root.classList.contains('is-open')) {
+      setOpen(false);
+    } else {
+      hideGreeting(true);
+    }
   });
+
+  let dismissed = false;
+  try {
+    dismissed = sessionStorage.getItem(storageKey) === '1';
+  } catch (e) {}
+
+  // if (!dismissed) {
+    window.setTimeout(() => {
+      if (root.classList.contains('is-open')) return;
+      root.classList.add('has-greeting');
+      if (bubble) bubble.setAttribute('aria-hidden', 'false');
+    }, greetingDelay);
+  // }
 }
 
 function setWrapperPadding(header, wrapper) {
