@@ -8,3 +8,4 @@ version.json
 Source/
 **/*.zip
 **/*.rar
+.DS_Store
