@@ -1,0 +1,47 @@
+{{ header }}
+
+<div class="container">
+    <div class="breadcrumbs">
+        <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <span class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+                    </li>
+                {% else %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="block-caption">
+        <h1 class="title">{{ heading_title }}</h1>
+    </div>
+
+    <div class="checkout-page">
+        <div class="contact-box">
+            <div class="contact-box__wrap after-elem">
+                <div class="contact-box__inner before-elem">
+                    <div class="contact-box__border txt-elem">
+                        <div class="checkout-notific">
+                            <div class="checkout-notific__icon">
+                                <img src="/front/dist/images/checkout-icon.svg" alt="icon" height="104" width="104">
+                            </div>
+                            <div class="checkout-notific__title">Заказ №{{ order_id }} успешно оформлен</div>
+                            <div class="checkout-notific__subtitle">После отправки заказа, вам поступит уведомление с номером для отслеживания
+                            </div>
+                            <a href="/" class="btn btn-default">На главную</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

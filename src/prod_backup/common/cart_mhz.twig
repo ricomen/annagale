@@ -1,0 +1,125 @@
+<div class="widget-elem__items" data-sidecart-open>
+  <div class="cout">
+    <span class="cout__holder">{{ text_items }}</span>
+  </div>
+  <a href="javascript:void(0);">
+    <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.00383282 13.8307L1.0769 3.51411C1.0999 3.28507 1.32601 3.11166 1.59044 3.11166H3.7979C3.82856 1.39059 5.4765 0 7.5 0C9.52351 0 11.1714 1.39059 11.2021 3.11166H13.4096C13.6778 3.11166 13.9001 3.28507 13.9231 3.51411L14.9962 13.8307C14.9962 13.8438 15 13.8569 15 13.8699C15 15.0446 13.7391 16 12.187 16H2.81298C1.26086 16 9.53674e-07 15.0446 9.53674e-07 13.8699C9.53674e-07 13.8569 9.53674e-07 13.8438 0.00383282 13.8307ZM7.5 0.883436C6.04752 0.883436 4.86331 1.87812 4.83265 3.11166H10.1673C10.1367 1.87812 8.95248 0.883436 7.5 0.883436ZM2.81298 15.1166H12.187C13.1605 15.1166 13.9499 14.5669 13.9653 13.8896L12.9382 3.99836H11.2059V5.33988C11.2059 5.58528 10.976 5.78159 10.6886 5.78159C10.4011 5.78159 10.1712 5.58528 10.1712 5.33988V3.99836H4.83265V5.33988C4.83265 5.58528 4.60271 5.78159 4.31528 5.78159C4.02785 5.78159 3.7979 5.58528 3.7979 5.33988V3.99836H2.06566L1.03475 13.8896C1.05008 14.5669 1.84338 15.1166 2.81298 15.1166Z" fill="black"/>
+    </svg>
+  </a>
+</div>
+
+
+<div class="mhz-cart__backdrop" data-sidecart-close style="display: none;"></div>
+<div class="mhz-cart_sidebar" style="display: none;">
+  <div class="mhz-cart__products products-cart">
+    <div class="mhz-cart__loader" hidden>
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="products-cart__top">
+      <svg width="59" height="59" viewBox="0 0 59 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="29.5" cy="29.5" r="29.5" fill="#556037" fill-opacity="0.26" />
+        <path
+          d="M31.4058 17.7738C31.3716 15.8412 29.777 14.3022 27.8444 14.3364C25.9117 14.3706 24.3727 15.9652 24.4069 17.8979L31.4058 17.7738ZM24.4069 17.8979L24.6372 30.8946L31.6361 30.7706L31.4058 17.7738L24.4069 17.8979Z"
+          fill="#556037" />
+        <path d="M28.1374 30.5187L47.4983 30.5186" stroke="#556037" stroke-width="7" stroke-linecap="round" />
+      </svg>
+      <span><b>Это займет у Вас всего</b> 3 минуты</span>
+    </div>
+    <div class="products-cart__head">
+      <a href="javascript:void(0);" data-sidecart-close class="products-cart__back">
+        <svg width="75" height="24" viewBox="0 0 75 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0.939339 10.9393C0.353554 11.5251 0.353554 12.4749 0.939339 13.0607L10.4853 22.6066C11.0711 23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97919 12.6066 1.3934C12.0208 0.807611 11.0711 0.807611 10.4853 1.3934L0.939339 10.9393ZM75 10.5L2 10.5V13.5L75 13.5V10.5Z"
+            fill="black" />
+        </svg>
+      </a>
+      <div class="products-cart__title">КОРЗИНА</div>
+    </div>
+    <div class="products-cart__body">
+      <div class="products-cart__list">
+      
+      {% if products %}
+        {% for product in products %}
+          <div class="products-cart__item item-cart" data-id="{{ product.cart_id }}">
+            <a href={{ product.href }} class="item-cart__image">
+              <img src="{{ product.thumb }}" alt="image">
+            </a>
+            <div class="item-cart__body">
+              <a href="{{ product.href }}" class="item-cart__name">{{ product.name }}</a>
+              <div class="item-cart__prices">
+                <!-- <div class="item-cart__oldprice">2 190 ₽</div> на случай наличия старой цены -->
+                <div class="item-cart__actprice">{{ product.total }}</div>
+              </div>
+              <div class="quantity item-cart__quantity">
+                <button type="button" class="quantity__button quantity__button_minus"></button>
+                <div class="quantity__input">
+                  <input autocomplete="off" type="text" name="form[]" value="{{ product.quantity }}">
+                </div>
+                <button type="button" class="quantity__button quantity__button_plus"></button>
+              </div>
+              <a href="javascript:void(0);" class="item-cart__del" title="{{ button_remove }}">
+                <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none">
+                  <path d="M8 11h16M14 15v6M18 15v6M9 11l1 12c0 .5.2 1 .6 1.4.4.4.9.6 1.4.6h8c.5 0 1-.2 1.4-.6.4-.4.6-.9.6-1.4l1-12M13 11V8c0-.3.1-.5.3-.7.2-.2.4-.3.7-.3h4c.3 0 .5.1.7.3.2.2.3.4.3.7v3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+
+        </div>
+{% if modules %}
+      <h2>{{ text_next }}</h2>
+      <p>{{ text_next_choice }}</p>
+      <div class="panel-group" id="accordion"> {% for module in modules %}
+        {{ module }}
+        {% endfor %} </div>
+      {% endif %} <br />
+        <form data-ajax method="post" action="/index.php?route=checkout/mhz966/coupon" class="products-cart__promo promo-cart" data-noclean>
+          <input type="text" name="coupon" class="promo-cart__input" placeholder="Введите промокод или подарочный сертификат" autocomplete="off" data-required {% if totals.coupon %} readonly {% endif %}>
+          <button type="submit" class="promo-cart__button">
+            <svg width="43" height="24" viewBox="0 0 43 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M42.0607 13.0607C42.6464 12.4749 42.6464 11.5251 42.0607 10.9393L32.5147 1.3934C31.9289 0.807611 30.9792 0.807611 30.3934 1.3934C29.8076 1.97918 29.8076 2.92893 30.3934 3.51472L38.8787 12L30.3934 20.4853C29.8076 21.0711 29.8076 22.0208 30.3934 22.6066C30.9792 23.1924 31.9289 23.1924 32.5147 22.6066L42.0607 13.0607ZM6.55843e-09 13.5L41 13.5L41 10.5L-6.55843e-09 10.5L6.55843e-09 13.5Z" fill="white"/>
+            </svg>
+          </button>
+          <button type="button" class="promo-cart__button" hidden data-promo-clean>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.3337 13.3332L2.66699 2.6665M13.3337 2.6665L2.66699 13.3332" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          </button>
+        </form>
+        <div class="products-cart__summ summ-cart">
+            {% for total in totals %}
+              <div class="summ-cart__row">
+                <div class="summ-cart__key">{{ total.title }}</div>
+                <div class="summ-cart__value">{{ total.text }}</div>
+              </div>
+            {% endfor %}
+        </div>
+        {# <a href="{{ checkout }}" class="products-cart__button">{{ text_checkout }}</a> #}
+        {# <a href="{{ cart }}" class="products-cart__button">{{ text_checkout }}</a> #}
+        <a href="{{ cart }}" class="products-cart__button">ПРОДОЛЖИТЬ</a>
+      {% else %}
+          <h2>{{ text_empty }}</h2>
+        </div>
+        <form data-ajax method="post" action="/index.php?route=checkout/mhz966/coupon" class="products-cart__promo promo-cart" data-noclean hidden>
+          <input type="text" name="coupon" class="promo-cart__input" placeholder="Введите промокод или подарочный сертификат" autocomplete="off" data-required {% if totals.coupon %} readonly {% endif %}>
+          <button type="submit" class="promo-cart__button">
+            <svg width="43" height="24" viewBox="0 0 43 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M42.0607 13.0607C42.6464 12.4749 42.6464 11.5251 42.0607 10.9393L32.5147 1.3934C31.9289 0.807611 30.9792 0.807611 30.3934 1.3934C29.8076 1.97918 29.8076 2.92893 30.3934 3.51472L38.8787 12L30.3934 20.4853C29.8076 21.0711 29.8076 22.0208 30.3934 22.6066C30.9792 23.1924 31.9289 23.1924 32.5147 22.6066L42.0607 13.0607ZM6.55843e-09 13.5L41 13.5L41 10.5L-6.55843e-09 10.5L6.55843e-09 13.5Z" fill="white"/>
+            </svg>
+          </button>
+          <button type="button" class="promo-cart__button" hidden data-promo-clean>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.3337 13.3332L2.66699 2.6665M13.3337 2.6665L2.66699 13.3332" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          </button>
+        </form>
+        <div class="products-cart__summ summ-cart" hidden>
+        </div>
+        <a href="{{ cart }}" class="products-cart__button" hidden>ПРОДОЛЖИТЬ</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+

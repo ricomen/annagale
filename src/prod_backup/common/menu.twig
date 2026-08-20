@@ -1,0 +1,32 @@
+{% if categories %}
+
+{% for category in categories %}
+  {% if category.status == 1 %}
+  <div class="box-category">
+    <div class="box-category__holder">
+      <div  class="box-category__link">
+        <img src="{{ category.image }}" alt="pic" width="147" height="242">
+      </div>
+
+      <div class="box-category__icon">
+        <img src="/front/dist/images/category-info.svg" alt="icon">
+      </div>
+      <div class="box-category__info">
+        Категория в разработке
+      </div>
+
+      <span   class="box-category__desc">{{ category.name }}</span>
+    </div>
+  </div>
+    {% else %}
+      <div class="box-category">
+        <div class="box-category__holder">
+          <a href="{{ category.href }}" class="box-category__link">
+            <img src="{{ category.image }}" alt="pic" width="147" height="242">
+          </a>
+          <a  href="{{ category.href }}" class="box-category__desc">{{ category.name }}</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% endif %} 

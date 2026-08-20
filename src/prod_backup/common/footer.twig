@@ -1,0 +1,740 @@
+</div>
+<!-- Виджет задать вопрос в левой боковой панели
+<div class="widget-callback">
+    <a href="#" class="widget-callback__link popup-open" data-for="popup-ask">
+        <i>
+            <img src="/front/dist/images/callback-icon.svg" alt="pic" width="25" height="25">
+        </i>
+        <span class="widget-callback__txt">Задать вопрос</span>
+    </a>
+</div>
+
+
+
+
+</div>
+<div class="widget-callback">
+    <a href="#" class="widget-callback__link popup-open" data-for="popup-ask">
+        <i>
+            <img src="/front/dist/images/callback-icon.svg" alt="pic" width="25" height="25">
+        </i>
+        <span class="widget-callback__txt">Задать вопрос</span>
+    </a>
+</div>
+-->
+
+<!--Скрываем amo_brand -->
+<style>
+    #amo_brand{
+        display: none!important;
+    }
+</style>
+<!-- -->
+
+<!--Скрываем Cookie policy -->
+<style>
+.cc-color-override--1360619034{
+        display: none!important;
+    }
+</style>
+<!-- -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(70902100, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/70902100" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+            {{ yandex_metrika_html_code }}
+            <script type="text/javascript">
+                window.dataLayer = window.dataLayer || [];
+                function sendEcommerceAdd(id, quantity) {
+                   $.ajax({
+                        url: 'index.php?route=extension/payment/yandex_money/productInfo',
+                        type: 'post',
+                        data: 'id=' + id,
+                        dataType: 'json',
+                        success: function(json) {
+                            json.quantity = quantity;
+                            dataLayer.push({ecommerce: {add: {products: [json]}}});
+                        }
+                    });
+                }
+                $(window).on("load", function () {
+                    var opencartCartAdd = cart.add;
+                    cart.add = function (product_id, quantity) {
+                        opencartCartAdd(product_id, quantity);
+                        sendEcommerceAdd(product_id, typeof(quantity) !== 'undefined' ? parseInt(quantity) : 1);
+                    };
+
+                    $('#button-cart').on('click', function() {
+                        var ecommerce_product = new Array();
+                        sendEcommerceAdd($('#product input[name="product_id"]').val(), parseInt($('#product input[name="quantity"]').val()));
+                    });
+                });
+            </script>
+            <footer class="footer">
+                <div class="btn-up mhz-btn-up _hide">
+                    <i class="btn-up__icon">
+                        <img src="/front/dist/images/btn-up.svg" alt="pic" width="11" height="7">
+                    </i>
+                    <i class="btn-up__hover">
+                        <img src="/front/dist/images/btn-up-hover.svg" alt="pic" width="9" height="5">
+                    </i>
+                    {# <span class="btn-up__text">ВВЕРХ</span> #}
+                </div>
+
+                <div class="footer__inner">
+                    <div class="row">
+                   
+                        <div class="footer__col">
+                            <div class="privacy-policy">
+                                <a href="/privacy" class="privacy-policy__link">Публичная оферта и Политика конфиденциальности</a>
+                                <a href="/rec" class="privacy-policy__link">На информационном ресурсе применяются рекомендательные технологии.</a>
+                                <div class="footer-copyright footer-text">
+                                    Anna Gale Professional © {{ "now"|date("Y") }}. All rights reserved.
+                                </div>
+                            
+                            </div>
+                        </div>
+
+                        <div class="footer__col">
+                            <div class="btn-up">
+                                <i class="btn-up__icon">
+                                    <img src="/front/dist/images/btn-up.svg" alt="pic" width="11" height="7" aria-hidden>
+                                </i>
+                                <i class="btn-up__hover">
+                                    <img src="/front/dist/images/btn-up-hover.svg" alt="pic" width="9" height="5" aria-hidden>
+                                </i>
+                                <span class="btn-up__text">ВВЕРХ</span>
+                            </div>
+                        </div>
+
+                        <div class="footer__col footer__col--contacts">
+                            <address class="footer-text footer-contacts">
+                                <strong>ANNA GALE</strong><br>
+                                Продавец: ИП Галевко Анна Владимировна<br>
+                                ИНН 773417347854 • ОГРН 31777460039634<br>
+                                Адрес регистрации: 123022, г. Москва<br>
+                                Тел.: <a href="tel:+74991124085">+7 (499) 112-40-85</a> • <a href="mailto:info@annagale.ru">info@annagale.ru</a>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+
+
+            </footer>
+        {% if facebook_messenger_enabled_FAE == 'true' %}
+        <script>
+          // checks if the customer chat in header is successfully added
+          // and if so, will need to remove away the customer chat from the footer
+          if (window.isFacebookCustomerChatInHeaderAdded === 1) {
+            $('div#fb-customerchat-footer').remove();
+          }
+        </script>
+        {% endif %}
+</div>
+
+<div class="popup popup-questions">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--questions">
+            <div class="items items-question">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <form action="#" class="form">
+                                <div class="form__title">Остались вопросы?</div>
+                                <div class="form__subtitle">Заполните форму и мы свяжемся с вами в ближайшее время</div>
+                                <div class="form__box">
+                                    <div class="form__row">
+                                        <input type="text" class="form__control" placeholder="Имя*">
+                                    </div>
+                                    <div class="form__row">
+                                        <input type="text" class="form__control" placeholder="Телефон*">
+                                    </div>
+                                    <div class="form__row form__row-comment">
+                                        <textarea class="form__control" placeholder="Сообщение"></textarea>
+                                    </div>
+                                </div>
+                                <label class="convention">
+                                    <input type="checkbox" class="convention__check">
+                                    <i class="convention__mark"></i>
+                                    <span class="convention__text">Я соглашаюсь с
+							      <a href="/privacy" class="convention__link">публичной офертой и политикой конфиденциальности</a>
+							    и обработкой моих персональных данных</span>
+                                </label>
+                                <button type="submit" class="btn btn-default">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup popup-personal">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--personal popup__content--basket">
+            <div class="items items-personal">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <!-- START FORM AUTH -->
+                            <form id="login_form" class="form">
+                                <div class="form__title">Личный кабинет</div>
+                                <div class="form__box">
+                                    <div class="form__row">
+                                        <input name="email" type="email" class="form__control" placeholder="Email*">
+                                    </div>
+                                    <div class="form__row">
+                                        <input name="password" type="password" class="form__control" placeholder="Пароль*">
+                                    </div>
+                                </div>
+                                <div class="form__personal">
+                                    <button onclick="return false" type="submit" class="btn btn-default">Войти</button>
+                                    <div class="form__personal-link">
+                                        <a href="{{ register }}" target="_blank" >Регистрация</a>
+                                        <a href="#" class="popup-open" data-for="popup-lostpass">Забыли пароль</a>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- END FORM AUTH -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup popup-ask">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--questions">
+            <div class="items items-ask">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <form id="que_pay" class="form">
+                                <div class="form__title">Задать вопрос</div>
+                                <div class="form__box">
+                                    <div class="form__row">
+                                        <input name="name" type="text" class="form__control" placeholder="Имя">
+                                    </div>
+                                    <div class="form__row">
+                                        <input name="email" type="email" class="form__control" placeholder="Email*">
+                                    </div>
+                                    <div class="form__row">
+                                        <input name="telephone" type="text" class="form__control" placeholder="Телефон*">
+                                    </div>
+                                    <div class="form__row form__row-comment">
+                                        <textarea name="text" class="form__control" placeholder="Сообщение"></textarea>
+                                    </div>
+                                </div>
+                                <label class="convention">
+                                    <input name="police" type="checkbox" class="convention__check">
+                                    <i class="convention__mark"></i>
+                                    <span class="convention__text">Я соглашаюсь с
+							      <a href="/privacy" class="convention__link">публичной офертой и политикой конфиденциальности</a>
+							    и обработкой моих персональных данных</span>
+                                </label>
+                                <!-- invisible reCaptcha -->
+                                <div id="recaptcha-question" class="recaptcha-block"></div>
+                                <button type="submit" class="btn btn-default">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup popup-thx">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--thx">
+            <div class="items items-thx">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <div class="thanks">
+                                <div class="thanks__icon">
+                                    <img src="/front/dist/images/thanks-icon.svg" alt="pic" width="72" height="74">
+                                </div>
+                                <div class="thanks__title">Спасибо за обращение</div>
+                                <div class="thanks__subtitle">Наш менеджер свяжется с вами в ближайшее время</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup popup-thxAccount">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--thx">
+            <div class="items items-thx">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <div class="thanks">
+                                <div class="thanks__icon">
+                                    <img src="/front/dist/images/thanks-icon.svg" alt="pic" width="72" height="74">
+                                </div>
+                                <div class="thanks__title">Данные успешно сохранены</div>
+                                <div style="display: none" class="thanks__subtitle">Наш менеджер свяжется с вами в ближайшее время</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup popup-new-password">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--thx">
+            <div class="items items-new-password">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <div class="thanks">
+                                <div class="thanks__icon">
+                                    <img src="/front/dist/images/thanks-icon.svg" alt="pic" width="72" height="74">
+                                </div>
+                                <div class="thanks__title thanks__title-sm">Новый пароль успешно отправлен</div>
+                                <div class="thanks__subtitle">Проверьте Ваш E-mail</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup popup-new-password2">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--thx">
+            <div class="items items-new-password">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <div class="thanks">
+                                <div class="thanks__icon">
+                                    <img src="/front/dist/images/thanks-icon.svg" alt="pic" width="72" height="74">
+                                </div>
+                                <div class="thanks__title thanks__title-sm">Новый пароль успешно отправлен</div>
+                                <div class="thanks__subtitle">Проверьре Ваш E-mail</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup popup-lostpass">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--questions">
+            <div class="items items-lostpass">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <form id="popupForgoten" class="form">
+                                <div class="form__title">Восстановление пароля</div>
+                                <div class="form__box">
+                                    <div class="form__row">
+                                        <input name="email" type="email" class="form__control" placeholder="Email*">
+                                    </div>
+                                </div>
+                                <button onclick="return false" type="submit" class="btn btn-default">Отправить новый пароль</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup popup-call-back">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--questions">
+            <div class="items items-call-back">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <form id="pay_mail" class="form">
+                                <div class="form__title">Заказ обратного звонка</div>
+                                <div class="form__box">
+                                    <div class="form__row">
+                                        <input name="name" type="text" class="form__control" placeholder="Имя">
+                                    </div>
+                                    <div class="form__row">
+                                        <input name="telephone" type="text" class="form__control" placeholder="Телефон*">
+                                    </div>
+                                </div>
+                                <label class="convention">
+                                    <input name="police" type="checkbox" class="convention__check ">
+                                    <i class="convention__mark "></i>
+                                    <span class="convention__text">Я соглашаюсь с
+							      <a href="/privacy" class="convention__link">публичной офертой и политикой конфиденциальности</a>
+							    и обработкой моих персональных данных*</span>
+                                </label>
+                                <!-- invisible reCaptcha -->
+                                <div id="recaptcha-callback" class="recaptcha-block"></div>
+                                <button type="submit" class="btn btn-default">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup popup-notify">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--basket popup__content--questions">
+            <div class="items items-call-back">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <form id="notify_mail" class="form">
+                                <input name="product" value="" type="hidden" class="form__control" >
+                                <div class="form__title">Оповестить по поступлению</div>
+                                <div class="form__box">
+                                    <div class="form__row">
+                                        <input name="name" type="text" class="form__control" placeholder="Имя">
+                                    </div>
+                                    <div class="form__row">
+                                        <input name="telephone" type="text" class="form__control" placeholder="Телефон*">
+                                    </div>
+                                </div>
+                                <label class="convention">
+                                    <input name="police" type="checkbox" class="convention__check ">
+                                    <i class="convention__mark "></i>
+                                    <span class="convention__text">Я соглашаюсь с
+							      <a href="/privacy" class="convention__link">публичной офертой и политикой конфиденциальности</a>
+							    и обработкой моих персональных данных*</span>
+                                </label>
+                                <!-- invisible reCaptcha -->
+                                <div id="recaptcha-notify" class="recaptcha-block"></div>
+                                <button type="submit" class="btn btn-default">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="popup popup-added popup-added-list" data-product-id="0">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder">
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content">
+            <div class="items items-added">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <form action="#" class="form form-added">
+                                <div class="notific">
+                                    <i class="notific__icon">
+                                        <img src="/front/dist/images/added-icon.svg" alt="icon" width="18" height="14">
+                                    </i>
+                                    <span class="notific__desc">Вы добавили товар в корзину</span>
+                                </div>
+                                <div class="added-items">
+                                    <a href="#" class="added-items__info">
+                                        <div class="added-items__pic">
+                                            <img src="" alt="pic" width="70" height="70">
+                                        </div>
+                                        <div class="added-items__desc">Пуш-ап масло для упругости груди объемом 50 мл
+                                        </div>
+                                    </a>
+                                    <div class="added-items__block">
+                                        <div class="amount">
+                                            <div class="amount__holder" style="position: relative;">
+                                                <button type="button" class="amount__btn btn-minus_popups_list"></button>
+                                                <div class="amount__control">
+                                                    <input value="1" type="text" class="amount__inp" placeholder="1">
+                                                </div>
+                                                <button type="button" class="amount__btn btn-plus_popups_list"></button>
+                                            </div>
+                                        </div>
+                                        <div class="added-items__price">0</div>
+                                    </div>
+                                </div>
+                                <div class="form-added__btns">
+                                    <div style="position: inherit" class="btn btn-transp popup__close">продолжить покупки</div>
+                                    <a href="https://annagale.ru/index.php?route=checkout/checkout_two_step" class="btn btn-default">в корзину</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<script>
+    // Change quantity (minus)
+    $(document).on('click', '.btn-minus_popups_list', function () {
+        var quantity = Number($(this).parent().find('input').val()) - 1;
+        var price = $(this).data('price');
+
+        if (quantity > 0) {
+            var id = $(this).attr('data-key');
+			$(this).parent().find('.amount__inp').val(quantity);
+            price = Number(price) * Number(quantity);
+            $('.popup-added-list .added-items__price').text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' РУБ');
+            uppopupList($(this),'minus');
+        }
+    });
+
+    // Change quantity (plus)
+    $(document).on('click', '.btn-plus_popups_list', function () {
+        var quantity = Number($(this).parent().find('input').val()) + 1;
+        var price = $(this).data('price');
+        $(this).parent().find('.amount__inp').val(quantity);
+		price = Number(price) * Number(quantity);
+		$('.popup-added-list .added-items__price').text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' РУБ');
+		uppopupList($(this),'plus');
+    });
+
+    function uppopupList(element,action) {
+    	var url = 'index.php?route=checkout/cart/add';
+    	var quantity = 1;
+    	var textError = 'Не удалось добавить товар в корзину';
+    	var key = '';
+    	if(action == 'minus') {
+    		url = 'index.php?route=checkout/cart/edit';
+    		quantity =  $('.popup.popup-basket').find('[data-key="' + element.data('key') + '"].btn-minus').data('quantity') - 1;
+    		textError = 'Не удалось уменьшить количество товара в корзине';
+    		key = '&key=' + element.data('key');
+    	}
+        $.ajax({
+            url: url,
+            type: 'post',
+			data: 'product_id=' + $('.popup-added-list').data('product-id') + '&quantity=' + quantity + key,
+            dataType: 'json',
+            success: function (json) {
+                element.siblings('.text-danger').remove();
+                if (json['error']) {
+                	element.after('<div class="text-danger" style="position:absolute;top:-15px;font-size:10px;width:196px;text-align:center;color:red;">' + textError + '</div>');
+                }
+                if (json['success']) {
+                    $('[data-for=\'popup-basket\'] .cout__holder').text(json['total']);
+                    if (json['product']) {
+                        $('.popup-added-list .added-items__desc').text(json['product']['name']);
+                        $('.popup-added-list .amount__inp').attr('placeholder', json['product']['quantity']);
+                        $('.popup-added-list .added-items__pic img').attr('src', json['product']['image']);
+                    }
+                    $.get("index.php?route=common/cart/info", '.popup-basket', function (data) {
+                        $(".popup-basket").html(data);
+                        // $('.scroll-text').mCustomScrollbar();
+
+                    });
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+
+    $('.button-cart-list').on('click', function (e) {
+      e.preventDefault();
+		var productId = $(this).data('id');
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: 'product_id=' + productId + '&quantity=1',
+            dataType: 'json',
+            success: function (json) {
+                $(this).siblings('.text-danger').remove();
+                if (json['error']) {
+                	$(this).after('<div class="text-danger" style="position:absolute;top:-15px;font-size:10px;width:196px;text-align:center;color:red;">Не удалось добавить товар в корзину</div>');
+                }
+                if (json['success']) {
+                    $('.popup-added-list').addClass('active');
+                    $('[data-for=\'popup-basket\'] .cout__holder').text(json['total']);
+                    if (json['product']) {
+                    	$('.popup-added-list').data('product-id', productId);
+                        $('.popup-added-list .added-items__desc').html(json['product']['name']);
+                        var price = Number(json['product']['price']) * Number(json['product']['quantity']);
+                        $('.popup-added-list .amount__btn').attr('data-price', json['product']['price']);
+                        $('.popup-added-list .added-items__price').text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' РУБ');
+                        $('.popup-added-list .amount__inp').attr('placeholder', json['product']['quantity']);
+                        $('.popup-added-list .amount__inp').val(json['product']['quantity']);
+                        $('.popup-added-list .added-items__pic img').attr('src', json['product']['image']);
+                        $('.popup-added-list .btn-minus_popups_list').attr('data-key', json['cart_id']);
+                    }
+
+                    $.get("index.php?route=common/cart/info", '.popup-basket', function (data) {
+                        $('.popup.popup-basket').html(data);
+                        // $('.scroll-text').mCustomScrollbar();
+
+                    });
+
+
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    // reCAPTCHA
+    var idCaptchaContact, idCaptchaRegistration, idCaptchaModalQuestion, idCaptchaModalCallback;
+    var onloadReCaptchaInvisible = function() {
+      if($('#contact_form').length) {
+        idCaptchaContact = grecaptcha.render('recaptcha-contact', {
+          "sitekey":"6LcNlbEaAAAAAEYa7S8mkdBJ7AsVhUpsFg0fWwg7",
+          "callback": "onSubmitReCaptchaContact",
+          "size":"invisible"
+        });
+      }
+      if($('#registration-form').length) {
+        idCaptchaRegistration = grecaptcha.render('recaptcha-registration', {
+          "sitekey":"6LcNlbEaAAAAAEYa7S8mkdBJ7AsVhUpsFg0fWwg7",
+          "callback": "onSubmitReCaptchaRegistration",
+          "size":"invisible"
+        });
+      }
+      if($('#que_pay').length) {
+        idCaptchaModalQuestion = grecaptcha.render('recaptcha-question', {
+          "sitekey":"6LcNlbEaAAAAAEYa7S8mkdBJ7AsVhUpsFg0fWwg7",
+          "callback": "onSubmitReCaptchaModalQuestion",
+          "size":"invisible"
+        });
+      }
+      if($('#pay_mail').length) {
+        idCaptchaModalCallback = grecaptcha.render('recaptcha-callback', {
+          "sitekey":"6LcNlbEaAAAAAEYa7S8mkdBJ7AsVhUpsFg0fWwg7",
+          "callback": "onSubmitReCaptchaModalCallback",
+          "size":"invisible"
+        });
+      }
+       if($('#notify_mail').length) {
+        idCaptchaModalNotify = grecaptcha.render('recaptcha-notify', {
+          "sitekey":"6LcNlbEaAAAAAEYa7S8mkdBJ7AsVhUpsFg0fWwg7",
+          "callback": "onSubmitReCaptchaModalNotify",
+          "size":"invisible"
+        });
+      }
+    };
+</script>
+
+<script src="/front/dist/js/app.js?v=1.0.5"></script>
+<script src="/catalog/view/javascript/common.js?v=1.0.6"></script>
+{% for script in scripts %}
+<script src="{{ script }}"></script>
+{% endfor %}
+<!-- Top.Mail.Ru counter -->
+<script type="text/javascript">
+var _tmr = window._tmr || (window._tmr = []);
+_tmr.push({id: "3752258", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = "https://top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "tmr-code");
+</script>
+<noscript><div><img src="https://top-fwz1.mail.ru/counter?id=3752258;js=na" style="position:absolute;left:-9999px;" alt="Top.Mail.Ru" /></div></noscript>
+<!-- /Top.Mail.Ru counter -->
+</body></html>

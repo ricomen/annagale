@@ -1,0 +1,92 @@
+
+<div class="widget-elem__items popup-open" data-for="popup-basket">
+  <div class="cout">
+    <span class="cout__holder">{{ text_items }}</span>
+  </div>
+  <a href="#">
+    <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.00383282 13.8307L1.0769 3.51411C1.0999 3.28507 1.32601 3.11166 1.59044 3.11166H3.7979C3.82856 1.39059 5.4765 0 7.5 0C9.52351 0 11.1714 1.39059 11.2021 3.11166H13.4096C13.6778 3.11166 13.9001 3.28507 13.9231 3.51411L14.9962 13.8307C14.9962 13.8438 15 13.8569 15 13.8699C15 15.0446 13.7391 16 12.187 16H2.81298C1.26086 16 9.53674e-07 15.0446 9.53674e-07 13.8699C9.53674e-07 13.8569 9.53674e-07 13.8438 0.00383282 13.8307ZM7.5 0.883436C6.04752 0.883436 4.86331 1.87812 4.83265 3.11166H10.1673C10.1367 1.87812 8.95248 0.883436 7.5 0.883436ZM2.81298 15.1166H12.187C13.1605 15.1166 13.9499 14.5669 13.9653 13.8896L12.9382 3.99836H11.2059V5.33988C11.2059 5.58528 10.976 5.78159 10.6886 5.78159C10.4011 5.78159 10.1712 5.58528 10.1712 5.33988V3.99836H4.83265V5.33988C4.83265 5.58528 4.60271 5.78159 4.31528 5.78159C4.02785 5.78159 3.7979 5.58528 3.7979 5.33988V3.99836H2.06566L1.03475 13.8896C1.05008 14.5669 1.84338 15.1166 2.81298 15.1166Z" fill="black"/>
+    </svg>
+  </a>
+</div>
+
+<div class="popup popup-basket">
+  <div class="popup__overlay"></div>
+  <div class="popup__holder">
+    <div class="popup__close">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+        <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+      </svg>
+    </div>
+    <div class="popup__content popup__content--basket">
+      <div class="items">
+        <div class="items__wrap after-elem">
+          <div class="items__inner before-elem">
+            <div class="items__border txt-elem {% if not products %}card-empty{% endif %}">
+              <div class="form">
+{% if products %}
+                <div class="form__title">Товары в корзине</div>
+                <ul class="items-box scroll-text">
+                  {% for product in products %}
+                  <li class="items-box__list">
+                    <div class="items-box__pic">
+                      <img src="{{ product.thumb }}" alt="pic" width="70" height="70">
+                    </div>
+                    <div class="items-box__holder">
+                      <i onclick="removeProductCart('{{ product.cart_id }}');" title="{{ button_remove }}" class="items-box__close">
+                        <img src="/front/dist/images/close-icon.svg" alt="icon" height="12" width="12">
+                      </i>
+                      <span class="items-box__desc">{{ product.name }}</span>
+                      {% if product.option %}
+                        {% for option in product.option %} <br />
+                          - <small>{{ option.name }} {{ option.value }}</small> {% endfor %}
+                      {% endif %}
+                      <div class="items-box__row">
+                        <div class="amount">
+                          <div class="amount__holder">
+                            <button data-key="{{ product.cart_id }}" data-quantity="{{ product.quantity }}" type="button" class="amount__btn btn-minus"></button>
+                            <div class="amount__control">
+                              <input value="{{ product.quantity }}" type="text" class="amount__inp" >
+                            </div>
+                            <button data-key="{{ product.cart_id }}" data-quantity="{{ product.quantity }}" type="button" class="amount__btn btn-plus"></button>
+                          </div>
+                        </div>
+                        <strong class="price">{{ product.total }}</strong>
+                      </div>
+                    </div>
+                  </li>
+                 {% endfor %}
+                </ul>
+                <div class="total">
+                  {% for total in totals %}
+                    <span>{{ total.title }}: </span>
+                    <strong>{{ total.text }}</strong>
+
+
+                  {% endfor %}
+
+                </div>
+
+                <label style="display: none" class="convention">
+                  <input type="checkbox" class="convention__check">
+                  <i class="convention__mark"></i>
+                  <span class="convention__text">Я хочу получать уведомления о новинках, скидках, акциях</span>
+                </label>
+                <a href="{{ checkout }}"><button type="submit" class="btn btn-default">{{ text_checkout }}</button></a>
+{% else %}
+                <div class="form__title">{{ text_empty }}</div>
+
+
+                </div>
+
+                {% endif %}
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

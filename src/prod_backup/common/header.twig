@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//apis.google.com">
+
+<!-- amoCRM plugin script start -->	
+<script>(function(a,m,o,c,r,m){a[m]={id:"333403",hash:"92495d08f8abb605a8ff980b7f7a6b89f66185a21e5bea572c328a53587626d0",locale:"ru",inline:false,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js?1668515685';d.head&&d.head.appendChild(s)}(window,0,'amoSocialButton',0,0,'amo_social_button'));</script>
+<!-- amoCRM plugin script end -->
+   <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                                                  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5MZ5999');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadReCaptchaInvisible&render=explicit" async defer></script>
+<!--
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
+  -->
+  <link rel="shortcut icon" href="/front/dist/images/favicon-16x16.png" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="16x16 32x32" href="/front/dist/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/front/dist/images/android-icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/front/dist/images/apple-icon-180x180.png">
+  <link href="/front/dist/css/index.css?v=1.0.7" rel="stylesheet">
+  <link href="/catalog/view/theme/default/stylesheet/custom.css?v=1.2.8" rel="stylesheet">
+
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script }}"></script>
+{% endfor %}
+
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+{% for metatag in tlt_metatags %}
+<meta {{ metatag.type }}="{{ metatag.name }}" content="{{ metatag.content }}" />
+{% endfor %}
+{% if noindex %}
+<!-- OCFilter Start -->
+<meta name="robots" content="noindex,nofollow" />
+<!-- OCFilter End -->
+{% endif %}
+<link href="/catalog/view/theme/default/stylesheet/stylesheet.after.css?v=1.1.8" rel="stylesheet">
+</head>
+<body class="{{ class }} ">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MZ5999"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!--
+
+        <script type="text/javascript">
+          // we are using this flag to determine if the pixel
+          // is successfully added to the header
+          window.isFacebookPixelInHeaderAdded = 1;
+          window.isFacebookPixelAdded=1;
+        </script>
+
+        <script type="text/javascript">
+          function facebook_loadScript(url, callback) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            if(script.readyState) {  // only required for IE <9
+              script.onreadystatechange = function() {
+                if (script.readyState === "loaded" || script.readyState === "complete") {
+                  script.onreadystatechange = null;
+                  if (callback) {
+                    callback();
+                  }
+                }
+              };
+            } else {  //Others
+              if (callback) {
+                script.onload = callback;
+              }
+            }
+
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+          }
+        </script>
+
+        <script type="text/javascript">
+          (function() {
+            var enableCookieBar = '{{ facebook_enable_cookie_bar }}';
+            if (enableCookieBar === 'true') {
+              facebook_loadScript("catalog/view/javascript/facebook/cookieconsent.min.js");
+
+              // loading the css file
+              var css = document.createElement("link");
+              css.setAttribute("rel", "stylesheet");
+              css.setAttribute("type", "text/css");
+              css.setAttribute(
+                "href",
+                "catalog/view/theme/css/facebook/cookieconsent.min.css");
+              document.getElementsByTagName("head")[0].appendChild(css);
+
+              window.addEventListener("load", function(){
+                function setConsent() {
+                  fbq(
+                    'consent',
+                    this.hasConsented() ? 'grant' : 'revoke'
+                  );
+                }
+                window.cookieconsent.initialise({
+                  palette: {
+                    popup: {
+                      background: '#237afc'
+                    },
+                    button: {
+                      background: '#fff',
+                      text: '#237afc'
+                    }
+                  },
+                  cookie: {
+                    name: fbq.consentCookieName
+                  },
+                  type: 'opt-out',
+                  showLink: false,
+                  content: {
+                    allow: {{ cookie_bar_opt_in_value }},
+                    deny: {{ cookie_bar_opt_out_value }},
+                    header: {{ cookie_bar_header_value }},
+                    message: {{ cookie_bar_description_value }}
+                  },
+                  layout: 'basic-header',
+                  location: true,
+                  revokable: true,
+                  onInitialise: setConsent,
+                  onStatusChange: setConsent,
+                  onRevokeChoice: setConsent
+                }, function (popup) {
+                  // If this isn't open, we know that we can use cookies.
+                  if (!popup.getStatus() && !popup.options.enabled) {
+                    popup.setStatus(cookieconsent.status.dismiss);
+                  }
+                });
+              });
+            }
+          })();
+        </script>
+
+        <script type="text/javascript">
+          (function() {
+            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+            var enableCookieBar = '{{ facebook_enable_cookie_bar }}';
+            if (enableCookieBar === 'true') {
+              fbq.consentCookieName = 'fb_cookieconsent_status';
+
+              (function() {
+                function getCookie(t){var i=("; "+document.cookie).split("; "+t+"=");if(2==i.length)return i.pop().split(";").shift()}
+                var consentValue = getCookie(fbq.consentCookieName);
+                fbq('consent', consentValue === 'dismiss' ? 'grant' : 'revoke');
+              })();
+            }
+
+            {% if facebook_pixel_id_FAE %}
+// system auto generated facebook_pixel.js, DO NOT MODIFY
+pixel_script_filename = 'catalog/view/javascript/facebook/facebook_pixel_3_1_0.js';
+// system auto generated facebook_pixel.js, DO NOT MODIFY
+              facebook_loadScript(
+                pixel_script_filename,
+                function() {
+                  var params = {{ facebook_pixel_params_FAE }};
+                  _facebookAdsExtension.facebookPixel.init(
+                    '{{ facebook_pixel_id_FAE }}',
+                    {{ facebook_pixel_pii_FAE }},
+                    params);
+                  {% if facebook_pixel_event_params_FAE %}
+                    _facebookAdsExtension.facebookPixel.firePixel(
+                      JSON.parse('{{facebook_pixel_event_params_FAE }}'));
+                  {% endif %}
+                });
+            {% endif %}
+          })();
+        </script>
+      -->
+
+                {% if config is defined and config.get('yandex_money_kassa_enabled') and (config.get('yandex_money_kassa_use_installments_button') or config.get('yandex_money_kassa_add_installments_block')) %}
+                <script src="https://static.yandex.net/kassa/pay-in-parts/ui/v1/"></script>
+                {% endif %}
+            
+</head>
+<body class="{{ class }} ">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MZ5999"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="wrapper">
+<div class="{% if class=='home' %}{% else %} main-wrapper {% endif %}">
+
+  <header class="header">
+    <div class="header__holder">
+      <div class="header__phone">
+        <a href="tel:{{ telephone }}">{{ telephone }}</a>
+      </div>
+
+      <div class="header__slider">
+        <div class="header__slider-holder">
+          <div class="header__slider-wrap">
+            <div class="header__slider-icon">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H3V3H0V0Z" fill="#4b601e"/>
+                <path d="M7 0H10V3H7V0Z" fill="#4b601e"/>
+                <path d="M14 0H17V3H14V0Z" fill="#4b601e"/>
+                <path d="M0 7H3V10H0V7Z" fill="#4b601e"/>
+                <path d="M7 7H10V10H7V7Z" fill="#4b601e"/>
+                <path d="M14 7H17V10H14V7Z" fill="#4b601e"/>
+                <path d="M0 14H3V17H0V14Z" fill="#4b601e"/>
+                <path d="M7 14H10V17H7V14Z" fill="#4b601e"/>
+                <path d="M14 14H17V17H14V14Z" fill="#4b601e"/>
+              </svg>
+            </div>
+            <span class="header__slider-text">Каталог</span>
+          </div>
+          <div class="header-slider inactive">
+
+            <div class="header-slider__close">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+              </svg>
+            </div>
+            <div class="header-slider__box after-elem">
+              <div class="header-slider__block before-elem">
+                <div class="header-slider__border txt-elem">
+                  <div class="header-slider__list">
+
+                    {{ menu }}
+
+                  </div>
+                </div>
+                <div class="header-slider__arrows"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header__nav">
+        <nav class="nav">
+          <ul class="nav__menu">
+              <li class="menu-item menu-item_catalog"></li>
+            {% for menu in menu_header %}
+              {% if menu.cildren %}
+            <li class="menu-item menu-item-has-children">
+              <a href="{{ menu.href }}">{{ menu.name }}</a>
+              <ul class="sub-menu">
+                {% for cildren in menu.cildren %}
+                <li class="menu-item"><a href="{{ cildren.href }}">{{ cildren.name }}</a></li>
+                {% endfor %}
+
+              </ul>
+            </li>
+            {% else %}
+            <li class="menu-item"><a href="{{ menu.href }}">{{ menu.name }}</a></li>
+              {% endif %}
+              {# {% if loop.index == 1 %}
+              <li class="menu-item menu-item_catalog"></li>
+              {% endif %} #}
+            {% endfor %}
+
+          </ul>
+        </nav>
+        <div class="logo" itemscope itemtype="http://schema.org/Organization">
+          {% if class !='home'  %}
+            <a href="{{ base }}" class="logo__home" itemprop="url">
+              <img src="/front/dist/images/logo.svg" width="178" height="95" alt="logo" class="logo-lg" itemprop="logo" />
+              <img src="/front/dist/images/logo-small.svg" width="36" height="36" alt="logo-small" class="logo-sm">
+            </a>
+          {% else %}
+            <div class="logo__home">
+              <img src="/front/dist/images/logo.svg" width="178" height="95" alt="logo" class="logo-lg" itemprop="logo" />
+              <img src="/front/dist/images/logo-small.svg" width="36" height="36" alt="logo-small" class="logo-sm">
+            </div>
+          {% endif %}
+        </div>
+        {% if menu_header_right %}
+        <nav class="nav">
+          <ul class="nav__menu">
+            {% for menu_right in menu_header_right %}
+              <li class="menu-item"><a href="{{ menu_right.href }}">{{ menu_right.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+        {% endif %}
+      </div>
+      <div class="widget-elem">
+        <ul class="widget-elem__list">
+          <li class="widget-elem__items popup-open" data-for="popup-call-back">
+            <a href="#">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.3108 10.1337C13.9398 9.7491 13.4922 9.54346 13.0179 9.54346C12.5474 9.54346 12.096 9.7453 11.7096 10.1299L10.5008 11.3295C10.4014 11.2762 10.3019 11.2267 10.2063 11.1772C10.0686 11.1086 9.93853 11.0439 9.82759 10.9754C8.69531 10.2594 7.66631 9.32639 6.67938 8.11918C6.20122 7.51747 5.8799 7.01098 5.64656 6.49686C5.96023 6.21125 6.25095 5.9142 6.53402 5.62858C6.64113 5.52195 6.74824 5.41151 6.85535 5.30488C7.65866 4.50515 7.65866 3.46931 6.85535 2.66958L5.81104 1.62993C5.69246 1.51187 5.57005 1.39001 5.45529 1.26815C5.22578 1.03203 4.98478 0.788306 4.73614 0.559812C4.36509 0.19422 3.92135 0 3.45467 0C2.98799 0 2.5366 0.19422 2.15407 0.559812C2.15025 0.56362 2.15025 0.56362 2.14642 0.567428L0.845827 1.87366C0.356191 2.36111 0.076945 2.9552 0.0157405 3.64449C-0.0760663 4.7565 0.252908 5.79234 0.505377 6.47021C1.12507 8.13441 2.05079 9.67675 3.43172 11.3295C5.10719 13.3212 7.12312 14.894 9.42594 16.0022C10.3058 16.4173 11.4801 16.9086 12.7922 16.9924C12.8725 16.9962 12.9567 17 13.0332 17C13.9168 17 14.6589 16.6839 15.2404 16.0556C15.2442 16.0479 15.2518 16.0441 15.2557 16.0365C15.4546 15.7966 15.6841 15.5795 15.9251 15.3472C16.0896 15.1911 16.2579 15.0273 16.4224 14.856C16.8011 14.4637 17 14.0067 17 13.5383C17 13.0661 16.7973 12.6129 16.4109 12.2321L14.3108 10.1337ZM15.6803 14.1438C15.6765 14.1476 15.6765 14.1438 15.6803 14.1438C15.5311 14.3038 15.3781 14.4485 15.2136 14.6084C14.9649 14.8445 14.7125 15.0921 14.4753 15.3701C14.089 15.7814 13.6337 15.9756 13.037 15.9756C12.9796 15.9756 12.9184 15.9756 12.861 15.9718C11.7249 15.8994 10.6692 15.4577 9.87732 15.0806C7.71221 14.0372 5.81105 12.5558 4.2312 10.6783C2.92678 9.11313 2.05462 7.66599 1.477 6.11223C1.12125 5.16398 0.991188 4.42518 1.04857 3.72827C1.08682 3.28271 1.25896 2.91331 1.57646 2.59722L2.88088 1.29861C3.06832 1.12343 3.26723 1.02823 3.46232 1.02823C3.70331 1.02823 3.8984 1.17294 4.02081 1.2948C4.02464 1.29861 4.02846 1.30242 4.03229 1.30623C4.26563 1.5233 4.4875 1.74798 4.72084 1.9879C4.83942 2.10977 4.96183 2.23163 5.08424 2.3573L6.12854 3.39695C6.53402 3.80063 6.53402 4.17384 6.12854 4.57751C6.01761 4.68795 5.9105 4.79839 5.79957 4.90502C5.47824 5.23253 5.17222 5.53719 4.83942 5.83423C4.83177 5.84185 4.82412 5.84565 4.8203 5.85327C4.49132 6.18078 4.55253 6.50067 4.62138 6.71774C4.62521 6.72917 4.62903 6.74059 4.63286 6.75202C4.90445 7.40703 5.28698 8.02397 5.86842 8.75896L5.87225 8.76277C6.92803 10.0576 8.04119 11.0668 9.2691 11.8398C9.42594 11.9388 9.5866 12.0188 9.73961 12.095C9.87732 12.1635 10.0074 12.2283 10.1183 12.2968C10.1336 12.3044 10.1489 12.3159 10.1642 12.3235C10.2943 12.3882 10.4167 12.4187 10.5429 12.4187C10.8604 12.4187 11.0593 12.2207 11.1244 12.1559L12.4326 10.8535C12.5627 10.724 12.7692 10.5679 13.0102 10.5679C13.2474 10.5679 13.4425 10.7164 13.5611 10.8459C13.5649 10.8497 13.5649 10.8497 13.5687 10.8535L15.6765 12.9518C16.0705 13.3403 16.0705 13.7401 15.6803 14.1438Z" fill="black"/>
+              </svg>
+            </a>
+          </li>
+
+          {{ search }}
+          <!--
+          <li hidden class="widget-elem__items popup-open{{ loged }}" data-for="popup-personal{{ loged }}">
+            <div class="cout">
+              <span class="cout__holder wish_count_num">{{ text_wishlist }}</span>
+            </div>
+            <a href="{{ wishlist }}&active=1">
+              <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.4653 1.57825C16.4704 0.56571 15.1533 0.0122981 13.7475 0.0122981C12.3417 0.0122981 11.0206 0.569809 10.0257 1.58235L9.50604 2.11116L8.97838 1.57415C7.98347 0.561611 6.65826 0 5.2525 0C3.85077 0 2.52959 0.557511 1.53871 1.56595C0.543799 2.57849 -0.00400592 3.92308 2.20561e-05 5.35375C2.20561e-05 6.78442 0.551855 8.12491 1.54676 9.13745L9.1113 16.836C9.21603 16.9426 9.35701 17 9.49396 17C9.63091 17 9.77189 16.9467 9.87662 16.8401L17.4573 9.15385C18.4522 8.14131 19 6.79672 19 5.36605C19.004 3.93537 18.4602 2.59079 17.4653 1.57825ZM16.6919 8.37087L9.49396 15.6677L2.31208 8.35857C1.5226 7.5551 1.08758 6.48927 1.08758 5.35375C1.08758 4.21823 1.51857 3.1524 2.30805 2.35303C3.09351 1.55365 4.14078 1.11092 5.2525 1.11092C6.36825 1.11092 7.41955 1.55365 8.20903 2.35713L9.11936 3.28358C9.33284 3.50084 9.67522 3.50084 9.8887 3.28358L10.791 2.36532C11.5804 1.56185 12.6318 1.11912 13.7435 1.11912C14.8552 1.11912 15.9025 1.56185 16.6919 2.36122C17.4814 3.1647 17.9124 4.23053 17.9124 5.36605C17.9165 6.50157 17.4814 7.5674 16.6919 8.37087Z" fill="black"/>
+              </svg>
+            </a>
+          </li>
+          <li hidden class="widget-elem__items popup-open{{ loged }}" data-for="popup-personal{{ loged }}">
+            <a href="{{ account_linck }}">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.34313 10.3431C3.21447 9.47181 4.25159 8.82678 5.38316 8.43631C4.17122 7.60159 3.375 6.20463 3.375 4.625C3.375 2.07478 5.44978 0 8 0C10.5502 0 12.625 2.07478 12.625 4.625C12.625 6.20463 11.8288 7.60159 10.6168 8.43631C11.7484 8.82678 12.7855 9.47181 13.6568 10.3431C15.1678 11.8542 16 13.8631 16 16H14.75C14.75 12.278 11.722 9.25 8 9.25C4.27803 9.25 1.25 12.278 1.25 16H0C0 13.8631 0.832156 11.8542 2.34313 10.3431ZM8 8C9.86097 8 11.375 6.486 11.375 4.625C11.375 2.764 9.86097 1.25 8 1.25C6.13903 1.25 4.625 2.764 4.625 4.625C4.625 6.486 6.13903 8 8 8Z" fill="black"/>
+              </svg>
+            </a>
+          </li>
+          -->
+        </ul>
+
+        {{ cart }}
+      </div>
+      <div class="burger js-menu-open">
+        <div class="burger__holder">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <div class="mob-menu">
+      <div class="mob-menu__holder">
+        <div class="mob-menu__nav"></div>
+
+        <ul class="welcome-messengers">
+          {% if whatsapp %}
+          <li>
+            <a href="{{ whatsapp }}" rel="nofollow">
+              <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.04337 0H7.03985C3.15728 0 0 3.15816 0 7.04161C0 8.58196 0.496433 10.0096 1.34055 11.1689L0.462986 13.7848L3.1696 12.9196C4.28306 13.6572 5.61128 14.0832 7.04337 14.0832C10.9259 14.0832 14.0832 10.9242 14.0832 7.04161C14.0832 3.15904 10.9259 0 7.04337 0ZM11.1407 9.94363C10.9708 10.4233 10.2966 10.8212 9.75879 10.9374C9.39087 11.0157 8.91028 11.0782 7.29247 10.4075C5.22311 9.55018 3.89049 7.44738 3.78663 7.31095C3.68716 7.17452 2.95043 6.1975 2.95043 5.18703C2.95043 4.17655 3.46359 3.68452 3.67044 3.47327C3.84032 3.29987 4.1211 3.22066 4.39044 3.22066C4.47758 3.22066 4.55592 3.22506 4.62634 3.22858C4.83318 3.23738 4.93705 3.2497 5.07348 3.57626C5.24336 3.98555 5.65705 4.99602 5.70634 5.09989C5.75652 5.20375 5.80669 5.34458 5.73627 5.48101C5.67026 5.62185 5.61216 5.68434 5.5083 5.80405C5.40444 5.92375 5.30585 6.01529 5.20199 6.1438C5.10693 6.25559 4.99954 6.3753 5.11925 6.58214C5.23896 6.78459 5.65265 7.4597 6.26175 8.00191C7.04777 8.70167 7.68504 8.92524 7.91301 9.0203C8.08289 9.09072 8.28533 9.07399 8.40944 8.94196C8.567 8.77209 8.76152 8.49042 8.95957 8.21316C9.1004 8.01423 9.2782 7.98959 9.4648 8.06C9.65493 8.12602 10.661 8.62333 10.8678 8.72631C11.0747 8.83018 11.2111 8.87947 11.2613 8.96661C11.3106 9.05375 11.3106 9.46304 11.1407 9.94363Z" fill="#424242"/>
+              </svg>
+            </a>
+          </li>
+        {% endif %}
+          {% if max %}
+          <li>
+            <a href="{{ max }}" rel="nofollow">
+              <img src="/front/dist/images/max-icon.svg" alt="icon" width="16" height="16">
+            </a>
+          </li>
+        {% endif %}
+          {% if viber %}
+          <li>
+            <a href="{{ viber }}" rel="nofollow">
+              <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.1303 5.9099C12.1472 3.92434 10.4561 2.10411 8.36056 1.8524C8.31888 1.84746 8.27348 1.83994 8.22541 1.83198C8.12167 1.81479 8.01438 1.79712 7.90614 1.79712C7.47664 1.79712 7.36183 2.09881 7.33161 2.27875C7.30222 2.45369 7.33025 2.60061 7.4148 2.71559C7.55703 2.90899 7.80729 2.94333 8.0083 2.97084C8.06722 2.97897 8.12281 2.98654 8.16934 2.99699C10.0521 3.4177 10.6861 4.07913 10.9959 5.9459C11.0035 5.99151 11.0069 6.04772 11.0105 6.10733C11.024 6.33047 11.0522 6.79474 11.5513 6.79474H11.5514C11.5929 6.79474 11.6376 6.79115 11.6841 6.78407C12.1489 6.71343 12.1343 6.28905 12.1273 6.08515C12.1253 6.02773 12.1234 5.97341 12.1283 5.93728C12.1296 5.92818 12.1303 5.91904 12.1303 5.9099Z" fill="#424242"/>
+                <path d="M7.78414 1.12351C7.83991 1.12753 7.8927 1.13138 7.93665 1.13812C11.0284 1.61358 12.4502 3.07841 12.8442 6.1943C12.8509 6.24726 12.852 6.31186 12.8531 6.38027C12.857 6.6237 12.8651 7.13013 13.4089 7.14063L13.4258 7.1408C13.5964 7.1408 13.7321 7.08937 13.8291 6.98781C13.9984 6.81072 13.9866 6.54765 13.9771 6.33622C13.9748 6.28435 13.9725 6.2355 13.9731 6.19272C14.0124 3.00598 11.254 0.116252 8.07005 0.00879108C8.05684 0.00835371 8.04425 0.0090535 8.03152 0.0108467C8.02526 0.0117652 8.01367 0.0129023 7.99382 0.0129023C7.96206 0.0129023 7.92301 0.0101469 7.88159 0.00734777C7.83151 0.0039363 7.77474 0 7.71718 0C7.21014 0 7.11375 0.36039 7.10141 0.575225C7.07298 1.07172 7.5533 1.10667 7.78414 1.12351Z" fill="#424242"/>
+                <path d="M12.6951 10.2214C12.6294 10.1712 12.5614 10.1193 12.4978 10.068C12.1602 9.79635 11.8011 9.54596 11.4538 9.30379C11.3817 9.25358 11.3096 9.20333 11.2378 9.15294C10.7929 8.84044 10.393 8.68859 10.0151 8.68859C9.50612 8.68859 9.06237 8.96982 8.69612 9.52435C8.53386 9.7702 8.337 9.88973 8.09439 9.88973C7.95093 9.88973 7.78793 9.84879 7.60996 9.76801C6.17395 9.11681 5.14855 8.11839 4.56217 6.80047C4.27871 6.16349 4.3706 5.74712 4.86946 5.40825C5.15275 5.21598 5.68004 4.85804 5.64269 4.1726C5.60039 3.39422 3.88294 1.05216 3.15932 0.786154C2.85294 0.673489 2.53104 0.672439 2.20083 0.78353C1.36895 1.06318 0.771992 1.5543 0.47432 2.2037C0.186664 2.83119 0.199654 3.56798 0.51189 4.33442C1.41453 6.55039 2.68359 8.48241 4.28396 10.0767C5.85043 11.6374 7.77577 12.9159 10.0064 13.8764C10.2075 13.9629 10.4184 14.0101 10.5724 14.0445C10.6249 14.0563 10.6702 14.0664 10.7032 14.0754C10.7213 14.0804 10.7401 14.083 10.7588 14.0832L10.7765 14.0833C10.7765 14.0833 10.7765 14.0833 10.7765 14.0833C11.8257 14.0833 13.0854 13.1246 13.4723 12.0316C13.8113 11.0746 13.1924 10.6015 12.6951 10.2214Z" fill="#424242"/>
+                <path d="M8.24849 3.65492C8.06887 3.65947 7.69505 3.66874 7.56388 4.04947C7.50252 4.22739 7.50987 4.38187 7.58575 4.50862C7.6971 4.69459 7.91045 4.75158 8.10451 4.78285C8.80828 4.89578 9.16972 5.28495 9.24202 6.00748C9.27561 6.34438 9.50247 6.57964 9.79375 6.57964H9.7938C9.81532 6.57964 9.83732 6.57837 9.85923 6.57571C10.2096 6.53403 10.3794 6.27663 10.364 5.81075C10.3696 5.32453 10.1152 4.77253 9.6824 4.33284C9.24814 3.8918 8.72465 3.64342 8.24849 3.65492Z" fill="#424242"/>
+              </svg>
+            </a>
+          </li>
+        {% endif %}
+          {% if telegram %}
+          <li>
+            <a style="background: #0088CC;" href="{{ telegram }}" rel="nofollow">
+              <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.415316 6.79037L3.66037 8.00153L4.91641 12.0409C4.99678 12.2996 5.31313 12.3953 5.52311 12.2236L7.33196 10.749C7.52157 10.5945 7.79164 10.5868 7.98979 10.7306L11.2523 13.0993C11.4769 13.2626 11.7952 13.1395 11.8515 12.868L14.2415 1.37185C14.303 1.07536 14.0116 0.828007 13.7293 0.937199L0.411514 6.0748C0.0828583 6.20155 0.0857219 6.66686 0.415316 6.79037ZM4.71398 7.3568L11.056 3.45073C11.17 3.38073 11.2873 3.53485 11.1894 3.62564L5.95537 8.49092C5.7714 8.66217 5.65272 8.89135 5.61911 9.14011L5.44082 10.4614C5.41721 10.6378 5.16939 10.6553 5.12071 10.4846L4.435 8.07519C4.35646 7.80037 4.47091 7.50683 4.71398 7.3568Z" fill="#424242"/>
+              </svg>
+            </a>
+          </li>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+    <!--
+    <script type="text/javascript">
+          // we are using this flag to determine if the customer chat
+          // is successfully added to the header
+          window.isFacebookCustomerChatInHeaderAdded = 1;
+          window.isFacebookCustomerChatAdded=1;
+        </script>
+
+        {% if facebook_messenger_enabled_FAE == 'true' %}
+
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId            : '',
+              autoLogAppEvents : true,
+              xfbml            : true,
+              version          : '{{ facebook_jssdk_version_FAE }}'
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "https://connect.facebook.net/{{ facebook_customization_locale_FAE }}/sdk/xfbml.customerchat.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <div
+          id="fb-customerchat-header"
+          class="fb-customerchat"
+          attribution="fbe_opencart"
+          page_id="{{ facebook_page_id_FAE }}"
+        />
+        {% endif %}
+        -->
+  </header>
