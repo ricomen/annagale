@@ -9,9 +9,6 @@
     </a>
 </div>
 
-
-
-
 </div>
 <div class="widget-callback">
     <a href="#" class="widget-callback__link popup-open" data-for="popup-ask">
@@ -31,16 +28,9 @@
 </style>
 <!-- -->
 
-<!--Скрываем Cookie policy -->
-<style>
-.cc-color-override--1360619034{
-        display: none!important;
-    }
-</style>
-<!-- -->
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
+<script type="text/plain" data-category="analytics" data-service="metrika">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -55,7 +45,7 @@
         ecommerce:"dataLayer"
    });
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/70902100" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
 <!-- /Yandex.Metrika counter -->
 
             {{ yandex_metrika_html_code }}
@@ -718,13 +708,11 @@
     };
 </script>
 
-<script src="/front/dist/js/app.js?v=1.0.5"></script>
-<script src="/catalog/view/javascript/common.js?v=1.0.6"></script>
 {% for script in scripts %}
 <script src="{{ script }}"></script>
 {% endfor %}
 <!-- Top.Mail.Ru counter -->
-<script type="text/javascript">
+<script type="text/plain" data-category="analytics" data-service="mailru">
 var _tmr = window._tmr || (window._tmr = []);
 _tmr.push({id: "3752258", type: "pageView", start: (new Date()).getTime()});
 (function (d, w, id) {
@@ -735,6 +723,9 @@ _tmr.push({id: "3752258", type: "pageView", start: (new Date()).getTime()});
   if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
 })(document, window, "tmr-code");
 </script>
-<noscript><div><img src="https://top-fwz1.mail.ru/counter?id=3752258;js=na" style="position:absolute;left:-9999px;" alt="Top.Mail.Ru" /></div></noscript>
 <!-- /Top.Mail.Ru counter -->
+
+<script src="/front/dist/js/app.js?v=1.0.5"></script>
+<script src="/catalog/view/javascript/common.js?v=1.0.6"></script>
+
 </body></html>
