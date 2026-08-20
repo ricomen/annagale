@@ -73,6 +73,7 @@
 	"dependencies": {
 		"@splidejs/splide": "latest",
 		"custom-select": "^1.1.15",
-		"simplebar": "latest"
+		"simplebar": "latest",
+		"vanilla-cookieconsent": "^3.1.0"
 	}
 }

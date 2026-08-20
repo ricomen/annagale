@@ -1,6 +1,5 @@
 flsStartTemplate/
 phpmailer/
-package-lock.json
 node_modules/
 dist/
 undefined
