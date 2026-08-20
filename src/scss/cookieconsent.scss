@@ -1,0 +1,34 @@
+#cc-main {
+	--cc-font-family: #{$fontFamily}, sans-serif;
+	--cc-modal-border-radius: 8px;
+	--cc-btn-border-radius: 4px;
+	--cc-primary-color: #1a1a1a;
+	--cc-separator-border-color: #e5e5e5;
+	--cc-btn-primary-bg: #536132;
+	--cc-btn-primary-border-color: #536132;
+	--cc-btn-primary-hover-bg: #445028;
+	--cc-btn-primary-hover-border-color: #445028;
+	--cc-btn-primary-color: #fff;
+	--cc-btn-secondary-bg: #f4f4f4;
+	--cc-btn-secondary-hover-bg: #eaeaea;
+	--cc-btn-secondary-color: #1a1a1a;
+	--cc-toggle-on-bg: #536132;
+	--cc-link-color: #536132;
+
+	.cm,
+	.pm {
+		font-size: 14px;
+		line-height: 1.45;
+	}
+
+	.cm__title,
+	.pm__title {
+		font-weight: 600;
+	}
+
+	.cm__desc a,
+	.pm__section-desc a,
+	.cm__footer a {
+		color: var(--cc-link-color);
+	}
+}
