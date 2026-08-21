@@ -12,15 +12,16 @@
 <!-- amoCRM plugin script start -->	
 <script>(function(a,m,o,c,r,m){a[m]={id:"333403",hash:"92495d08f8abb605a8ff980b7f7a6b89f66185a21e5bea572c328a53587626d0",locale:"ru",inline:false,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js?1668515685';d.head&&d.head.appendChild(s)}(window,0,'amoSocialButton',0,0,'amo_social_button'));</script>
 <!-- amoCRM plugin script end -->
-   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                                                  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5MZ5999');</script>
-  <!-- End Google Tag Manager -->
 
-  <meta charset="UTF-8" />
+<!-- Google Tag Manager -->
+<script type="text/plain" data-category="analytics" data-service="gtm">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                                                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5MZ5999');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="UTF-8" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,12 +69,8 @@
 {% endif %}
 <link href="/catalog/view/theme/default/stylesheet/stylesheet.after.css?v=1.1.8" rel="stylesheet">
 </head>
-<body class="{{ class }} ">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MZ5999"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
+<body class="{{ class }} ">
 <!--
 
         <script type="text/javascript">
@@ -211,13 +208,6 @@ pixel_script_filename = 'catalog/view/javascript/facebook/facebook_pixel_3_1_0.j
                 {% if config is defined and config.get('yandex_money_kassa_enabled') and (config.get('yandex_money_kassa_use_installments_button') or config.get('yandex_money_kassa_add_installments_block')) %}
                 <script src="https://static.yandex.net/kassa/pay-in-parts/ui/v1/"></script>
                 {% endif %}
-            
-</head>
-<body class="{{ class }} ">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MZ5999"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 <div class="wrapper">
 <div class="{% if class=='home' %}{% else %} main-wrapper {% endif %}">
