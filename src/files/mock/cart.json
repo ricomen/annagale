@@ -1,0 +1,46 @@
+{
+	"total_products": 3,
+	"toFreeShipping": 5000,
+	"coupon_info": {
+		"shipping": 0
+	},
+	"totals": {
+		"products": {
+			"title": "Стоимость товаров",
+			"text": "6 470 ₽"
+		},
+		"total": {
+			"title": "Итого",
+			"text": "6 470 ₽"
+		}
+	},
+	"products": [
+		{
+			"cart_id": "1",
+			"_price": 1190,
+			"name": "Пенка для интимной гигиены «Деликатная»",
+			"href": "#",
+			"thumb": "/img/product_1.png",
+			"quantity": 1,
+			"total": "1 190 ₽"
+		},
+		{
+			"cart_id": "2",
+			"_price": 2990,
+			"name": "Пилинг для глубокого очищения кожи головы",
+			"href": "#",
+			"thumb": "/img/product_2.png",
+			"quantity": 1,
+			"total": "2 990 ₽"
+		},
+		{
+			"cart_id": "3",
+			"_price": 2290,
+			"name": "Бальзам-маска для волос «Увлажнение и восстановление»",
+			"href": "#",
+			"thumb": "/img/product_3.png",
+			"quantity": 1,
+			"total": "2 290 ₽"
+		}
+	]
+}

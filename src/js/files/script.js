@@ -42,6 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
 function initSocialFixed() {
   const root = document.querySelector('.social-fixed');
   if (!root) return;
+  
+  root.querySelectorAll('[hidden]').forEach(item => {
+    item.removeAttribute('hidden');
+  })
 
   const toggle = root.querySelector('.social-fixed__toggle');
   if (!toggle) return;
@@ -106,11 +110,12 @@ function initSocialFixed() {
   } catch (e) {}
 
   // if (!dismissed) {
-    window.setTimeout(() => {
-      if (root.classList.contains('is-open')) return;
-      root.classList.add('has-greeting');
-      if (bubble) bubble.setAttribute('aria-hidden', 'false');
-    }, greetingDelay);
+   // Попросили скрыть показ 01.09.2026
+    // window.setTimeout(() => {
+    //   if (root.classList.contains('is-open')) return;
+    //   root.classList.add('has-greeting');
+    //   if (bubble) bubble.setAttribute('aria-hidden', 'false');
+    // }, greetingDelay);
   // }
 }
 

@@ -2,6 +2,7 @@ import fs from 'fs';
 import FileIncludeWebpackPlugin from 'file-include-webpack-plugin-replace';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyPlugin from "copy-webpack-plugin";
+import { createCartMockMiddleware } from './webpack-mock.js';
 
 import * as path from 'path';
 
@@ -49,11 +50,18 @@ const config = {
 	devServer: {
 		historyApiFallback: true,
 		static: paths.build,
-		open: true,
+		open: ['/home.html'],
 		compress: true,
 		port: 'auto',
 		hot: true,
 		host: 'local-ip', // localhost
+		setupMiddlewares: (middlewares) => {
+			middlewares.unshift({
+				name: 'opencart-mock',
+				middleware: createCartMockMiddleware(),
+			});
+			return middlewares;
+		},
 
 		// Расскоментировать на слабом ПК
 		// (в режиме разработчика, папка с результаттом будет создаваться на диске)
