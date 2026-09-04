@@ -1,0 +1,72 @@
+{{ header }}
+
+<div class="checkout">
+
+    <div class="checkout__title">{{ heading_title }}</div>
+    {% if not logged %}
+        <a href="#" class="checkout-block__link" id="have-account">{{ text_cart_account }}</a>
+    {% endif %}
+
+    <div>
+        <form id="customer" class="checkout-block__form">
+            <div class="form-block">
+                <input class="main-input" type="text" value="{{ firstname }}" name="firstname">
+                <label class="form-label">{{ entry_firstname }}</label>
+            </div>
+            <div class="form-block">
+                <input class="main-input" type="text" value="{{ lastname }}" name="lastname">
+                <label class="form-label">{{ entry_lastname }}</label>
+            </div>
+            <div class="form-block">
+                <input class="main-input" type="tel" value="{{ telephone }}" name="telephone">
+                <label class="form-label">{{ entry_telephone }}</label>
+            </div>
+            <div class="form-block">
+                <input class="main-input" type="email" value="{{ email }}" name="email">
+                <label class="form-label">{{ entry_email }}</label>
+            </div>
+        </form>
+
+        <form class="delivery-block" id="shipping-block">
+            <div class="radio-block__title">{{ text_shipping_title }}</div>
+        </form>
+
+        {# Payment #}
+        <div class="payment-block" id="payment-block"></div>
+
+        {# Comment will be here #}
+        <input type="hidden" name="comment" id="comment">
+
+        {# Cart #}
+        <div class="checkout-items" id="cart-block">
+            <div class="radio-block__title">{{ text_cart_title }}</div>
+        </div>
+
+        {# Confirm #}
+        <div id="confirm-block"></div>
+    </div>
+
+</div>
+<div class="popup popup-has-acc">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder popup__holder--registration-thx">
+        <div class="popup__close">x</div>
+        <form method="post" id="login-form" class="popup__content">
+            <div class="popup__title">{{ text_login_title }}</div>
+            <div class="form-block">
+                <input class="main-input" type="email" name="email">
+                <label class="form-label">{{ text_login_email }}</label>
+            </div>
+            <div class="form-block">
+                <input class="main-input" type="password" name="password">
+                <label class="form-label">{{ text_login_pwd }}</label>
+            </div>
+
+            <button type="submit" id="login-confirm" class="checkout-button">{{ text_login_submit }}</button>
+
+        </form>
+    </div>
+</div>
+<link rel="stylesheet" href="/front/dist/css/index.css?v=1.0.1">
+<script src="/front/dist/js/app.js"></script>
+{{ footer }}

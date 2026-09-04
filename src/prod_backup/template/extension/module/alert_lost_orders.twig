@@ -1,0 +1,80 @@
+За период с {{ period_start }} по {{ period_end }} обнаружены пропавшие заказы (неактивные больше {{ period_hours }}). Количество: {{ count }}.<br/>
+<br/>
+{% for key, order in orders %}
+<hr/>
+<strong>Заказ №{{ key }}</strong><br/>
+<strong>Дата добавления:</strong> {{ order.date_added }}<br/>
+<strong>Дата последнего изменения:</strong> {{ order.date_modified }}<br/>
+<br/>
+<table border="1" width="100%" cellpadding="10">
+	<thead>
+		<tr>
+			<td width="33%"><strong>Контактные данные</strong></td>
+			<td width="33%"><strong>Плательщик</strong></td>
+			<td width="33%"><strong>Доставка</strong></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td width="33%">{{ order.firstname }} {{ order.lastname }}<br/>Email: {{ order.email }}<br/>Телефон: {{ order.telephone }}</td>
+			<td width="33%">
+			{{ order.payment_firstname }} {{ order.payment_lastname }}
+			{% if order.payment_company %}<br/>Компания: {{ order.payment_company }}{% endif %}
+			{% if order.payment_address_1 %}<br/>Адрес: {{ order.payment_address_1 }}{% endif %}
+			{% if order.payment_address_2 %}<br/>Адрес: {{ order.payment_address_2 }}{% endif %}
+			{% if order.payment_city %}<br/>Город: {{ order.payment_city }}{% endif %}
+			{% if order.payment_zone %}<br/>Населенный пункт: {{ order.payment_zone }}{% endif %}
+			{% if order.payment_country %}<br/>Страна: {{ order.payment_country }}{% endif %}
+			{% if order.payment_postcode %}<br/>Почтовый индекс: {{ order.payment_postcode }}{% endif %}
+			{% if order.payment_method %}<br/>Способ оплаты: {{ order.payment_method }}{% endif %}
+			</td>
+			<td width="33%">
+			{{ order.shipping_firstname }} {{ order.shipping_lastname }}
+			{% if order.shipping_company %}<br/>Компания: {{ order.shipping_company }}{% endif %}
+			{% if order.shipping_address_1 %}<br/>Адрес: {{ order.shipping_address_1 }}{% endif %}
+			{% if order.shipping_address_2 %}<br/>Адрес: {{ order.shipping_address_2 }}{% endif %}
+			{% if order.shipping_city %}<br/>Город: {{ order.shipping_city }}{% endif %}
+			{% if order.shipping_zone %}<br/>Населенный пункт: {{ order.shipping_zone }}{% endif %}
+			{% if order.shipping_country %}<br/>Страна: {{ order.shipping_country }}{% endif %}
+			{% if order.shipping_postcode %}<br/>Почтовый индекс: {{ order.shipping_postcode }}{% endif %}
+			{% if order.shipping_method %}<br/>Способ доставки: {{ order.shipping_method }}{% endif %}
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br/>
+<table border="1" width="100%" cellpadding="10">
+	<thead>
+		<tr>
+			<td width="60%"><strong>Товар</strong></td>
+			<td width="15%"><strong>Модель</strong></td>
+			<td width="5%"><strong>Количество</strong></td>
+			<td width="10%"><strong>Цена за единицу</strong></td>
+			<td width="10%"><strong>Итого</strong></td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for product in order.products %}
+		<tr>
+			<td width="60%">{{ product.name }}</td>
+			<td width="15%">{{ product.model }}</td>
+			<td width="5%">{{ product.quantity }}</td>
+			<td width="10%">{{ product.price }}</td>
+			<td width="10%">{{ product.total }}</td>
+		</tr>
+      	{% endfor %}    
+		{% for total in order.totals %}
+		<tr>
+			<td colspan="4" align="right">{{ total.title }}</td>
+			<td align="right">{{ total.value }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<br/>
+{% if order.comment %}
+<strong>Комментарий: </strong><br/>
+{{ order.comment }}
+{% endif %}
+{% endfor %}
+<br/>

@@ -1,0 +1,91 @@
+<div class="items">
+  <div class="items__wrap after-elem">
+    <div class="items__inner before-elem">
+      <div class="items__border txt-elem">
+        <form action="#" class="form">
+          <div class="form__title">Товары в корзине</div>
+          <ul class="items-box scroll-text">
+            {% for product in products %}
+              <li class="items-box__list">
+                <div class="items-box__pic">
+                  <img src="{{ product.thumb }}" alt="pic" width="70" height="70">
+                </div>
+                <div class="items-box__holder">
+                  <i class="items-box__close remove" data-cart-id="{{ product.cart_id }}" data-product='{{ product|json_encode() }}'>
+                    <img src="/front/dist/images/close-icon.svg" alt="icon" height="12" width="12">
+                  </i>
+                  <span class="items-box__desc">{{ product.name }}</span>
+                  <div class="items-box__row">
+                    <div class="amount">
+                      <div class="amount__holder">
+                        <button data-key="{{ product.cart_id }}" data-quantity="{{ product.quantity }}"
+                                data-product="{{ product.id }}" type="button"
+                                class="amount__btn btn-minus_cart"></button>
+                        <div class="amount__control">
+                          <input value="{{ product.quantity }}" type="text" class="amount__inp"
+                                 placeholder="{{ product.quantity }}">
+                        </div>
+                        <button data-key="{{ product.cart_id }}" data-quantity="{{ product.quantity }}"
+                                data-product="{{ product.id }}" type="button"
+                                class="amount__btn btn-plus_cart"></button>
+                      </div>
+                    </div>
+                    <strong class="price">{{ product.total }}</strong>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+
+          </ul>
+          {% if totals %}
+
+            {% for total in totals %}
+              <div class="total">
+                <span>{{ total.title }}: </span>
+                <strong>{{ total.text }}</strong>
+
+              </div>
+            {% endfor %}
+
+          {% endif %}
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(window).on("load", function () {
+    var products = [];
+
+    {% for product in products %}
+      products.push({
+        //id      : {{ product.product_id }}, //15112022
+         id      : {{ product.id }},
+        name    : '{{ product.name }}',
+        category: '{{ product.category }}',
+       // price   : {{ product.price_clear }},
+        price   : {{ product.price | replace({' ': '', 'руб':''}) }}, //15112022
+        quantity: {{ product.quantity }}
+      })
+    {% endfor %}
+
+    if (dataLayer) {
+      dataLayer.push({
+        event    : 'ecommerce',
+        EE       : 'checkout',
+        ecommerce: {
+          checkout: {
+            actionField: {
+              step  : 1,
+              option: 'Корзина'
+            },
+            products   : products
+          }
+        }
+      });
+    }
+  })
+</script>

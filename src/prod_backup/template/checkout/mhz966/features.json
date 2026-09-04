@@ -1,0 +1,304 @@
+{
+  "type":"FeatureCollection",
+  "features":[
+    {
+      "type":"Feature",
+      "id": 1,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.942715, 30.369804]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки1",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки1</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='1' data-choice='Адрес точки1'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 2,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.986344, 30.287056]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки2",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки2</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='2' data-choice='Адрес точки2'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 3,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.888491, 30.389366]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки3",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки3</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='3' data-choice='Адрес точки3'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 4,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.888491, 30.389366]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки4",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки4</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='4' data-choice='Адрес точки4'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 5,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.888491, 30.389366]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки5",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки5</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='5' data-choice='Адрес точки5'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 6,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.888491, 30.389366]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки6",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки6</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='6' data-choice='Адрес точки6'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 7,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.888491, 30.389366]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки7",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки7</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='7' data-choice='Адрес точки7'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 8,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.888491, 30.389366]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки8",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки8</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='8' data-choice='Адрес точки8'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 9,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.888491, 30.389366]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки9",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки9</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='9' data-choice='Адрес точки9'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 10,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[59.888491, 30.389366]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки10",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки10</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='10' data-choice='Адрес точки10'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 11,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[54.804405, 56.121013]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки11",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки11</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='11' data-choice='Адрес точки11'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 12,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[54.785849, 56.042329]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки12",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки12</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='12' data-choice='Адрес точки12'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    },
+    {
+      "type":"Feature",
+      "id": 13,
+      "geometry":{
+        "type":"Point",
+        "coordinates":[54.735152, 55.958736]
+      },
+      "properties":{
+        "name": "Название ПВЗ",
+        "postal_сode": "Почтовый индекс",
+        "address":"Адрес точки13",
+        "nearest_station": "Ближайшая остановка",
+        "work_time": "Время работы",
+        "number": "Контактный телефон",
+        "other": "люая другая информация, которую считаешь нужной сюда сунуть",
+
+
+        "balloonContentHeader": "<h4 class='mhz-baloon__title'><img src='https://annagale.ru/image/catalog/ll_cdek/logo_small.png'>Название ПВЗ</h4>",
+        "balloonContentBody": "<div class='mhz-baloon__body'>\n<div class='mhz-baloon__address'>Адрес точки13</div>\n<a href='tel:Контактный телефон' class='mhz-baloon__phone'>Контактный телефон</a>\n<div class='mhz-baloon__time'>\nВремя работы\n</div>\n<div class='mhz-baloon__nearest'>\nБлижайшая остановка\n</div>\n</div>",
+        "balloonContentFooter": "<button class='mhz-baloon__choice mhz-btn' data-id='13' data-choice='Адрес точки13'>Выбрать</button>",
+        "hintContent": "Адрес точки"
+      }
+    }
+  ]
+}

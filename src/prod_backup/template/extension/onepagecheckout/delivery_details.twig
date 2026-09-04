@@ -1,0 +1,446 @@
+<div class="extpanel extpanel-default">
+	<div class="extpanel-heading">
+		<h4 class="extpanel-title"><i class="fa fa-truck fa-flip-horizontal"></i> {{entry_heading}}</h4>
+	</div>
+	<div class="extpanel-body">
+		<form>
+			{% if addresses %}
+			<div class="radio">
+				<label>
+					<input type="radio" name="delivery_details[shipping_address]" value="existing" checked="checked" />{{text_address_existing}}</label>
+			</div>
+			<div id="shipping-existing">
+				<select name="delivery_details[address_id]" class="form-control">
+					 {% for address in addresses %}
+					  {% if address['address_id'] == address_id %}
+					  <option value="{{ address.address_id }}" selected="selected">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}, {{ (address.showcustomfeildsaddress ? address.showcustomfeildsaddress : '') }} {{ address.city }}, {{ address.zone }}, {{ address.country }}</option>
+					  {% else %}
+					  <option value="{{ address.address_id }}">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}, {{ (address.showcustomfeildsaddress ? address.showcustomfeildsaddress : '') }} {{ address.city }}, {{ address.zone }}, {{ address.country }}</option>
+					  {% endif %}
+					  {% endfor %}
+				</select>
+			</div>
+			<div class="radio">
+				<label><input type="radio" name="delivery_details[shipping_address]" value="new" />{{text_address_new}}</label>
+			</div>
+			<br/>
+			{% else %}
+			<input style="display:none" type="radio" checked="checked" name="delivery_details[shipping_address]" value="new" />
+			{% endif %}
+			<div id="shipping-new" style="display: {% if addresses %}none{% else %}block{% endif %};">
+							 
+				 {% for feild in feilds %}
+				
+				{% if feild.key == 'firstname' %}
+					<div class="form-group {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-firstname">{{feild['label']}}</label>
+						<input type="text" name="delivery_details[firstname]" value="{{ firstname }}" placeholder="{{feild['placeholder']}}" id="input-shipping-firstname" class="formcontrol" />
+					</div>
+				{% endif %}
+				
+				{% if feild.key == 'lastname' %}
+					<div class="form-group {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-lastname">{{feild['label']}}</label>
+						<input type="text" name="delivery_details[lastname]" value="{{ lastname }}" placeholder="{{feild['placeholder']}}" id="input-shipping-lastname" class="formcontrol" />
+					</div>
+				{% endif %}
+				
+				{% if feild.key == 'company' %}
+					<div class="form-group {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-company">{{feild['label']}}</label>
+						<input type="text" name="delivery_details[company]" value="" placeholder="{{feild['placeholder']}}" id="input-shipping-company" class="formcontrol" />
+					</div>
+				{% endif %}
+				
+				{% if feild.key == 'address_1' %}
+					<div class="form-group {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-address-1">{{feild['label']}}</label>
+						<input type="text" name="delivery_details[address_1]" value="" placeholder="{{feild['placeholder']}}" id="input-shipping-address-1" class="formcontrol" />
+					</div>
+				{% endif %}
+				
+				{% if feild.key == 'address_2' %}
+					<div class="form-group {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-address-2">{{feild['label']}}</label>
+						<input type="text" name="delivery_details[address_2]" value="" placeholder="{{feild['placeholder']}}" id="input-shipping-address-2" class="formcontrol" />
+					</div>
+				{% endif %}
+				
+				{% if feild.key == 'city' %}
+					<div class="form-group {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-city">{{feild['label']}}</label>
+						<input type="text" name="delivery_details[city]" value="" placeholder="{{feild['placeholder']}}" id="input-shipping-city" class="formcontrol" />
+					</div>
+				{% endif %}
+				
+				{% if feild.key == 'postcode' %}
+					<div class="form-group {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-postcode">{{feild['label']}}</label>
+						<input type="text" name="delivery_details[postcode]" value="" placeholder="{{feild['placeholder']}}" id="input-shipping-postcode" class="formcontrol" />
+					</div>
+				{% endif %}
+				{% if feild.key == 'country' %}
+					<div class="form-group {{feild['chide'] ? 'hide' : ''}} {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-country">{{feild['label']}}</label>
+						<select name="delivery_details[country_id]" id="input-shipping-country" class="formcontrol">
+							<option value="">{{feild['placeholder']}}</option>
+							{% for country in countries %}
+							{% if country['country_id'] == country_id %}
+							<option value="{{country['country_id']}}" selected="selected">{{country['name']}}</option>
+							{% else %}
+							<option value="{{country['country_id']}}">{{country['name']}}</option>
+							{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+				{% endif %}
+				{% if feild.key == 'zone' %}
+					<div class="form-group {{feild['zhide'] ? 'hide' : ''}} {{class1}} {{feild['required'] ? 'required' : ''}}">
+						<label class="control-label" for="input-shipping-zone">{{feild['label']}}</label>
+						<select name="delivery_details[zone_id]" id="input-shipping-zone" class="formcontrol">
+						</select>
+					</div>
+				{% endif %}
+				{% endfor %}
+				
+				
+				{% for custom_field in custom_fields %}
+				{% if custom_field['location']=='address'%}
+				
+					{% if custom_field['type'] == 'select' %}
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label" for="input-shipping-custom-field{{custom_field['custom_field_id']}}">{{custom_field['name']}}</label>
+						<select name="delivery_details[custom_field][{{custom_field['custom_field_id']}}]" id="input-shipping-custom-field{{custom_field['custom_field_id']}}" class="formcontrol">
+								<option value="">{{text_select}}</option>
+								{% for custom_field_value in custom_field['custom_field_value'] %}
+								<option value="{{custom_field_value['custom_field_value_id']}}">{{custom_field_value['name']}}</option>
+								{% endfor %}
+						</select>
+					</div>
+					{% endif %}		
+					
+					
+					{% if custom_field['type'] == 'radio' %}
+					<!-- Radio Custom -->
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label">{{custom_field['name']}}</label>
+						<div id="input-shipping-custom-field{{custom_field['custom_field_id']}}">
+								{% for custom_field_value in custom_field['custom_field_value'] %}
+								<div class="radio">
+									<label>
+										<input type="radio" name="delivery_details[custom_field][{{custom_field['custom_field_id']}}]" value="{{custom_field_value['custom_field_value_id']}}" />
+										{{custom_field_value['name']}}</label>
+								</div>
+								{% endfor %}
+							</div>
+					</div>
+					{% endif %}	
+					{% if custom_field['type'] == 'checkbox' %}
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label">{{custom_field['name']}}</label>
+						<div id="input-shipping-custom-field{{custom_field['custom_field_id']}}">
+								{% for custom_field_value in custom_field['custom_field_value'] %}
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="delivery_details[custom_field][{{custom_field['custom_field_id']}}][]" value="{{custom_field_value['custom_field_value_id']}}" />
+										{{custom_field_value['name']}}</label>
+								</div>
+								{% endfor %}
+							</div>
+					</div>
+					{% endif %}
+					
+					{% if custom_field['type'] == 'text' %}
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label" for="input-shipping-custom-field{{custom_field['custom_field_id']}}">{{custom_field['name']}}</label>
+						<input type="text" name="delivery_details[custom_field][{{custom_field['custom_field_id']}}]" value="{{custom_field['value']}}" placeholder="{{custom_field['name']}}" id="input-shipping-custom-field{{custom_field['custom_field_id']}}" class="formcontrol" />
+					</div>
+					{% endif %}
+					
+					{% if custom_field['type'] == 'textarea' %}
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label" for="input-shipping-custom-field{{custom_field['custom_field_id']}}">{{custom_field['name']}}</label>
+						<textarea name="delivery_details[custom_field][{{custom_field['custom_field_id']}}]" rows="5" placeholder="{{custom_field['name']}}" id="input-shipping-custom-field{{custom_field['custom_field_id']}}" class="formcontrol">{{custom_field['value']}}</textarea>
+					</div>
+					{% endif %}
+					
+					{% if custom_field['type'] == 'file' %}
+					<!-- Custom File -->
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label">{{custom_field['name']}}</label>
+						<button type="button" id="button-shipping-custom-field{{custom_field['custom_field_id']}}" data-loading-text="{{text_loading}}" class="btn btn-default"><i class="fa fa-upload"></i> {{button_upload}}</button>
+							<input type="hidden" name="delivery_details[custom_field][{{custom_field['custom_field_id']}}]" value="" id="input-shipping-custom-field{{custom_field['custom_field_id']}}" />
+					</div>
+					{% endif %}
+					{% if custom_field['type'] == 'date' %}
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label" for="input-shipping-custom-field{{custom_field['custom_field_id']}}">{{custom_field['name']}}</label>
+							<div class="input-group date">
+								<input type="text" name="delivery_details[custom_field][{{custom_field['custom_field_id']}}]" value="{{custom_field['value']}}" placeholder="{{custom_field['name']}}" data-date-format="YYYY-MM-DD" id="input-shipping-custom-field{{custom_field['custom_field_id']}}" class="formcontrol" />
+								<span class="input-group-btn">
+								<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+								</span></div>
+					</div>
+					{% endif %}
+					{% if custom_field['type'] == 'time' %}
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label" for="input-shipping-custom-field{{custom_field['custom_field_id']}}">{{custom_field['name']}}</label>
+						<div class="input-group time">
+								<input type="text" name="delivery_details[custom_field][{{custom_field['custom_field_id']}}]" value="{{custom_field['value']}}" placeholder="{{custom_field['name']}}" data-date-format="HH:mm" id="input-shipping-custom-field{{custom_field['custom_field_id']}}" class="formcontrol" />
+								<span class="input-group-btn">
+								<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+								</span>
+						</div>
+					</div>
+					{% endif %}
+					
+					{% if custom_field['type'] == 'time' %}
+				
+					<!-- Custom Datetime -->
+					<div class="{{class1}} form-group {{custom_field['required'] ? 'required' : ''}} custom-field" data-sort="{{custom_field['sort_order']}}">
+						<label class="control-label" for="input-shipping-custom-field{{custom_field['custom_field_id']}}">{{custom_field['name']}}</label>
+						<div class="input-group datetime">
+							<input type="text" name="delivery_details[custom_field][{{custom_field['custom_field_id']}}]" value="{{custom_field['value']}}" placeholder="{{custom_field['name']}}" data-date-format="YYYY-MM-DD HH:mm" id="input-shipping-custom-field{{custom_field['custom_field_id']}}" class="formcontrol" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+							</span>
+						</div>
+					</div>
+					{% endif %}
+					
+					{% endif %}
+				{% endfor %}
+			</div>
+		</form>
+	</div>
+</div>
+<script><!--
+$('.delivery-details-content input[name=\'delivery_details[shipping_address]\']').on('change', function() {
+	if (this.value == 'new') {
+		$('#shipping-existing').hide();
+		$('#shipping-new').show();
+		$('#shipping-new select[name=\'delivery_details[zone_id]\']').trigger('change');
+	} else {
+		$('#shipping-existing').show();
+		$('#shipping-new').hide();
+		$('#shipping-existing select[name=\'delivery_details[address_id]\']').trigger('change');
+	}
+});
+//--></script>
+<script><!--
+$('#shipping-new .form-group[data-sort]').detach().each(function() {
+	if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#shipping-new .form-group').length-2) {
+		$('#shipping-new .form-group').eq(parseInt($(this).attr('data-sort'))+2).before(this);
+	}
+
+	if ($(this).attr('data-sort') > $('#shipping-new .form-group').length-2) {
+		$('#shipping-new .form-group:last').after(this);
+	}
+
+	if ($(this).attr('data-sort') == $('#shipping-new .form-group').length-2) {
+		$('#shipping-new .form-group:last').after(this);
+	}
+
+	if ($(this).attr('data-sort') < -$('#shipping-new .form-group').length-2) {
+		$('#shipping-new .form-group:first').before(this);
+	}
+});
+//--></script>
+<script><!--
+$('#shipping-new button[id^=\'button-shipping-custom-field\']').on('click', function() {
+	var node = this;
+
+	$('#form-upload').remove();
+
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="delivery_details[file]" /></form>');
+
+	$('#form-upload input[name=\'delivery_details[file]\']').trigger('click');
+
+	if (typeof timer != 'undefined') {
+    	clearInterval(timer);
+	}
+
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'delivery_details[file]\']').val() != '') {
+			clearInterval(timer);
+
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(node).button('loading');
+				},
+				complete: function() {
+					$(node).button('reset');
+				},
+				success: function(json) {
+					$(node).parent().find('.text-danger').remove();
+
+					if (json['error']) {
+						$(node).parent().find('input[name^=\'delivery_details[custom_field]\']').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
+
+					if (json['success']) {
+						alert(json['success']);
+
+						$(node).parent().find('input[name^=\'delivery_details[custom_field]\']').attr('value', json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+//--></script>
+<script><!--
+$('.date').datetimepicker({
+	pickTime: false
+});
+
+$('.time').datetimepicker({
+	pickDate: false
+});
+
+$('.datetime').datetimepicker({
+	pickDate: true,
+	pickTime: true
+});
+//--></script>
+<script><!--
+{% if isLogged %}
+$('#shipping-existing select[name=\'delivery_details[address_id]\']').on('change', function(){
+	var postdata = $('.delivery-details-content input[type=\'text\'],.delivery-details-content input[type=\'checkbox\']:checked, .delivery-details-content input[type=\'radio\']:checked, .delivery-details-content input[type=\'hidden\'],.delivery-details-content select');
+	var url = 'index.php?route=extension/onepagecheckout/shipping_method&type=delivery_details';
+	var shipping_address = $('#onepagecheckout input[name=\'payment_details[shipping_address]\']:checked').val();
+	if(shipping_address==undefined){
+		$.ajax({
+			url:url,
+			type:'post',
+			data:postdata,
+			dataType: 'html',
+			success: function(html){
+				$('#onepagecheckout .delivery-method-loader').remove();
+				$('#onepagecheckout .delivery-method-content').html(html);
+			}
+		});
+	}
+});
+
+setTimeout(function(){ $('#shipping-existing select[name=\'delivery_details[address_id]\']').trigger('change'); }, 1000);
+{% endif %}
+$('#shipping-new select[name=\'delivery_details[country_id]\']').on('change', function(){
+	$.ajax({
+		url: 'index.php?route=extension/onepagecheckout/checkout/country&country_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function(){
+			$('#shipping-new select[name=\'delivery_details[country_id]\']').after(' <i class="fa fa-circle-o-notch fa-spin"></i>');
+		},
+		complete: function() {
+			$('.fa-spin').remove();
+		},
+		success: function(json){
+			html = '<option value="">{{zoneplaceholder}}</option>';
+
+			if (json['zone'] && json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+					html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+					if (json['zone'][i]['zone_id'] == '{{zone_id}}') {
+						html += ' selected="selected"';
+					}
+
+					html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0" selected="selected">{{text_none}}</option>';
+			}
+
+			$('#shipping-new select[name=\'delivery_details[zone_id]\']').html(html).trigger('change');
+		},
+		error: function(xhr, ajaxOptions, thrownError){
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('#shipping-new select[name=\'delivery_details[country_id]\']').trigger('change');
+
+$('#shipping-new select[name=\'delivery_details[zone_id]\']').on('change', function(){
+	var shipping_address = false;
+		{% if not isLogged %}
+			var val = $("input[name='personal_details[shipping_address]']:checked").val();
+			if(!$("input[name='personal_details[shipping_address]']:checked").val()){
+				shipping_address = true;
+			}
+		{% else %}
+			
+			var val = $("input[name='delivery_details[shipping_address]']:checked").val();
+			shipping_address = false;
+			if(val=='new'){
+			  shipping_address = true;
+			}
+			/*delivery and billing addresses are the same.*/
+			var sameaddress = $('#onepagecheckout input[name=\'payment_details[shipping_address]\']:checked').val();
+			if(sameaddress){
+			 shipping_address = false;
+			}
+			/*delivery and billing addresses are the same.*/
+			
+		{% endif %}
+		
+		if(shipping_address==true){
+			LoadShippingMethod();
+		}
+});
+
+
+
+$('#shipping-new input[name=\'delivery_details[postcode]\']').on('blur', function(){
+	
+	var shipping_address = false;
+
+	{% if not isLogged %}
+
+		var val = $("input[name='personal_details[shipping_address]']:checked").val();
+
+		if(!$("input[name='personal_details[shipping_address]']:checked").val()){
+
+			shipping_address = true;
+
+		}
+
+	{% else %}
+
+		var val = $("input[name='delivery_details[shipping_address]']:checked").val();
+
+		shipping_address = false;
+
+		if(val=='new'){
+
+		  shipping_address = true;
+
+		}
+		
+		/*delivery and billing addresses are the same.*/
+		var sameaddress = $('#onepagecheckout input[name=\'payment_details[shipping_address]\']:checked').val();
+		if(sameaddress){
+		 shipping_address = false;
+		}
+		/*delivery and billing addresses are the same.*/
+
+	{% endif %}
+
+	if(shipping_address==true){
+
+		LoadShippingMethod();
+
+	}
+});
+//--></script>

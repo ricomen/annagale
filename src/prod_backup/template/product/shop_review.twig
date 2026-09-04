@@ -1,0 +1,99 @@
+{{ header }}
+
+
+<div class="main-feedback container">
+
+    <div class="breadcrumbs">
+        <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <span  class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+                    </li>
+                {% else %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="block-caption">
+        <h1 class="title">Отзывы</h1>
+    </div>
+
+    <div class="reviews-block">
+        {% if reviews %}
+        {% for review in reviews %}
+        <div class="box-review">
+            <div class="box-review__holder">
+                <a href="{{ review.popup }}" class="box-review__pic" data-fancybox="images">
+                    <img src="{{ review.image }}" alt="pic" width="245" height="245">
+                </a>
+                <div class="box-review__info">
+                    <a href="{{ review.author }}" class="box-review__link" target="_blank">{{ review.text }}</a>
+                </div>
+            </div>
+        </div>
+
+            {% endfor %}
+{% endif %}
+    </div>
+ {{ pagination }}
+
+</div>
+
+
+
+<script>
+    $('#form-review').submit(function (e) {
+        e.preventDefault();
+        var data = $('#form-review').serialize();
+        $('.label-content__error').remove();
+        console.log(data);
+
+
+        $.ajax({
+            url: 'index.php?route=product/product/writeShop',
+            type: 'post',
+            data: data,
+            dataType: 'json',
+            success: function(json) {
+
+console.log(json)
+
+                if (json['error']) {
+                    console.log(json['error']);
+                    for(var key in json['error']) {
+                        if(json['error'].hasOwnProperty(key)) {
+
+                            $('#form-review').find('[name="' + key + '"]').before('<span class="label-content__error">' + json['error'][key] + '</span>');
+                        }
+                    }
+
+                }
+                if (json['success']) {
+                    $('[data-target="review"]').addClass('active');
+                    $('#form-review').find('input').val('');
+                    $('#form-review').find('textarea').val('');
+                    $('#form-review .star-rating__item').removeClass('active');
+
+                }
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+
+        return false;
+
+    })
+</script>
+
+
+{{ footer }}

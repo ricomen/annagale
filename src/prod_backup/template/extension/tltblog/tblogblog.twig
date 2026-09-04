@@ -1,0 +1,62 @@
+{{ header }}
+
+
+<div class="main-blog container">
+
+    <div class="breadcrumbs">
+        <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <span  class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+                    </li>
+                {% else %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="block-caption">
+        <h1 class="title">{{ heading_title }}</h1>
+    </div>
+
+    <div class="blog-section">
+        <ul class="blog-list">
+            {% for tltblog in tltblogs %}
+            <li class="blog-list__items">
+                <a href="{{ tltblog['href'] }}" class="blog-list__box">
+                    <div class="blog-list__link">
+                        <img src="{{ tltblog['thumb'] }}" alt="pic" width="379" height="237">
+                    </div>
+                    <div class="blog-list__holder">
+                        <span  class="blog-list__title">{{ tltblog['title'] }}</span>
+                        <div class="blog-list__desc">{{ tltblog['intro'] }}</div>
+                        <div class="blog-list__row">
+                      <span class="blog-list__data">
+                        <i class="blog-list__icon">
+                          <img src="/front/dist/images/blog-icon.svg" alt="icon" width="13" height="13">
+                        </i>
+                        <span class="blog-list__time">{{ tltblog['blog_date'] }}</span>
+                      </span>
+                            <span class="blog-list__more">Читать далее</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+{% endfor %}
+
+        </ul>
+
+        {{ pagination }}
+    </div>
+
+</div>
+
+
+{{ footer }}

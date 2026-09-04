@@ -1,0 +1,853 @@
+{{ header }}
+<div style="display: none" class="checkout-block">
+    <div class="checkout-block__steps">
+        <div class="checkout-block__title">{{ heading_title }}</div>
+        {% if not logged %}
+            <a href="#" class="checkout-block__link" id="have-account">{{ text_cart_account }}</a>
+        {% endif %}
+        <div class="checkout-block__step checkout-block__step-1">
+            <div class="checkout-block__step-title">{{ text_cart_step_1 }}</div>
+            <div class="checkout-block__step-content">
+                <form class="checkout-block__form">
+
+                    <div class="item_form_first">
+                    <div class="form-block">
+                        <input class="main-input" type="text">
+                    </div>
+                        <label class="form-label">{{ entry_firstname }}</label>
+            </div>
+                    <div class="item_form_first">
+                    <div class="form-block">
+                        <input class="main-input" type="text">
+                    </div>
+                        <label class="form-label">{{ entry_lastname }}</label>
+                    </div>
+
+                    <div class="item_form_first">
+                    <div class="form-block">
+                        <input class="main-input" type="tel">
+                    </div>
+                        <label class="form-label">{{ entry_telephone }}</label>
+                    </div>
+                    <div class="item_form_first">
+                    <div class="form-block">
+                        <input class="main-input" type="email">
+                    </div>
+                        <label class="form-label">{{ entry_email }}</label>
+                    </div>
+
+                    <div class="checkout-button" id="next-step2">{{ button_next_step }}</div>
+                </form>
+            </div>
+        </div>
+        <div class="checkout-block__step checkout-block__step-2 disabled" id="tab-2">
+            <div class="checkout-block__step-title">{{ text_cart_step_2 }}</div>
+            <div class="checkout-block__step-content" id="step-2-content">
+                <div class="checkout-block__delivery-payment-form">
+                    {# Shipping #}
+                    {# Payment #}
+                    {# Comment will be here #}
+                    {# Confirm #}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Cart #}
+
+</div>
+
+
+<div class="container">
+
+    <div class="breadcrumbs">
+        <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <span class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+                    </li>
+                {% else %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="block-caption">
+        <h1 class="title">{{ heading_title7 }}</h1>
+    </div>
+
+    <div class="checkout-page">
+
+        <div class="date">
+            <i class="date__icon">
+                <img src="/front/dist/images/moment-icon.svg" alt="icon" width="14" height="14">
+            </i>
+            <div class="date__time">Это займет у Вас всего <span>3 минуты</span></div>
+        </div>
+
+        <form id="step-1" class="checkout-box">
+            <div class="checkout-box__holder">
+                <div id="step-1-content" class="checkout-box__step">
+
+                    <div class="checkout-box__title">
+                        <span class="step active">1</span>
+                        <div class="checkout-box__desc">Контактные данные</div>
+                        <div class="edit inactive js-slideUp">Редактировать</div>
+                    </div>
+                    <div class="checkout-box__wrap wrap-one">
+                        <div class="status">
+
+                            {% if firstname %}
+
+                                <div class="status__new">Я постоянный клиент</div>
+                                {#                                <div class="status__const">Я новый покупатель</div>#}
+                            {% else %}
+                                <div class="status__new ">Я новый покупатель</div>
+                                <div style="cursor: pointer" class="status__const">Я постоянный клиент</div>
+
+
+                            {% endif %}
+                        </div>
+                        <div class="form__box">
+                            <div class="item_form_first">
+                            <div class="form__row">
+                                <input type="text" class="form__control" placeholder="Имя*" value="{{ firstname }}"
+                                       name="firstname"></div>
+                            </div>
+                            <div class="item_form_first">
+                            <div class="form__row">
+                                <input type="text" class="form__control" placeholder="Фамилия*" value="{{ lastname }}"
+                                       name="lastname"></div>
+                            </div>
+                            <div class="item_form_first">
+                            <div class="form__row">
+                                <input type="text" class="form__control" placeholder="Телефон*" value="{{ telephone }}"
+                                       name="telephone"></div>
+                            </div>
+                            <div class="item_form_first">
+                            <div class="form__row">
+                                <input type="email" class="form__control" placeholder="Email*" value="{{ email }}"
+                                       name="email"></div>
+                            </div>
+
+                        </div>
+                        <div id="next-step" class="btn btn-default js-next2">Далее</div>
+                    </div>
+
+                </div>
+
+
+                <div id="step-2-content" class="checkout-box__step">
+
+                    <div class="checkout-box__title">
+                        <span class="step">2</span>
+                        <div class="checkout-box__desc">Доставка и оплата</div>
+                    </div>
+                    <div style="display: none" class="checkout-box__wrap">
+
+                        <div class="delivery-title">Доставка</div>
+                        <div class="delivery-subtitle">Для расчета доставки необходимо выбрать город из выпадающего списка</div>
+                        <div class="form-delivery">
+                            <div class="form-delivery__row">
+
+                                <div class="select-block">
+                                    <div class="select-sorting country_val">
+
+
+                                        <select name="country_id" id="input-country" class="form-control search-select"
+                                                data-search="Поиск по стране" data-error="Ничего не найдено">
+                                            <option disabled selected value="">Страна*</option>
+                                            {% for country in countries %}
+                                                {% if country.country_id == country_id %}
+                                                    <option value="{{ country.country_id }}"
+                                                            selected="selected">{{ country.name }}</option>
+                                                {% else %}
+                                                    <option value="{{ country.country_id }}">{{ country.name }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="select-block zone_name">
+{#                                    <div class="select-sorting">#}
+{#                                        <select autocomplete="off" name="zone_id" id="input-zone" class="form-control search-select"#}
+{#                                                data-search="Поиск по городу" data-error="Ничего не найдено">#}
+{#                                            <option data-zone_name="" disabled selected value="0" selected="selected">#}
+{#                                                Город*#}
+{#                                            </option>#}
+{#                                        </select>#}
+{#                                    </div>#}
+                                   <div style="">
+                                        <div class="form-delivery__box">
+                                            <input id="cdek-city-from" disabled="disabled" name="shipping_cdek_city_from" type="text" class="form__control" placeholder="Город">
+                                            <div class="icon-container">
+                                              <i class="loader"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-delivery__row row-address">
+                                <div class="form-delivery__box">
+                                    <input id="street" name="street" type="text" class="form__control" placeholder="Улица" disabled>
+                                </div>
+
+                                <div class="form-delivery__unit">
+                                    <div class="unit-index">
+                                        <input name="postcode" type="text" class="form__control" placeholder="Индекс" disabled>
+                                    </div>
+                                    <div class="unit-house">
+                                        <input name="house" type="text" class="form__control" placeholder="Дом" disabled>
+                                    </div>
+                                    <div class="unit-flat">
+                                        <input name="apartment" type="text" class="form__control"
+                                               placeholder="Квартира" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="error-box" style="display:none;font-size:13px;color:#e58182;"></div>
+                        </div>
+                        <!--coupon-->
+                        <div class="delivery_pay_block" style="display: none">
+                            <div id="box-check" class="box-check" style="display: none">
+                                <div class="box-check-title">Выбор коробки</div>
+                                <label class="convention">
+                                    <input type="radio" checked name="box_type" value="classic" class="convention__check">
+                                    <i class="convention__mark"></i>
+                                    <div class="convention__text class_1">
+                                        <span>Классическая</span>
+                                    </div>
+                                </label>
+                                <label class="convention">
+                                    <input type="radio" name="box_type" value="gift" class="convention__check">
+                                    <i class="convention__mark"></i>
+                                    <div class="convention__text class_1">
+                                        <span>Подарочная (с дополнительной защитой классической коробки) + 70 руб.</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="delivery-title">Служба доставки</div>
+                            <div id="shipping-block" class="delivery-check"></div>
+                            <div class="delivery-title">Способ оплаты</div>
+                            <div id="payment-block" class="delivery-check delivery-check-pay"></div>
+                        </div>
+                        <div class="section-options">
+                            <div class="comment">
+                                <div class="comment__txt js-comment">Комментарий к заказу</div>
+                                <br>
+                                <small style="font-size:70%;">
+                                *При заказе продукции в подарок, можно добавить поздравительную открытку с вашими пожеланиями
+                                </small>
+                                <div class="comment__block">
+                                    <div class="form__row form__row-comment">
+                                        <textarea name="comment" id="comment" class="form__control"
+                                                  placeholder="Сообщение"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="promo-code" style="margin-top: 10px;">
+
+
+                                <div class="promo-code__txt js-promo-code">У меня есть промо-код или сертификат</div>
+                                <div class="promo-code__block">
+
+                                    {% for module in modules %}
+                                        {{ module }}
+                                    {% endfor %}
+
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="agreement">
+
+                                <label class="convention">
+                                    <input checked="checked" name="agree" type="checkbox" class="convention__check">
+                                    <i class="convention__mark"></i>
+                                    <span class="convention__text">Я соглашаюсь с <a href="/delivery">условиями доставки и оплаты</a></span>
+                                </label>
+
+                                <label class="convention">
+                                    <input checked="checked" name="convention2" type="checkbox" class="convention__check">
+                                    <i class="convention__mark"></i>
+                                    <span class="convention__text">Я соглашаюсь с <a href="/privacy">публичной офертой и политикой конфиденциальности</a> и обработкой моих персональных данных</span>
+                                </label>
+
+                                <label class="convention">
+                                    <input checked="checked" type="checkbox" class="convention__check">
+                                    <i class="convention__mark"></i>
+                                    <span class="convention__text">Я хочу получать уведомления о новинках, скидках, акциях</span>
+                                </label>
+
+                            </div>
+
+                        </div>
+                        <div id="confirm-block">
+
+                            <div class="buttons ">
+                                <div class="pull-right">
+                                    <input type="submit" value="Оформить заказ" class="btn btn-order btn-default onclup disabled" disabled="">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="basket-block__wrap" id="cart-block"></div>
+
+        </form>
+
+
+    </div>
+</div>
+
+
+<div class="popup popup-has-acc">
+    <div class="popup__overlay"></div>
+    <div class="popup__holder popup__holder--registration-thx">
+
+        <div class="popup__close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+                <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+            </svg>
+        </div>
+        <div class="popup__content popup__content--personal popup__content--basket">
+            <div class="items items-personal">
+                <div class="items__wrap after-elem">
+                    <div class="items__inner before-elem">
+                        <div class="items__border txt-elem">
+                            <form method="post" id="login-form" class="popup__content form">
+                                <div class="popup__title form__title">{{ text_login_title }}</div>
+                                <div class="form__box">
+                                <div class="form__row">
+                                    <input class="main-input form__control" placeholder="{{ text_login_email }}" type="email" name="email">
+{#                                    <label class="form-label">{{ text_login_email }}</label>#}
+                                </div>
+                                <div class="form__row">
+                                    <input class="main-input form__control" placeholder="{{ text_login_pwd }}" type="password" name="password">
+{#                                    <label class="form-label">{{ text_login_pwd }}</label>#}
+                                </div>
+                                </div>
+                                <div class="form__personal">
+                                <button type="submit" id="login-confirm"
+                                        class="checkout-button btn btn-default">{{ text_login_submit }}</button>
+                                </div>
+                            </form>
+                            {% if  ulogin %}
+                            <p>Войти через:</p>
+                            <div>{{ ulogin }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    $('.js.city-from').click(function(){
+        $("#cdek-city-from").show().focus().trigger('keydown');
+    //    $(this).hide();
+    });
+
+    $("#cdek-city-from").blur(function(){
+        if ($('#cdek-city-from-id').val() != '') {
+            $('.js.city-from').show();
+        //    $(this).hide();
+        }
+    });
+
+    $("#cdek-city-from").change(function(){
+        $('#cdek-city-from-id').val('');
+    });
+
+    $(function() {
+        $("#cdek-city-from").autocomplete({
+            source: function(request,response) {
+                if ($("#cdek-city-from").val().length > 1 ) {
+                     $('.loader').css( "display", "block" );
+                }
+               
+                $.ajax({
+                 url: "//api.cdek.ru/city/getListByTerm/jsonp.php?countryCodeList=RU&=1485514316680:1&callback=?",
+                // url: "https://integration.cdek.ru/v1/location/cities/json?size=5&page=0&regionCode=23",
+
+                    dataType: "jsonp",
+                    data: {
+                        q: function () { return $("#cdek-city-from").val() },
+                        name_startsWith: function () { return $("#cdek-city-from").val() }
+                    },
+                    success: function(data) {
+                        $('.loader').hide();
+                    //   console.log(data);
+                        // BY KZ RU
+
+                 var country_id = $('.select__item.select__item--active').data('value')
+                        var countryIso = 'RU'
+                        if(country_id==20){
+                            countryIso = 'BY'
+                        }    if(country_id==109){
+                            countryIso = 'KZ'
+                        }
+
+                        response($.map(data.geonames, function(item) {
+if(item.countryIso==countryIso){
+
+
+                            return {
+                                label: item.name,
+                                value: item.id,
+                                id: item.id,
+                            }
+                        }
+
+                        }));
+                    }
+                });
+            },
+            minLength: 1,
+            select: function(event) {
+               // console.log(event);
+                $('#cdek-city-from-id').parent().find('.error').remove();
+                $('#cdek-city-from-id').val(event.id);
+
+                $("#cdek-city-from").val(event.label);
+                $('.js.city-from').text(event.label).show();
+             //   $("#cdek-city-from").hide();
+            }
+        });
+
+    });
+</script>
+
+
+
+
+
+<script><!--
+
+
+    // On change country
+    $(document).on('change', 'select[name=\'country_id\']', function () {
+        var country_id = this.value;
+        $('#cdek-city-from').removeAttr('disabled')
+        $.ajax({
+            url: 'index.php?route=extension/total/shippingcustom/country&country_id=' + this.value,
+            dataType: 'json',
+            success: function (json) {
+
+                if(country_id!=176&& country_id!=20 && country_id!=109){
+                    $('#cdek-city-from').removeAttr('id')
+                }else{
+                  $('input[name=\'shipping_cdek_city_from\']').attr('id','cdek-city-from')
+                }
+
+
+                if (json['postcode_required'] == '1') {
+                    $('input[name=\'postcode\']').parent().parent().addClass('required');
+                } else {
+                    $('input[name=\'postcode\']').parent().parent().removeClass('required');
+                }
+                //   console.log(json);
+                html = '<option data-zone_name="" disabled selected value="">Город</option>';
+
+                if (json['zone'] && json['zone'] != '') {
+                    for (i = 0; i < json['zone'].length; i++) {
+                        html += '<option data-zone_name="' + json['zone'][i]['name'] + '" value="' + json['zone'][i]['zone_id'] + '"';
+
+                        if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
+                            html += ' selected="selected"';
+                        }
+
+                        html += '>' + json['zone'][i]['name'] + '</option>';
+                    }
+                } else {
+                    html += '<option data-zone_name="" disabled selected value="0" selected="selected">Город</option>';
+                }
+
+                $('select[name=\'zone_id\']').html(html);
+
+                setTimeout(function () {
+                    customeSelect.update('select')
+                    ;
+                }, 500);
+                setTimeout(function () {
+                 //  console.log(111);
+                    $('.select__list').mCustomScrollbar()
+
+                }, 600);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    // On change region2
+    $(document).on('change', 'select[name="zone_id"]', function () {
+        //console.log($(".zone_name .select__item--active").text());
+
+        $.ajax({
+            url: 'index.php?route=checkout/checkout_two_step/changeZone',
+            type: 'post',
+            cache: false,
+            data: 'zone_id=' + $(this).val() + '&zone_name=' + $(".zone_name .select__item--active").text() + '&country_id=' + $('.country_val .select__item--active').data('value'),
+            dataType: 'json',
+            success: function (json) {
+                setTimeout(function () {
+                    shippingMethods();
+                    $('#box-check').show('slow');
+                    $('.delivery_pay_block').show('slow');
+                }, 500);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    $(document).on('change', 'input[name="shipping_cdek_city_from"]', function () {
+        $('#confirm-block').find('.btn-order').addClass('disabled').prop('disabled',true);
+        $(this).addClass('inp-error');
+        if($('input[name="shipping_cdek_city_from"]').val().length>1) {
+            var country_id = $('.select__item.select__item--active').data('value');
+            $.ajax({
+                url: 'index.php?route=checkout/checkout_two_step/changeZone',
+                type: 'post',
+                cache: false,
+                data: 'zone_id=999999&zone_name=' + $('input[name="shipping_cdek_city_from"]').val() + '&country_id=' + $('.country_val .select__item--active').data('value'),
+                dataType: 'json',
+                success: function (json) {
+                    // $('#shipping-block').html('');
+                    // setTimeout(function () {
+                    //     shippingMethods();
+                    //     $('#box-check').show('slow');
+                    //     $('.delivery_pay_block').show('slow');
+                    // }, 500);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        } else {
+            $('.delivery_pay_block').hide();
+            $('.error-box-city').remove();
+            $('.form-delivery').append('<div class="error-box-city" style="font-size: 13px;color: rgb(229, 129, 130);">Необходимо указать город</div>');
+        }
+    });
+    $(document).on('click', '.form-delivery__box li', function () {
+        $('#confirm-block').find('.btn-order').addClass('disabled').prop('disabled',true);
+        $.ajax({
+            url: 'index.php?route=checkout/checkout_two_step/changeZone',
+            type: 'post',
+            cache: false,
+            data: 'zone_id=' + $(this).data('value') + '&zone_name=' + $(this).text().split(',')[0] + '&country_id=' + $('.country_val .select__item--active').data('value'),
+            dataType: 'json',
+            success: function (json) {
+                $('#shipping-block').html('');
+                setTimeout(function () {
+                    shippingMethods();
+                    $('#box-check').show('slow');
+                    $('.delivery_pay_block').show('slow');
+                }, 500);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+
+    $(document).on('click', '#cdek-city-from', function () {
+        $(this).addClass('inp-error');
+    });
+
+    $(document).on('click', '.form-delivery__box .dropdown-menu li', function () {
+        $('#street').removeAttr('disabled');
+        $('.form-delivery__unit input').removeAttr('disabled');
+        $('#cdek-city-from').removeClass('inp-error').addClass('inp-success')
+        $('#shipping-block').html('');
+                    setTimeout(function () {
+                        shippingMethods();
+                        $('#box-check').show('slow');
+                        $('.delivery_pay_block').show('slow');
+                    }, 500);
+    });
+
+
+    //--></script>
+
+<style>
+    @media only screen and (min-width: 768px) {
+        .ll_set_button {
+            max-width: 150px !important;
+        }
+        .change_select {
+            float: left;
+            width: 60%;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .change_select {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+    .ll_set_button {
+        float: right;
+        height: 40px;
+        line-height: 40px;
+    }
+    #shipping-block .convention__text {
+        display: inline-block;	
+    }
+    .bw-gr
+    {
+        filter: url(&#8220;data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale&#8221;); /\* Firefox 10+, Firefox on Android \*/
+    filter: gray; /* IE6-9 */
+        -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+        -moz-filter: grayscale(150%);
+        -ms-filter: grayscale(150%);
+        -o-filter: grayscale(150%);
+        filter: grayscale(150%);
+    }
+
+
+    .modal-open {
+        overflow: hidden;
+    }
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        display: none;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+    }
+    .modal.fade .modal-dialog {
+        -webkit-transition: -webkit-transform .3s ease-out;
+        -o-transition:      -o-transform .3s ease-out;
+        transition:         transform .3s ease-out;
+        -webkit-transform: translate(0, -25%);
+        -ms-transform: translate(0, -25%);
+        -o-transform: translate(0, -25%);
+        transform: translate(0, -25%);
+    }
+    .modal.in .modal-dialog {
+        -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        -o-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    .modal-open .modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 10px;
+    }
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    }
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        background-color: #000;
+    }
+    .modal-backdrop.fade {
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+    .modal-backdrop.in {
+        filter: alpha(opacity=50);
+        opacity: .5;
+    }
+    .modal-header {
+        min-height: 16.42857143px;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .modal-header .close {
+        margin-top: -2px;
+    }
+    .modal-title {
+        margin: 0;
+        line-height: 1.42857143;
+    }
+    .modal-body {
+        position: relative;
+        padding: 15px;
+    }
+    .modal-footer {
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 5px;
+    }
+    .modal-footer .btn-group .btn + .btn {
+        margin-left: -1px;
+    }
+    .modal-footer .btn-block + .btn-block {
+        margin-left: 0;
+    }
+    .modal-scrollbar-measure {
+        position: absolute;
+        top: -9999px;
+        width: 50px;
+        height: 50px;
+        overflow: scroll;
+    }
+    @media (min-width: 768px) {
+        .modal-dialog {
+            width: 600px;
+            margin: 30px auto;
+        }
+        .modal-content {
+            -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        }
+        .modal-sm {
+            width: 300px;
+        }
+    }
+    @media (min-width: 992px) {
+        .modal-lg {
+            width: 900px;
+        }
+    }
+
+    .close {
+        float: right;
+        font-size: 21px;
+        font-weight: bold;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .2;
+    }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        filter: alpha(opacity=50);
+        opacity: .5;
+    }
+    button.close {
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+    }
+
+    .inp-error {
+        border:  solid 1px red!important;
+    }
+
+    .inp-success {
+        border:  solid 1px #5b8c32;
+    }
+
+    .delivery-subtitle {
+            font-size: 12px;
+            margin-bottom: 20px;
+
+    }
+
+    .icon-container {
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 10px);
+}
+.loader {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  display: none;
+  animation: around 5.4s infinite;
+}
+
+@keyframes around {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+.loader::after, .loader::before {
+  content: "";
+  background: white;
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-width: 2px;
+  border-color: #333 #333 transparent transparent;
+  border-style: solid;
+  border-radius: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  animation: around 0.7s ease-in-out infinite;
+}
+
+.loader::after {
+  animation: around 0.7s ease-in-out 0.1s infinite;
+  background: transparent;
+}
+
+
+
+
+
+
+
+</style>
+{{ footer }}
+

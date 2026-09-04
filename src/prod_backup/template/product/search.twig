@@ -1,0 +1,131 @@
+{{ header }}
+<div class="main-catalog container">
+
+    <div class="breadcrumbs">
+        <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <span  class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+                    </li>
+                {% else %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+    {% if product_listing %}
+    <div class="block-caption">
+        <h1 class="title">{{ heading_title }} </h1>
+
+        <div class="select-block">
+            <span class="select-block-txt">Сортировка:</span>
+            <form action="#" class="select-sorting">
+                <select id="input-sort" onchange="location = this.value;">
+
+                    {% for sorts in sorts %}
+                        {% if sorts.value == '%s-%s'|format(sort, order) %}
+                            <option value="{{ sorts.href }}" disabled selected="selected">{{ sorts.text }}</option>
+                        {% else %}
+                            <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                        {% endif %}
+                    {% endfor %}
+
+
+                </select>
+            </form>
+        </div>
+
+    </div>
+    {% else %}
+        <div class="block-caption">
+            <h1 class="title">{{ heading_title }} </h1>
+
+        </div>
+        <div class="catalog-holder catalog-no-result">
+            <div class="catalog-no-result__icon">
+                <img src="/front/dist/images/no-result.svg" alt="icon" width="80" height="80">
+            </div>
+
+            <div class="catalog-no-result__text">поиск не дал результатов. Попробуйте еще раз</div>
+
+            <div action="#" class="search-result">
+                <div class="search-result__control">
+
+                    <input type="text" name="search" value="{{ search }}" placeholder="Введите запрос" id="input-search" class="search-result__inp" />
+
+                </div>
+
+                <button id="button-search" class="search-result__btn"></button>
+            </div>
+            <a href="/" class="btn btn-default ">на главную</a>
+        </div>
+    {% endif %}
+    <div class="catalog-holder catalog-result">
+        <div class="catalog-grid">
+            <ul class="catalog-grid__list">
+{{ product_listing }}
+
+
+            </ul>
+         {{ pagination }}
+        </div>
+    </div>
+
+</div>
+
+
+
+<script><!--
+$('#button-search').bind('click', function() {
+	url = 'index.php?route=product/search';
+
+	var search = $('.search-result input[name=\'search\']').prop('value');
+
+	if (search) {
+		url += '&search=' + encodeURIComponent(search);
+	}
+
+	// var category_id = $('#content select[name=\'category_id\']').prop('value');
+    //
+	// if (category_id > 0) {
+	// 	url += '&category_id=' + encodeURIComponent(category_id);
+	// }
+    //
+	// var sub_category = $('#content input[name=\'sub_category\']:checked').prop('value');
+    //
+	// if (sub_category) {
+	// 	url += '&sub_category=true';
+	// }
+    //
+	// var filter_description = $('#content input[name=\'description\']:checked').prop('value');
+    //
+	// if (filter_description) {
+	// 	url += '&description=true';
+	// }
+
+	location = url;
+});
+
+$('.search-result input[name=\'search\']').bind('keydown', function(e) {
+	if (e.keyCode == 13) {
+		$('#button-search').trigger('click');
+	}
+});
+
+$('select[name=\'category_id\']').on('change', function() {
+	if (this.value == '0') {
+		$('input[name=\'sub_category\']').prop('disabled', true);
+	} else {
+		$('input[name=\'sub_category\']').prop('disabled', false);
+	}
+});
+
+$('select[name=\'category_id\']').trigger('change');
+--></script>
+{{ footer }}

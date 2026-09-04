@@ -1,0 +1,76 @@
+{% if payment_pp_express_incontext_disable != 1 %}
+<div class="buttons">
+  <div class="pull-right">
+    <a id="button-confirms" href="{{ continue }}"></a>
+      <div id="paypal-button-container"></div>
+  </div>
+</div>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+
+
+<script><!--
+window.paypalCheckoutReady = function (e) {
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '0.09'
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                // Call your server to save the transaction
+                return fetch('/paypal-transaction-complete', {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        orderID: data.orderID
+                    })
+                });
+            });
+        }
+    }).render('#paypal-button-container');
+  {#paypal.checkout.setup('{{ username }}', {#}
+  {#  container: 'button-confirms',#}
+  {#  environment: 'sandbox'#}
+  {#});#}
+};
+
+    // $('#button-confirms').on('click', function(e) {
+    //     e.preventDefault()
+    //
+    //     $.ajax({
+    //         url: 'index.php?route=extension/payment/pp_express/checkout',
+    //         type: 'GET',
+    //       //  dataType: 'json',
+    //         success: function(data) {
+    //
+    //             console.log(data);
+    //         }
+    //     });
+    //
+    // });
+//--></script>
+<script src="//www.paypalobjects.com/api/checkout.js" async></script>
+
+{% else %}
+
+<div class="buttons">
+  <div class="pull-right">
+    <a href="{{ continue }}" class="btn btn-primary" id="button-confirm" data-loading-text="{{ text_loading }}">{{ button_continue }}</a>
+  </div>
+</div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script><!--
+    $('#button-confirms').on('click', function(e) {
+        e.preventDefault()
+        $('#button-confirms').button('loading');
+    });
+//--></script>
+{% endif %}

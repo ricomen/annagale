@@ -1,0 +1,28 @@
+<div class="section-benefit">
+    <div class="container">
+        <div class="block-caption">
+            <div class="title">{{ heading_title }}</div>
+        </div>
+        <ul class="section-benefit__list ">
+            {% if triggers %}
+                {% for trigger in triggers %}
+                    <li class="section-benefit__items">
+                        <div class="section-benefit__outer after-elem after-elem">
+                            <div class="section-benefit__inner before-elem">
+                                <div class="section-benefit__block txt-elem">
+                                    <div class="section-benefit__pic" style="background-image: url(/front/dist/images/benefit-bg.png)">
+                                        <img src="{{ trigger.image }}" alt="pic" width="84" height="66">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-benefit__desc">{{ trigger.title }}</div>
+                    </li>
+                {% endfor %}
+
+            {% endif %}
+
+
+        </ul>
+    </div>
+</div>

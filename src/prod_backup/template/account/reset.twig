@@ -1,0 +1,121 @@
+{{ header }}
+{#<div style="display: none" id="account-reset" class="container">#}
+{#  <ul class="breadcrumb">#}
+{#    {% for breadcrumb in breadcrumbs %}#}
+{#    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
+{#    {% endfor %}#}
+{#  </ul>#}
+{#  <div class="row">{{ column_left }}#}
+{#    {% if column_left and column_right %}#}
+{#    {% set class = 'col-sm-6' %}#}
+{#    {% elseif column_left or column_right %}#}
+{#    {% set class = 'col-sm-9' %}#}
+{#    {% else %}#}
+{#    {% set class = 'col-sm-12' %}#}
+{#    {% endif %}#}
+{#    <div id="content" class="{{ class }}">{{ content_top }}#}
+{#      <h1>{{ heading_title }}</h1>#}
+{#      <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">#}
+{#        <fieldset>#}
+{#          <legend>{{ text_password }}</legend>#}
+{#          <div class="form-group">#}
+{#            <label class="col-sm-2 control-label" for="input-password">{{ entry_password }}</label>#}
+{#            <div class="col-sm-10">#}
+{#              <input type="password" name="password" value="{{ password }}" id="input-password" class="form-control" />#}
+{#              {% if error_password %}#}
+{#              <div class="text-danger">{{ error_password }}</div>#}
+{#              {% endif %} </div>#}
+{#          </div>#}
+{#          <div class="form-group">#}
+{#            <label class="col-sm-2 control-label" for="input-confirm">{{ entry_confirm }}</label>#}
+{#            <div class="col-sm-10">#}
+{#              <input type="password" name="confirm" value="{{ confirm }}" id="input-confirm" class="form-control" />#}
+{#              {% if error_confirm %}#}
+{#              <div class="text-danger">{{ error_confirm }}</div>#}
+{#              {% endif %}</div>#}
+{#          </div>#}
+{#        </fieldset>#}
+{#        <div class="buttons clearfix">#}
+{#          <div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>#}
+{#          <div class="pull-right">#}
+{#            <button type="submit" class="btn btn-primary">{{ button_continue }}</button>#}
+{#          </div>#}
+{#        </div>#}
+{#      </form>#}
+{#      {{ content_bottom }}</div>#}
+{#    {{ column_right }}</div>#}
+{#</div>#}
+
+<div class="main-wrapper">
+  <div class="main-registration container">
+
+    <div class="breadcrumbs">
+      <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+        {% for breadcrumb in breadcrumbs %}
+          {% if loop.last %}
+            <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+              <span  class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+            </li>
+          {% else %}
+            <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+              <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+            </li>
+          {% endif %}
+
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="block-caption">
+      <h1 class="title">Сброс пароля</h1>
+    </div>
+    {% if error_warning %}
+      <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+    {% endif %}
+    <div class="main-registration-block">
+      <div class="contact-box">
+        <div class="contact-box__wrap after-elem">
+          <div class="contact-box__inner before-elem">
+            <div class="contact-box__border txt-elem">
+              <form class="form-fix-login form" action="{{ action }}" method="post" enctype="multipart/form-data">
+                <div class="form__col">
+                  <div class="form__title">{{ text_password }}</div>
+                  <div class="form__box">
+
+
+                    <div class="form__box">
+                      <div class="form__row">
+                        <input type="password" name="password" value="{{ password }}" class="form__control {% if error_password %} error-inp {% endif %}" placeholder="{{ entry_password }}*">
+
+                      </div>
+                      {% if error_password %}
+                        <div class="text-danger">{{ error_password }}</div>
+                      {% endif %}
+
+                    </div>
+                    <div class="form__box">
+                      <div class="form__row">
+                        <input type="password" name="confirm" value="{{ confirm }}" class="form__control {% if error_confirm %} error-inp {% endif %}" placeholder="{{ entry_confirm }}*">
+
+                      </div>
+                      {% if error_confirm %}
+                        <div class="text-danger">{{ error_confirm }}</div>
+                      {% endif %}
+
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-default">Войти</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{{ footer }}

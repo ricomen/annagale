@@ -1,0 +1,15 @@
+{% if debug %}
+<!--
+    <pre hidden>{{debug}}</pre>
+-->
+{% endif %}
+{% if payment_methods %}
+  {% set id = 1 %}
+  {% for payment_method in payment_methods %}
+    <div class="payment-cart__item">
+      <input type="radio" name="payment-cart__radio" class="payment-cart__radio" id="payment-cart__radio_{{ id }}" name="payment_method" value="{{ payment_method.code }}" data-name="payment_method" />
+      <label for="payment-cart__radio_{{ id }}" class="payment-cart__paylabel"><div class="payment-cart__main">{{ payment_method.title }}</div></label>
+    </div>
+    {% set id = id + 1 %}
+  {% endfor %}
+{% endif %}

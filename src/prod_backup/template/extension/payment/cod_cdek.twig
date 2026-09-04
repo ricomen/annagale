@@ -1,0 +1,16 @@
+<div class="">
+  <div class="">
+    <input type="button" value="{{ button_confirm }}" id="button-confirm" class=" btn btn-order btn-default" />
+  </div>
+</div>
+<script><!--
+$('#button-confirm').bind('click', function() {
+	$.ajax({ 
+		type: 'get',
+		url: 'index.php?route=extension/payment/cod_cdek/confirm',
+		success: function() {
+			location = '{{continue}}';
+		}		
+	});
+});
+//--></script> 

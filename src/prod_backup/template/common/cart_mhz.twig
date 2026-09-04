@@ -75,9 +75,9 @@
         {{ module }}
         {% endfor %} </div>
       {% endif %} <br />
-        <form data-ajax method="post" action="/index.php?route=checkout/mhz966/coupon" class="products-cart__promo promo-cart" data-noclean>
-          <input type="text" name="coupon" class="promo-cart__input" placeholder="Введите промокод или подарочный сертификат" autocomplete="off" data-required {% if totals.coupon %} readonly {% endif %}>
-          <button type="submit" class="promo-cart__button">
+        <div class="products-cart__promo promo-cart" data-promo>
+          <input type="text" class="promo-cart__input" placeholder="Введите промокод или подарочный сертификат" autocomplete="off" {% if totals.coupon %} readonly {% endif %}>
+          <button type="button" class="promo-cart__button" data-promo-send>
             <svg width="43" height="24" viewBox="0 0 43 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M42.0607 13.0607C42.6464 12.4749 42.6464 11.5251 42.0607 10.9393L32.5147 1.3934C31.9289 0.807611 30.9792 0.807611 30.3934 1.3934C29.8076 1.97918 29.8076 2.92893 30.3934 3.51472L38.8787 12L30.3934 20.4853C29.8076 21.0711 29.8076 22.0208 30.3934 22.6066C30.9792 23.1924 31.9289 23.1924 32.5147 22.6066L42.0607 13.0607ZM6.55843e-09 13.5L41 13.5L41 10.5L-6.55843e-09 10.5L6.55843e-09 13.5Z" fill="white"/>
             </svg>
@@ -87,7 +87,7 @@
             <path d="M13.3337 13.3332L2.66699 2.6665M13.3337 2.6665L2.66699 13.3332" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
           </svg>
           </button>
-        </form>
+        </div>
         <div class="products-cart__summ summ-cart">
             {% for total in totals %}
               <div class="summ-cart__row">
@@ -102,9 +102,9 @@
       {% else %}
           <h2>{{ text_empty }}</h2>
         </div>
-        <form data-ajax method="post" action="/index.php?route=checkout/mhz966/coupon" class="products-cart__promo promo-cart" data-noclean hidden>
-          <input type="text" name="coupon" class="promo-cart__input" placeholder="Введите промокод или подарочный сертификат" autocomplete="off" data-required {% if totals.coupon %} readonly {% endif %}>
-          <button type="submit" class="promo-cart__button">
+        <div class="products-cart__promo promo-cart" data-promo hidden>
+          <input type="text" class="promo-cart__input" placeholder="Введите промокод или подарочный сертификат" autocomplete="off" {% if totals.coupon %} readonly {% endif %}>
+          <button type="button" class="promo-cart__button" data-promo-send>
             <svg width="43" height="24" viewBox="0 0 43 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M42.0607 13.0607C42.6464 12.4749 42.6464 11.5251 42.0607 10.9393L32.5147 1.3934C31.9289 0.807611 30.9792 0.807611 30.3934 1.3934C29.8076 1.97918 29.8076 2.92893 30.3934 3.51472L38.8787 12L30.3934 20.4853C29.8076 21.0711 29.8076 22.0208 30.3934 22.6066C30.9792 23.1924 31.9289 23.1924 32.5147 22.6066L42.0607 13.0607ZM6.55843e-09 13.5L41 13.5L41 10.5L-6.55843e-09 10.5L6.55843e-09 13.5Z" fill="white"/>
             </svg>
@@ -114,7 +114,7 @@
             <path d="M13.3337 13.3332L2.66699 2.6665M13.3337 2.6665L2.66699 13.3332" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
           </svg>
           </button>
-        </form>
+        </div>
         <div class="products-cart__summ summ-cart" hidden>
         </div>
         <a href="{{ cart }}" class="products-cart__button" hidden>ПРОДОЛЖИТЬ</a>

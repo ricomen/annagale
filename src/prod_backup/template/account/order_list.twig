@@ -1,0 +1,91 @@
+
+
+<div class="order-history">
+  <div class="block-history">
+{% if orders %}
+  {% set number_order=1 %}
+    {% for order in orders %}
+    <div class="history">
+
+      <div class="history__holder">
+        <div class="column">
+          <div class="serial-number">
+            <span class="normal">#</span>
+            <strong class="bold">{{ number_order }}</strong>
+          </div>
+
+          <div class="order-number">
+            <span class="normal">Номер заказа:</span>
+            <strong class="bold">{{ order.order_id }}</strong>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="cost">
+            <span class="normal">Стоимость:</span>
+            <strong class="bold">{{ order.total }}</strong>
+          </div>
+
+          <div class="order-date">
+            <span class="normal">Дата заказа:</span>
+            <strong class="bold"> {{ order.date_added }}</strong>
+          </div>
+        </div>
+
+        <div class="order-details act_{{ order.order_id }}">
+                          <span class="order-details__text">
+                            Подробнее
+                          </span>
+        </div>
+
+      </div>
+      <div class="history__content hist_{{ order.order_id }}">
+        <div class="history__list">
+          {% for product in order.product %}
+          <a href="{{ product.href }}" class="history__block">
+            <div class="thumb">
+              <img src="{{ product.image }}" alt="pic" width="70" height="70">
+            </div>
+            <div class="history__info">
+              <div class="history__title">{{ product.name }}</div>
+              <div class="unit">
+                <div class="unit__cell">
+                  <span class="unit__light">Цена за единицу</span>
+                  <strong>{{ product.price }}</strong>
+                </div>
+                <div class="unit__cell">
+                  <span class="unit__light">Количество</span>
+                  <strong>{{ product.quantity }}шт.</strong>
+                </div>
+                <div class="unit__cell">
+                  <span class="unit__light">Итого</span>
+                  <strong>{{ product.total }}</strong>
+                </div>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        <div class="history__sum">
+          <div class="history__sum-col">
+            <span class="normal">Общая сумма</span>
+            <strong class="bold">{{ order.total }}</strong>
+          </div>
+          <div class="history__sum-col">
+            <div class="history__sum-pay">Способ оплаты: <span>{{ order.payment }}</span></div>
+            <div class="history__sum-pay">Способ оплаты: <span>{{ order.shipping }}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+      {% set number_order=number_order+1 %}
+{% endfor %}
+{% else %}
+  {{ text_empty2 }}
+    {% endif %}
+
+  </div>
+
+  {{ pagination }}
+</div>
+

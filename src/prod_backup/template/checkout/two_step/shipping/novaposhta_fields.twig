@@ -1,0 +1,16 @@
+<div class="form-block">
+    <select id="city" name="city_ref">
+        <option value="0">{{ text_select_city }}</option>
+        {% for city in cities %}
+            <option value="{{ city.ref }}"{% if city_ref == city.ref %} selected="selected"{% endif %}>{{ city.name }}</option>
+        {% endfor %}
+    </select>
+</div>
+<div class="form-block">
+    <select id="department" name="warehouse_ref">
+        <option value="0">{{ text_select_depart }}</option>
+        {% for warehouse in warehousies %}
+            <option value="{{ warehouse.ref }}"{% if warehouse_ref == warehouse.ref %} selected="selected"{% endif %}>{{ warehouse.name }}</option>
+        {% endfor %}
+    </select>
+</div>

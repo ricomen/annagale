@@ -1,0 +1,90 @@
+{% for product in products %}
+  {% if grid %}<li class="catalog-grid__items js-catalog-product prod_id{{ product.product_id }}">{% endif %}
+	<div class="box-sale">
+		<div class="with-cart box-sale__block {% if settings_modul.status_shodow==0 %} no-shadow {% endif %}">
+      <a href="{{ product.href }}" data-product='{{ product|json_encode }}' data-position="{{ loop.index }}">
+        <div class="box-sale__head">
+          {% if not product.special %}
+            {% if product.promo %}
+              {% for promo in product.promo %}
+                <div class="label">
+                  <div class="label__hit">{{ promo.text }}</div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% else %}
+            <div class="label">
+              <div class="label__sale">Sale</div>
+            </div>
+          {% endif %}
+
+          <form action="#" class="like">
+            <span data-id="{{ product.product_id }}" onclick="{% if product.is_wishlist %} wishlist.remove('{{ product.product_id }}');  {% else %}wishlist.add('{{ product.product_id }}'); {% endif %}" class="like__icon">
+              <input type="checkbox" class="like__check cheked{{ product.product_id }}"  {% if product.is_wishlist %}checked {% endif %}>
+              <span class="like__fill"></span>
+            </span>
+          </form>
+        </div>
+
+        <div class="box-sale__link">
+          <div class="box-sale__holder">
+            <div class="box-sale__pic">
+              <img src="{{ product.thumb }}" alt="{{ product.name }}" >
+            </div>
+            <div class="box-sale__details">Подробнее</div>
+          </div>
+          <div class="box-sale__title" style="height:68px">{{ product.name }}</div>
+          {% if not product.special %}
+              <div class="box-sale__price">{{  product.price }}</div>
+          {% else %}
+            <div class="block-discount">
+              <span class="old-price">{{  product.price }}</span>
+              <strong class="new-price">{{  product.special }}</strong>
+            </div>
+          {% endif %}
+        </div>
+      </a>
+     
+      <div class="more-beautiful">
+        {% if product.stock != 'Нет в наличии' %}
+				<a href="#" class="button-cart-list button-cart more-beautiful__btn btn btn-default " data-product='{{ product|json_encode }}' data-for="popup-added-list" data-id="{{ product.product_id }}">
+          <span>стать еще красивее</span>
+				</a>
+         {% else %}
+    <!--<div class="stock_status" style="color: #cbcbcb;padding: 10px 20px;width: 100%;text-align: center;">{{ product.stock }}</div>-->
+     <div class="stock_status btn_notify btn_notify_detail btn btn-default popup-open btn-notify_hidden space-evenly" style="" data-for="popup-notify" data-url="{{ (breadcrumbs|last).href }}"><img src="/catalog/view/theme/default/image/icons8-secured-letter-50.png" alt="Оповестить по поступлению"/><span>Оповестить по поступлению</span></div> 
+     <!--<div class="stock_status btn btn-default btn_notify btn-notify_hidden popup-open" style="" data-for="popup-notify" data-url="{{ product.href }}">Оповестить по поступлению</div>      -->   
+      <div class="stock_status btn btn-default btn_notify btn_notify_mobile popup-open" style="" data-for="popup-notify" data-url="{{ product.href }}"></div>                                    
+        {% endif %}
+			</div>
+		</div>
+	</div>
+  {% if grid %}</li>{% endif %}
+{% endfor %}
+
+{% if gtag_list %}
+  <script>
+    if (window.dataLayer) {
+      var products = [];
+
+      {% for product in products %}
+        products.push({
+          'id': {{ product.product_id }},
+          'name': '{{ product.name }}',
+          'category': '{{ product.category_name }}',
+          'price': {{ product.price_clear }},
+          'list': 'default',
+          'position': {{ loop.index }}
+        })
+      {% endfor %}
+
+      window.dataLayer.push({
+        'event': 'ecommerce',
+        'EE': 'ListView',
+        'ecommerce': {
+          'impressions': products
+        }
+      });
+    }
+  </script>
+{% endif %}

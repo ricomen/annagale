@@ -1,0 +1,16 @@
+
+<div class="catalog-grid wishlist">
+  {% if product_listing %}
+  <ul class="catalog-grid__list">
+
+{{ product_listing }}
+  </ul>
+  {% else %}
+    <p>{{ text_empty_wish }}</p>
+  {% endif %}
+{{ pagination }}
+
+
+</div>
+
+

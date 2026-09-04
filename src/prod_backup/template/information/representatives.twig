@@ -1,0 +1,80 @@
+{{ header }}
+{{ column_left }}
+{{ content_top }}
+<div class="main">
+  <div class="container">
+	<ul class="breadcrumbs">
+		{% for i, breadcrumb in breadcrumbs %}
+			{% if i+1 < breadcrumbs_total %}
+			  <li class="home">
+				<span property="itemListElement" typeof="ListItem">
+				  <a property="item" typeof="WebPage" href="{{ breadcrumb.href }}" class="home"><span property="name">{{ breadcrumb.text }}</span></a>
+				  <meta property="position" content="{{ i+1 }}">
+				</span>
+			  </li>
+			{% else %}
+			  <li class="post post-page current-item">
+				<span property="itemListElement" typeof="ListItem">
+				  <span property="name">{{ breadcrumb.text }}</span>
+				  <meta property="position" content="{{ i+1 }}">
+				</span>
+			  </li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+	<div class="section-title page-title">{{ heading_title }}</div>
+	<div id="map"></div>
+	<div class="cities-list tabs-list">
+		{% set irow = 0 %}
+		{% for key, item in stocks %}
+			<a href="#tab-{{ key }}" class="tab-link cities-list__link {% if irow == 0 %}active{% endif %}">{{ item.0.city }}</a>
+			{% set irow = irow + 1 %}
+		{% endfor %}
+	</div>
+	<div class="tabs-holder representatives-tabs">
+		{% for key, item in stocks %}
+			<div class="representatives-list tab" id="tab-{{ key }}">
+				{% for stock in item %}
+					<div class="item">
+					  <div class="city">{{stock.city}}</div>
+					  <div class="shop">{{stock.store_name}}</div>
+					  <div class="info">
+						<address class="address">{{stock.store_addr}}</address>
+						<ul class="phones-list">
+							{% if stock.phone1 is defined %}<li>{{stock.phone1}}</li>{% endif %}
+							{% if stock.phone2 is defined %}<li>{{stock.phone2}}</li>{% endif %}
+						</ul>
+						{% if stock.shipping %}<div class="delivery">{{ text_can_shipping }}</div>{% endif %}
+						<ul class="links-list">
+							{% if stock.link1 is defined %}<li><a href="{{ stock.link1 }}" target="_blank" rel="nofollow">{{ stock.link1 }}</a></li>{% endif %}
+							{% if stock.link2 is defined %}<li><a href="{{ stock.link2 }}" target="_blank" rel="nofollow">{{ stock.link2 }}</a></li>{% endif %}					
+						</ul>
+					  </div>
+					</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+  </div>
+</div>
+<script>
+var representatives = [{% for point in map_points %}
+{
+	'coords': '{{ point.point_x }}, {{ point.point_y }}',
+	'city': '{{ point.city }}',
+	'shop': '{{ point.store_name }}',
+	'address': '{{ point.store_addr }}',
+	'phonesList': [
+	  '{{ point.phone1 }}',
+	  '{{ point.phone2 }}'
+	],
+	{% if point.shipping is defined %}'delivery': '{{ text_can_shipping }}',{% endif %}
+	'linksList': [
+	  '{{ point.link1 }}',
+	  '{{ point.link2 }}'
+	],
+},{% endfor %}];
+</script>
+{{ content_bottom }}
+{{ column_right }}
+{{ footer }}

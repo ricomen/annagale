@@ -1,0 +1,23 @@
+<div class="ulogin_profile">
+    <legend>{{ ulogin_profile_title }}</legend>
+
+    <div class="panel panel-default ulogin_panel">
+        <div class="panel-heading">{{ add_account }}</div>
+        {{ ulogin_form }}
+        <div class="ulogin_note"><small>{{ add_account_explain }}</small></div>
+
+        <div class="panel-heading">{{ delete_account }}</div>
+        <div class="ulogin_accounts can_delete">
+      
+            {% if networks != '' %}
+            {% for network in networks %}
+                    <div data-ulogin-network='{{ network }}'
+                         class="ulogin_provider big_provider {{ network }}_big"
+                         onclick="uloginDeleteAccount('{{ network }}')"></div>
+                {% endfor %}
+            {% endif %}
+        </div><div style="clear:both"></div>
+        <div class="ulogin_note"><small>{{ delete_account_explain }}</small></div>
+    </div>
+</div>
+

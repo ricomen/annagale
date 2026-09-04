@@ -1,0 +1,51 @@
+{{ header }}
+
+
+<div class="container">
+
+    <div class="breadcrumbs">
+        <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <span  class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+                    </li>
+                {% else %}
+                    <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                        <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="block-caption">
+        <h1 class="title">{{ heading_title }}</h1>
+    </div>
+
+    <div class="main-delivery">
+        {% if triggers %}
+        <div class="accordion">
+            {% for trigger in triggers %}
+            <div class="accordion__holder">
+                <div class="trigger">{{ trigger.title }}<i></i></div>
+                <div class="trigger__content">
+                    {{ trigger.description }}
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+
+
+
+
+
+{{ footer }}

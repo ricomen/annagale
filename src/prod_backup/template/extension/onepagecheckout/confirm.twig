@@ -1,0 +1,121 @@
+<div class="extrow">
+{% if button_type != 'confirm' %}
+	{% if  comment_status %}
+	<div class="extsm-12 margintb">
+		{% if  comment_label %}
+		<label>{{comment_label}}</label>
+		{% endif %}
+		<textarea name="comment" class="form-control" placeholder="{{comment_placeholder}}">{{comment}}</textarea>
+	</div>
+	{% endif %}
+	{% if  text_agree %}
+	<div class="extsm-12">
+		{% if  agree %}
+		<input type="checkbox" name="agree" value="1" checked="checked" />
+		{% else %}
+		<input type="checkbox" {{checkout_terms}} name="agree" value="1" />
+		{% endif %}
+		{{text_agree}}
+	</div>
+	{% endif %}
+	{% endif %}
+	{% if  button_type != 'confirm' and shopping_button_status %}
+	<div class="extsm-6">
+		
+		<div class="buttons">
+			<div class="pull-left">
+				<a href="{{continue}}" class="btn btn-primary">{{button_shopping}}</a>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	
+	<div class="{% if  button_type != 'confirm' and shopping_button_status %} extsm-6  {% else %} extsm-12 {% endif %}">
+		{% if  button_type == 'register'%}
+		<div class="buttons">
+			<div {% if shopping_button_status %} class="pull-right" {% endif %}>
+				<button {% if  button_type != 'confirm' and not shopping_button_status %} style="width:100%"; {% endif %} {% if redirect !="" %} disabled="disabled" {% endif %} class="btn btn-primary common-confirm-button" rel="register" id="button-register">{{button_checkout_order}}</button>
+			</div>
+		</div>
+		{% elseif button_type == 'guest' %}
+		<div class="buttons">
+			<div {% if shopping_button_status %} class="pull-right" {% endif %}>
+				<button {% if  button_type != 'confirm' and not shopping_button_status %} style="width:100%"; {% endif %} {% if redirect !="" %} disabled="disabled" {% endif %}  class="btn btn-primary common-confirm-button" rel="guest" id="button-guest">{{button_checkout_order}}</button>
+			</div>
+		</div>
+		{% elseif button_type == 'login' %}
+		<div class="buttons">
+			<div {% if shopping_button_status %} class="pull-right" {% endif %}>
+				<button {% if  button_type != 'confirm' and not shopping_button_status %} style="width:100%"; {% endif %} {% if redirect !="" %} disabled="disabled" {% endif %} class="btn btn-primary button-login common-confirm-button" rel="login" id="button-checkout-order">{{button_checkout_order}}</button>
+			</div>
+		</div>
+		{% elseif button_type == 'logged' %}	
+		<div class="buttons">
+			<div {% if shopping_button_status %} class="pull-right" {% endif %}>
+				<button {% if  button_type != 'confirm' and not shopping_button_status %} style="width:100%"; {% endif %} {% if redirect !="" %} disabled="disabled" {% endif %} class="btn btn-primary common-confirm-button" rel="loggedorder" id="button-loggedorder">{{button_checkout_order}}</button>
+			</div>
+		</div>
+		{% elseif button_type == 'confirm' %}
+		{% if not redirect %}
+			{{payment}}
+			<script><!--
+			{% if button_type == 'confirm' %}
+				{% if autotrigger %}
+					{% if selectedtriggers in trigger_payment_method %}
+						$('{{payment_trigger_button}}').trigger('click');
+					{% endif %}
+				{% endif %}
+			{% endif %}
+			//--></script>
+		{% else %}
+		<script><!--
+location = '{{redirect}}';
+//--></script>
+		{% endif %}
+		{% endif %}
+	</div>
+</div>
+<script><!--
+$('#onepagecheckout textarea[name="comment"]').on('keyup',function(){
+	$.ajax({
+		url: 'index.php?route=extension/onepagecheckout/confirm/comment',
+		dataType: 'json',
+		type: 'post',
+		data: $('#onepagecheckout textarea[name="comment"]'),
+		success: function(json){
+
+		}
+	});
+});
+$('#onepagecheckout input[name="agree"]').on('click',function(){
+	$.ajax({
+		url: 'index.php?route=extension/onepagecheckout/confirm/ordertrem',
+		dataType: 'json',
+		type: 'post',
+		data: $('#onepagecheckout input[name="agree"]:checked'),
+		success: function(json){
+
+		}
+	});
+});
+//--></script>
+<script><!--
+{% if missingsgipping %}
+	{% if delivery_status %}
+		LoadShippingMethod();
+	{% else %}
+		Loadshippingmethodwithpaymentaddress();
+	{% endif %}
+{% endif %}
+//--></script>
+<script><!--
+{% if missingpayment %}
+{% if logged %}
+LoadPaymentMethod(true);
+{% else %}
+LoadPaymentMethod(false);
+{% endif %}
+{% endif %}
+$('#button-confirm').parent('div').removeClass('pull-right');
+$('#button-confirm').addClass('col-sm-12');
+//--></script>

@@ -1,0 +1,66 @@
+{% if error_warning %}
+	<div class="extalert balert-danger"><i class="fa fa-exclamation-circle"></i> {{error_warning}}</div>
+{% endif %}
+{% if shipping_methods %}
+		{% for shipping_method in shipping_methods %}
+		<p><strong>{{shipping_method['title']}}</strong></p>
+		{% if not shipping_method['error']  %}
+		{% for quote in shipping_method['quote'] %}
+		<div class="radio">
+			<label>
+				{% if quote.code == code or not code %}
+					{% set code = quote.code %}
+						<input type="radio" name="shipping_method" value="{{quote['code']}}" checked="checked" />
+					{% else %}
+						<input type="radio" name="shipping_method" value="{{quote['code']}}" />
+					{% endif %} {{quote['title']}} - {{quote['text']}}
+				{% if shipping_method.image  %}<br/><img src="{{shipping_method['image']}}" alt="pic"/>{% endif %}</label>
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="alert alert-danger">{{shipping_method['error']}}</div>
+		{% endif %}
+{% endfor %}
+{% endif %}
+<script><!--
+if($('.delivery-method-content input[name=\'shipping_method\']:checked').val()==undefined){
+	$('.delivery-method-content input[name=\'shipping_method\']:first').prop('checked',true);
+}
+
+$('.delivery-method-content input[name=\'shipping_method\'], .delivery-method-content input[name=\'shipping_method\']').on('change', function(){
+	$.ajax({
+		url: 'index.php?route=extension/onepagecheckout/shipping_method/saveshipping',
+		type:'post',
+		data:$('.delivery-method-content input[type="radio"]:checked'),
+		dataType: 'json',
+		success: function(json){
+			$('.alert, .text-danger').remove();
+			if(json['error']){
+				//$('.delivery-method-content').before('<div class="alert alert-danger">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+			if(json['success']){
+				{% if loadcartonpayment==0 and loadpayments==1 %}
+				  LoadCartWithoutloader();
+				{% elseif loadcartonpayment==1 and loadpayments==0 %}
+					 LoadCartWithoutloader();
+				{% else %}
+					LoadCartWithoutloader();
+				{% endif %}
+				
+				
+				{% if loadpayments %}
+				{% if isLogged %}
+					LoadPaymentMethod(true);
+				{% else %}
+					LoadPaymentMethod(false);
+				{% endif %}
+				{% endif %}
+			}
+		}
+	})
+});
+
+$(document).ready(function(){
+ $('.delivery-method-content input[name=\'shipping_method\']:checked, .delivery-method-content select[name=\'shipping_method\']').trigger('change');
+});
+//--></script>

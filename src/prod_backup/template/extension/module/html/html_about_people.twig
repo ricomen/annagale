@@ -1,0 +1,56 @@
+{{ header }}
+
+
+<div class="section-special">
+    <div class="block-caption block-caption-team ">
+        <div class="title">{{ heading_title }}</div>
+        <div class="block-caption__arrows special-arrows"></div>
+    </div>
+    <div class="special-slider special-slider-team">
+
+
+        {% for trigger in triggers %}
+        <div class="team-member">
+            <div class="team-member__box after-elem">
+                <div class="team-member__block before-elem">
+                    <div class="team-member__border txt-elem">
+                        <div class="team-member__name">{{ trigger.title }}</div>
+                        <div class="team-member__subtitle">{{ trigger.description }}</div>
+                        <div class="team-member__pic">
+                            <div class="team-member__bg"> 
+
+                                <img class="scale" src="{{ trigger.image }}" alt="pic" width="190" height="252">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+<style>
+/*
+.scale {
+    display: inline-block; /* Строчно-блочный элемент */
+    overflow: hidden; /* Скрываем всё за контуром */
+   }
+   .scale img {
+    transition: 1s; /* Время эффекта */
+    display: block; /* Убираем небольшой отступ снизу */
+   }
+   .scale img:hover {
+    transform: scale(1.5); /* Увеличиваем масштаб */
+   }
+*/
+  .scale {
+    transition: 1s;
+   }
+   .scale:hover {
+    transform: scale(1.6);
+   }
+  </style>
+{{ footer }}
+
+

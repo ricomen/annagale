@@ -1,0 +1,310 @@
+{{ header }}
+<div style="display: none;" id="account-account" class="container">
+
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if success %}
+  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+  {% endif %}
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h2>{{ text_my_account }}</h2>
+      <ul class="list-unstyled">
+        <li><a href="{{ edit }}">{{ text_edit }}</a></li>
+        <li><a href="{{ password }}">{{ text_password }}</a></li>
+        <li><a href="{{ address }}">{{ text_address }}</a></li>
+        <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+      </ul>
+      {% if credit_cards %}
+      <h2>{{ text_credit_card }}</h2>
+      <ul class="list-unstyled">
+        {% for credit_card in credit_cards %}
+        <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <h2>{{ text_my_orders }}</h2>
+      <ul class="list-unstyled">
+        <li><a href="{{ order }}">{{ text_order }}</a></li>
+        <li><a href="{{ download }}">{{ text_download }}</a></li>
+        {% if reward %}
+        <li><a href="{{ reward }}">{{ text_reward }}</a></li>
+        {% endif %}
+        <li><a href="{{ return }}">{{ text_return }}</a></li>
+        <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+        <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+      </ul>
+      <h2>{{ text_my_affiliate }}</h2>
+      <ul class="list-unstyled">
+        {% if not tracking %}
+        <li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>
+        {% else %}
+        <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
+        <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
+        {% endif %}
+      </ul>
+      <h2>{{ text_my_newsletter }}</h2>
+      <ul class="list-unstyled">
+        <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+      </ul>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+  <div class="main-privat container">
+
+    <div class="breadcrumbs">
+      <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+        {% for breadcrumb in breadcrumbs %}
+          {% if loop.last %}
+            <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+        itemtype="https://schema.org/ListItem">
+              <span  class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+            </li>
+          {% else %}
+            <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+        itemtype="https://schema.org/ListItem">
+              <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+            </li>
+          {% endif %}
+
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="block-caption">
+      <h1 class="title">Личный кабинет</h1>
+    </div>
+
+    <div class="main-privat-block">
+
+
+      <div class="main-privat-block__tabs">
+        <ul class="tabs-list">
+          <li class="tabs-items"><a class=" tabs-link {% if history == 0 %}active{% endif %}" href="#tab-1">Личные данные</a></li>
+          <li class="tabs-items"><a class=" tabs-link {% if history > 0 %}active{% endif %}" href="#tab-2">История заказов</a></li>
+          <li class="tabs-items"><a class=" tabs-link " href="#tab-3">Мои желания</a></li>
+          <li class="tabs-items"><a class=" tabs-link " href="#tab-4">Смена пароля</a></li>
+          <li class="tabs-items"><a class=" tabs-link " href="#tab-5">Клуб привилегий</a></li>
+          {# <li class="tabs-items"><a class=" tabs-link " href="#tab-6">Промо код</a></li> #}
+          <li class="tabs-items"><a class="last_link tabs-link " data-href="{{ logout }}" href="#tab-7">Выход</a></li>
+        </ul>
+      </div>
+
+      <div class="main-privat-block__content">
+        <div class="tab" id="tab-1"></div>
+        <div class="tab" id="tab-2"></div>
+        <div class="tab" id="tab-3"></div>
+        <div class="tab" id="tab-4"></div>
+        <div class="tab" id="tab-5">
+          <div data-tabs class="mhz-acctabs">
+            <nav data-tabs-titles class="mhz-acctabs__navigation">
+              <button type="button" class="mhz-acctabs__title _tab-active">Клуб привилегий</button>
+              <button type="button" class="mhz-acctabs__title">Реферальная программа</button>
+              <button type="button" class="mhz-acctabs__title">Бонусные баллы</button>
+              <button type="button" class="mhz-acctabs__title">Промокод</button>
+              <button type="button" class="mhz-acctabs__title">Частые вопросы</button>
+            </nav>
+            <div data-tabs-body class="mhz-acctabs__content">
+              <div class="mhz-acctabs__body block-news-one _content">
+                <h2 class="title">КЛУБ ПРИВИЛЕГИЙ ANNA GALE</h2>
+                <br>
+                <p>Когда вы делаете выбор в пользу ANNA GALE, вы автоматически попадаете в число избранных. Тех, кто достоин самых эффективных натуральных компонентов, инноваций в области космецевтики и хочет наслаждаться от максимально комфортного использования средств.</p>
+                <p>Новое преимущество для почитателей бренда — Клуб привилегий.</p>
+                <p>•&nbsp;500 приветственных бонусов каждому</p>
+                <p>•&nbsp;5% кешбэк в виде бонусов за каждый заказ</p>
+                <p>•&nbsp;До 20% заказа можно оплатить бонусами</p>
+                <p>•&nbsp;1 бонус = 1 рубль</p>
+                <p>•&nbsp;Делитесь с друзьями и подписчиками промокодом на скидку 10% на первый заказ и получайте 500 бонусов. Чем больше людей вы пригласите — тем больше вознаграждений получите!</p>
+              </div>
+              <div class="mhz-acctabs__body block-news-one _content">
+                <h2 class="title">РЕФЕРАЛЬНАЯ ПРОГРАММА ANNA GALE</h2>
+                <p>Реферал получает 500 приветственных бонусов, скидку 10% по реферальному промо и 5% возврат бонусами за заказы, где бонусы не списывались </p>
+                <p>А тот, чей промокод, получает 500 бонусов после оплаченного заказа реферала с использованием его промо</p>
+              </div>
+              <div class="mhz-acctabs__body block-news-one _content">
+                <h2 class="title">БОНУСНЫЕ БАЛЛЫ ANNA GALE</h2>
+                <span id="mhz-points"></span>
+              </div>
+              <div class="mhz-acctabs__body block-news-one _content" id="mhz-promo">
+                <h2 class="title">ПРОМОКОД ANNA GALE</h2>
+                {{ promo_code }}
+              </div>
+              <div class="mhz-acctabs__body block-news-one _content">
+                <h2 class="title">ОТВЕТЫ НА ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ</h2>
+                <div data-spollers class="mhz-spollers">
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>За что начисляются бонусы?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>5% бонусов начисляются за ваш каждый заказ, кроме тех, где вы списывали бонусы. Бонусы начисляются на общую сумму оплаты. Вы можете либо накопить, либо списать бонусы в одном заказе.</p>
+                      <p>Также 500 бонусов начисляются за первый заказ каждого приглашённого друга с применением вашего реферального промокода.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Когда начисляются приветственные бонусы?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>500 бонусов будет начислено сразу после регистрации. В одном заказе можно использовать промокод либо оплатить до 20% бонусами.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Как воспользоваться бонусами?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>Поставьте галочку «Оплатить бонусами», которую вы увидите при оформлении заказа в корзине. Бонусами можно оплатить до 20% стоимости выбранных вами продуктов, из расчёта 1 бонус = 1 рубль.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Могу ли я накопить и списать бонусы в одном заказе?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>В одном заказе вы можете либо накопить 5% бонусов, либо списать до 20% суммы заказа бонусами.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Могу ли я использовать реферальный промокод и бонусы в одном заказе?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>Вы можете использовать скидку 10% по реферальному промокоду либо оплатить до 20% бонусами. </p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Где можно узнать реферальный промокод?</span></button>
+                    <div class="mhz-spollers__body">
+                      Личный реферальный промокод вы можете найти в личном кабинете, раздел «Промокод».
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>С кем я могу поделиться реферальным промокодом?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>Делитесь промокодом с незарегистрированными пользователями. После оплаты первого заказа каждым новым пользователем с применением вашего промокода, вам будут начислены 500 бонусов.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Как действует реферальный промокод?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>При оформлении заказа с использованием реферального промокода владельцу промокода будут начислены 500 бонусов, а новому клиенту — дополнительная скидка 10% на первый заказ. Вы можете поделиться личным реферальным промокодом с неограниченным количеством клиентов.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Сколько раз можно использовать реферальный промокод одному клиенту?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>Промокодом можно воспользоваться только при совершении первой покупки — один раз. После ввода промокода и его отмены ввести тот же/иной промокод не получится.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Как узнать свой баланс бонусов?</span></button>
+                    <div class="mhz-spollers__body">
+                      Баланс бонусов вы можете узнать в личном кабинете, раздел «Бонусы».
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Сколько бонусов можно использовать в одном заказе?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>Оплатить бонусами вы можете до 20% от суммы заказа без учёта доставки.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Сгорают ли бонусы?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>Бонусы сгорают через 1 год с момента начисления.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Могу ли я использовать промокод и бонусы в одном заказе?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>Нет. Вы можете оплатить до 20% заказа бонусами, либо использовать промокод.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Могу ли я использовать 2 промокода в одном заказе?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>В заказе можно использовать только один промокод.</p>
+                    </div>
+                  </div>
+                  <div class="mhz-spollers__item">
+                    <button type="button" data-spoller class="mhz-spollers__title"><span>Действуют ли бонусы на специальные предложения?</span></button>
+                    <div class="mhz-spollers__body">
+                      <p>Бонусы не применяются на оплату наборов и товаров со скидкой.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {# <div class="tab" id="tab-6">{{ promo_code }}</div> #}
+
+    </div>
+
+
+    </div>
+    <script>
+      $(document).ready(function(){
+        var params = window
+                .location
+                .search
+                .replace('?','')
+                .split('&')
+                .reduce(
+                        function(p,e){
+                          var a = e.split('=');
+                          p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+                          return p;
+                        },
+                        {}
+                );
+        if( params['active']){
+          setTimeout(function () {
+            $('.tabs-link,.tab').removeClass('active')
+            $('.tabs-list li:nth-child(3) > a,#tab-3').addClass('active')
+          },500)
+        }
+      })
+      $(document).delegate('.last_link','click',function (e) {
+        e.preventDefault()
+        location.href = $(this).attr('data-href')
+      })
+
+      $('#tab-1').load('index.php?route=account/edit');
+      $('#tab-2').load('index.php?route=account/order');
+      $('#tab-3').load('index.php?route=account/wishlist');
+      $('#tab-4').load('index.php?route=account/password');
+      $('#tab-5 #mhz-points').load('index.php?route=account/reward');
+
+    </script>
+    <script>
+      $('#tab-3').delegate('.pagination a', 'click', function (e) {
+        e.preventDefault();
+        $('#tab-3').fadeOut('slow');
+        $('#tab-3').load(this.href);
+        $('#tab-3').fadeIn('slow');
+      });
+    </script>
+    <script>
+      $('#tab-2').delegate('.pagination a', 'click', function (e) {
+        e.preventDefault();
+        $('#tab-2').fadeOut('slow');
+        $('#tab-2').load(this.href);
+        $('#tab-2').fadeIn('slow');
+      });
+      {% if history > 0 %}
+      setTimeout(function () {
+        $('.tabs-link,.tab').removeClass('active')
+        $('.tabs-list li:nth-child(2) > a,#tab-2').addClass('active')
+        $('.act_{{ history }}').addClass('active');
+        $('.hist_{{ history }}').show();
+      },500)
+      {% endif %}
+    </script>
+  </div>
+{# <div class="main-wrapper">
+</div> #}
+{{ footer }}
+
+

@@ -1,0 +1,43 @@
+{{ header }}
+
+
+    <div class="main-smi container">
+
+        <div class="breadcrumbs">
+            <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                {% for breadcrumb in breadcrumbs %}
+                    {% if loop.last %}
+                        <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                            <span class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+                        </li>
+                    {% else %}
+                        <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                            <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+                        </li>
+                    {% endif %}
+
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="block-caption">
+            <h1 class="title">{{ heading_title }}</h1>
+        </div>
+
+
+        <div class="privacy-block">
+            <div class="block-news-one">
+                {{ description }}
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+{{ footer }}

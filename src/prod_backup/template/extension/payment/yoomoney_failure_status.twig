@@ -1,0 +1,13 @@
+{% if fullView is defined and fullView %}
+{{ header }}{{ column_left }}{{ column_right }}
+<div class="container">
+    {{ content_top }}
+    {% endif %}
+
+    <p>Не удалось провести платёж</p>
+
+    {% if fullView is defined and fullView %}
+    {{ content_bottom }}
+</div>
+{{ footer }}
+{% endif %}

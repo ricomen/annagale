@@ -1,0 +1,434 @@
+{% if not redirect %}
+{% if error_warning %}
+<div class="extalert balert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+{% endif %}
+<div class="extcover">
+<div class="exttable-responsive">
+	<table class="exttable btable-bordered exthidden-xs">
+		<thead>
+			<tr>
+				{% set colspan = 0 %}
+				{% if show_product_image %}
+				<td class="text-center">{{column_image}}</td>
+				{% set colspan = colspan + 1 %}
+				{% endif %}
+				{% if show_product_name %}
+				<td class="text-center">{{column_name}}</td>
+				{% set colspan = colspan + 1 %}
+				{% endif %}
+				{% if show_product_model %}
+				<td class="text-center">{{column_model}}</td>
+				{% set colspan = colspan + 1 %}
+				{% endif %}
+				{% if show_product_quantity %}
+				<td class="text-center">{{column_quantity}}</td>
+				{% set colspan = colspan + 1 %}
+				{% endif %}
+				{% if show_product_unit %}
+				<td class="text-center">{{column_price}}</td>
+				{% set colspan = colspan + 1 %}
+				{% endif %}
+				{% if show_product_total_price %}
+				<td class="text-center">{{column_total}}</td>
+				{% set colspan = colspan + 1 %}
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for product in products %}
+			<tr>
+				{% if show_product_image %}
+				<td class="text-center">{% if product.thumb %}
+					<a href="{{product.href}}"><img src="{{product.thumb}}" alt="{{product.name}}" title="{{product.name}}" class="img-thumbnail" /></a>
+					{% endif %}</td>
+				{% endif %}
+				{% if show_product_name %}
+				<td style="width:145px;" class="text-left"><a href="{{product.href}}">{{product.name}}</a>
+					{% if not product.stock %}
+					<span class="exttext-danger">***</span>
+					{% endif %}
+					{% if product.option %}
+					{% for option in product.option %}
+					<br />
+					<small>{{option.name}}: {{option.value}}</small>
+					{% endfor %}
+					{% endif %}
+					{% if product.reward %}
+					<br />
+					<small>{{product.reward}}</small>
+					{% endif %}
+					{% if product.recurring %}
+					<br />
+					<span class="label label-info">{{text_recurring_item}}</span> <small>{{product.recurring}}</small>
+					{% endif %}</td>
+				{% endif %}
+				{% if show_product_model %}
+				<td class="text-left">{{product.model}}</td>
+				{% endif %}
+				{% if show_product_quantity %}
+				<td class="text-left">
+					{% if qty_update_permission %}
+					<div class="extinput-group hidden-xs">
+						<span class="extbtn-block">
+							<button type="button" data-toggle="tooltip" title="{{button_update}}" class="btn btn-primary" onclick="downOnepageCart('{{product['cart_id']}}');"><b><i class="fa fa-angle-down" aria-hidden="true"></i></b></button>
+						</span>
+						<input type="text" name="quantity[{{product['cart_id']}}]" value="{{product['quantity']}}" size="1" rel="{{product['cart_id']}}" class="formcontrol quantitybox" />
+						<span class="extbtn-block">
+							<button type="button" data-toggle="tooltip" title="{{button_update}}" class="btn btn-primary" onclick="upOnepageCart('{{product['cart_id']}}');"><b><i class="fa fa-angle-up" aria-hidden="true"></i></b></button>
+						</span>
+						<span class="extbtn-block">
+							<button type="button" data-toggle="tooltip" title="{{button_remove}}" class="btn btn-danger" onclick="removeOnepageCart('{{product['cart_id']}}');"><i class="fa fa-times-circle"></i></button>
+						</span>
+					</div>
+					{% else %}
+						{{product['quantity']}}
+					{% endif %}
+				</td>
+				{% endif %}
+				
+				{% if show_product_unit %}
+				<td class="text-right">{{product['price']}}</td>
+				{% endif %}
+				{% if show_product_total_price %}
+				<td class="text-right">{{product['total']}}</td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+			{% for voucher in vouchers %}
+			<tr>
+				<td></td>
+				<td class="text-left">{{voucher.description}}</td>
+				<td class="text-left"></td>
+				<td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
+						<input type="text" name="" value="1" size="1" disabled="disabled" class="form-control" />
+						<span class="input-group-btn">
+						<button type="button" data-toggle="tooltip" title="{{button_remove}}" class="btn btn-danger" onclick="removeOnepageCartVoucher('{{voucher['key']}}');"><i class="fa fa-times-circle"></i></button>
+						</span></div>
+				</td>
+				<td class="text-right">{{voucher['amount']}}</td>
+				<td class="text-right">{{voucher['amount']}}</td>
+			</tr>
+			{% endfor %}
+			<tr>
+				<td colspan="6"></td>
+			</tr>
+			{% for total in totals %}
+			<tr>
+				<td colspan="{{colspan ? colspan - 1 : 0}}" class="noborder text-right"><strong>{{total['title']}}:</strong></td>
+				<td class="noborder text-right">{{total['text']}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<table class="exttable btable-bordered extvisible-xs">
+		<thead>
+			<tr>
+				{% set mcolspan = 0 %}
+				{% if show_m_product_image %}
+				<td class="text-center">{{column_image}}</td>
+				{% set mcolspan = mcolspan + 1 %}
+				{% endif %}
+				{% if show_m_product_name %}
+				<td class="text-center">{{column_name}}</td>
+				{% set mcolspan = mcolspan + 1 %}
+				{% endif %}
+				{% if show_m_product_quantity %}
+				<td class="text-center">{{column_quantity}}</td>
+				{% set mcolspan = mcolspan + 1 %}
+				{% endif %}
+				{% if show_m_product_unit %}
+				<td class="text-center">{{column_price}}</td>
+				{% set mcolspan = mcolspan + 1 %}
+				{% endif %}
+				{% if show_m_product_total_price %}
+				<td class="text-center">{{column_total}}</td>
+				{% set mcolspan = mcolspan + 1 %}
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for product in products %}
+			<tr>
+			{% if show_m_product_image or show_m_product_model  %}
+				<td class="text-center">
+					{% if product['thumb'] or show_m_product_image  %}
+					<a href="{{product['href']}}"><img src="{{product['thumb']}}" alt="{{product['name']}}" title="{{product['name']}}" class="img-thumbnail" /></a>
+					{% endif %}
+					{% if show_m_product_model  %}
+					<br/>
+					<div>
+					 {{product['model']}}
+					</div>
+					{% endif %}
+				</td>
+			{% endif %}
+			{% if show_m_product_name %}
+				<td style="width:100px;" class="text-left width_product"><a href="{{product.href}}">{{product.name}}</a>
+					{% if not product.stock %}
+					<span class="text-danger">***</span>
+					{% endif %}
+					{% if product.option %}
+					{% for option in product.option %}
+					<br />
+					<small>{{option.name}}: {{option.value}}</small>
+					{% endfor %}
+					{% endif %}
+					{% if product.reward %}
+					<br />
+					<small>{{product.reward}}</small>
+					{% endif %}
+					{% if product.recurring %}
+					<br />
+					<span class="label label-info">{{text_recurring_item}}</span> <small>{{product.recurring}}</small>
+					{% endif %}</td>
+			{% endif %}
+				{% if show_m_product_quantity %}
+				<td class="text-left">
+				{% if qty_update_permission %}
+					<div class="extinput-group visible-xs">
+						<input type="text" name="quantitymb[{{product['cart_id']}}]" value="{{product['quantity']}}" size="1" rel="{{product['cart_id']}}" class="formcontrol quantityboxmb" />
+						<br/>
+						<a style="cursor:pointer;" onclick="removeOnepageCart('{{product['cart_id']}}');">{{clear_cart_text}}</a>
+					</div>
+					{% else %}
+						{{product['quantity']}}
+					{% endif %}
+				</td>
+				{% endif %}
+				{% if show_m_product_unit %}
+				 <td class="text-right">{{product['price']}}</td>
+				{% endif %}
+				{% if show_m_product_total_price %}
+				<td class="text-right">{{product['total']}}</td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+			{% for voucher in vouchers %}
+			<tr>
+				<td></td>
+				<td class="text-left">{{voucher.description}}</td>
+				<td class="text-left"></td>
+				<td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
+						<input type="text" name="" value="1" size="1" disabled="disabled" class="form-control" />
+						<span class="input-group-btn">
+						<button type="button" data-toggle="tooltip" title="{{button_remove}}" class="btn btn-danger" onclick="removeOnepageCartVoucher('{{voucher['key']}}');"><i class="fa fa-times-circle"></i></button>
+						</span></div>
+				</td>
+				<td class="text-right">{{voucher['amount']}}</td>
+				<td class="text-right">{{voucher['amount']}}</td>
+			</tr>
+			{% endfor %}
+			<tr>
+				<td colspan="{{mcolspan}}"></td>
+			</tr>
+			{% for total in totals %}
+			<tr>
+				<td colspan="{{mcolspan ? mcolspan - 1 : 0}}" class="noborder text-right"><strong>{{total['title']}}:</strong></td>
+				<td class="noborder text-right">{{total['text']}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+<div class="extrow">
+		<div class="extsm-12"><div id="voucher-coupon-reward-error"></div></div>
+		{{coupon_module}}
+		{{voucher_module}}
+	</div>				
+	<div class="extrow">
+		{{reward_module}}
+	</div>
+</div>
+<script><!--
+$('#onepagecheckout .quantitybox').keypress(function(event) {
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	if(keycode == '13'){
+		var key = $(this).attr('rel');
+		var quantity = $('#onepagecheckout input[name=\'quantity['+ key +']\']').val();
+		updatecart(key,quantity);
+	}
+});
+
+$('#onepagecheckout .quantitybox').blur(function(){
+	var key = $(this).attr('rel');
+	var quantity = $('#onepagecheckout input[name=\'quantity['+ key +']\']').val();
+	updatecart(key,quantity);
+});
+
+$('#onepagecheckout .quantityboxmb').blur(function(){
+	var key = $(this).attr('rel');
+	var quantity = $('#onepagecheckout input[name=\'quantitymb['+ key +']\']').val();
+	updatecart(key,quantity);
+});
+
+function upOnepageCart(key){
+	$('.tooltip').remove();
+	var quantity = parseInt($('#onepagecheckout input[name=\'quantity['+ key +']\']').val())+1;
+	updatecart(key,quantity);
+}
+
+function downOnepageCart(key){
+	$('.tooltip').remove();
+	var quantity = parseInt($('#onepagecheckout input[name=\'quantity['+ key +']\']').val())-1;
+	if(quantity ==0){
+		removeOnepageCart(key);
+	}else{
+		updatecart(key,quantity);
+	}
+}
+
+function updatecart(key,quantity){
+	$('#onepagecheckout .ext-carts').html('<div class="extloader loader cart-loader text-center"><img src="catalog/view/theme/default/image/loader.gif" alt="Loader" /> <span class="sr-only">Loading...</span></div>');
+	$.ajax({
+		url: 'index.php?route=extension/onepagecheckout/cart/edit',
+		type: 'post',
+		data: 'key=' + key + '&quantity=' + quantity,
+		dataType: 'json',
+		beforeSend: function() {
+			$('#cart > button').button('loading');
+		},
+		complete: function() {
+			$('#cart > button').button('reset');
+		},
+		success: function(json){
+			// Need to set timeout otherwise it wont update the total
+			setTimeout(function (){
+				$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+			}, 100);
+			updateweight();
+			{% if shipping %}
+				{% if delivery_status %}
+					LoadShippingMethod();
+				{% else %}
+					Loadshippingmethodwithpaymentaddress();
+				{% endif %}
+			{% else %}
+			LoadCartWithoutloader();
+			{% endif %}
+			setTimeout(function(){
+				{% if logged %}
+				LoadPaymentMethod(true);
+				{% else %}
+				LoadPaymentMethod(false);
+				{% endif %}
+				var account_type = ($('#onepagecheckout input[name=\'account_type\']:checked').val()) ? $('#onepagecheckout input[name=\'account_type\']:checked').val() : '';
+				LoadConfirmation(account_type);
+				$('#cart > ul').load('index.php?route=common/cart/info ul li');
+			},1000);
+		}
+	});
+}
+
+function removeOnepageCart(key){
+	if (confirm("{{alert_message}}") == true) {
+	$('.tooltip').remove();
+	$('#onepagecheckout .ext-carts').html('<div class="extloader loader cart-loader text-center"><img src="catalog/view/theme/default/image/loader.gif" alt="Loader" /> <span class="sr-only">Loading...</span></div>');
+	$.ajax({
+		url: 'index.php?route=checkout/cart/remove',
+		type: 'post',
+		data: 'key=' + key,
+		dataType: 'json',
+		beforeSend: function() {
+			$('#cart > button').button('loading');
+		},
+		complete: function() {
+			$('#cart > button').button('reset');
+		},
+		success: function(json) {
+			// Need to set timeout otherwise it wont update the total
+			setTimeout(function () {
+				$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+			}, 100);
+			{% if shipping %}
+				{% if delivery_status %}
+					LoadShippingMethod();
+				{% else %}
+					Loadshippingmethodwithpaymentaddress();
+				{% endif %}
+			{% else %}
+			LoadCartWithoutloader();
+			{% endif %}
+			setTimeout(function(){
+				{% if logged %}
+				LoadPaymentMethod(true);
+				{% else %}
+				LoadPaymentMethod(false);
+				{% endif %}
+				updateweight();
+				var account_type = ($('#onepagecheckout input[name=\'account_type\']:checked').val()) ? $('#onepagecheckout input[name=\'account_type\']:checked').val() : '';
+				LoadConfirmation(account_type);
+				$('#cart > ul').load('index.php?route=common/cart/info ul li');
+			},1000);
+		}
+	});
+  }
+}
+
+function removeOnepageCartVoucher(key){
+	if (confirm("{{alert_message}}") == true) {
+		$('.tooltip').remove();
+		$.ajax({
+			url: 'index.php?route=checkout/cart/remove',
+			type: 'post',
+			data: 'key=' + key,
+			dataType: 'json',
+			beforeSend: function() {
+				$('#cart > button').button('loading');
+			},
+			complete: function() {
+				$('#cart > button').button('reset');
+			},
+			success: function(json) {
+				// Need to set timeout otherwise it wont update the total
+				setTimeout(function () {
+					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+				}, 100);
+				{% if shipping %}
+					{% if delivery_status %}
+						LoadShippingMethod();
+					{% else %}
+						Loadshippingmethodwithpaymentaddress();
+					{% endif %}
+				{% else %}
+					LoadCartWithoutloader();
+				{% endif %}
+				setTimeout(function(){
+					{% if logged %}
+					LoadPaymentMethod(true);
+					{% else %}
+					LoadPaymentMethod(false);
+					{% endif %}
+					updateweight();
+					var account_type = ($('#onepagecheckout input[name=\'account_type\']:checked').val()) ? $('#onepagecheckout input[name=\'account_type\']:checked').val() : '';
+					LoadConfirmation(account_type);
+					$('#cart > ul').load('index.php?route=common/cart/info ul li');
+				},1000);
+			}
+		});
+	}
+}			
+
+
+function updateweight(){
+	
+	$.ajax({
+
+			url: 'index.php?route=extension/onepagecheckout/checkout/updateweight',
+			dataType: 'json',
+
+			success: function(json) {
+
+				$('#loadweight').text(json['weight']);
+
+			}
+
+		});
+	
+}
+
+//--></script>
+{% else %}
+<script><!--
+location = '{{redirect}}';
+//--></script>
+{% endif %}

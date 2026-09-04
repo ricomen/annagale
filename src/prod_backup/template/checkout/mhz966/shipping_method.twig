@@ -1,0 +1,34 @@
+{% if debug %}<!--
+    <pre hidden>{{debug}}</pre>
+-->
+{% endif %}
+{% if shipping_methods %}
+    {% for shipping_method in shipping_methods %}
+        <div hidden>
+            {{ shipping_method.title }}
+        </div>
+        {% for quote in shipping_method.quote %}
+            {# <div class="variants-deliveryCart__title {% if quote.code==code  %} _tab-active {% endif %}" {% if quote.code == 'll_cdek.ll_cdek_136'%} data-popup="#pvzPopup"{% endif %}       >         #}
+            <div class="variants-deliveryCart__title {% if quote.code==code %} _tab-active {% endif %}" data-delivery-tabtitle="{{ quote.code }}" {% if quote.code == 'll_cdek.ll_cdek_136' or quote.code == 'll_cdek.ll_cdek_291' %} data-sdek-pvzs {% endif %}>
+                <input type="radio" name="shipping_method" class="variants-deliveryCart__radio" {% if quote.code==code %} checked="checked" {% endif %} data-name="delivery_method" value="{{ quote.code }}" data-required />
+                <div class="variants-deliveryCart__label" data-code="{{ quote.code }}">
+                    {% if 'll_cdek' in quote.code %}
+                        {{ quote.title }}
+                    {% else %}
+                        <b>
+                            {{ quote.title }}
+                        </b>
+                    {% endif %}
+                    {% if quote.description %}
+                        <span {% if quote.code in ['flat.flat', 'free.free'] %} {% else %} hidden {% endif %}>
+                            {{ quote.description }}
+                        </span>
+                    {% endif %}
+                    <span>
+                        {{ quote.text }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,747 @@
+{{ header }}
+<div class="main-wrapper main-wrapper--reset ">
+    <div class="card-page">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                    {% for breadcrumb in breadcrumbs %}
+                        {% if loop.last %}
+                            <li class="breadcrumbs__items" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                <span class="breadcrumbs__current">
+                                    {{ breadcrumb.text }}
+                                </span>
+                            </li>
+                        {% else %}
+                            <li class="breadcrumbs__items" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">
+                                    {{ breadcrumb.text }}
+                                </a>
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="box-card">
+                <div class="title title--mobile">
+                    {{ heading_title }}
+                </div>
+                <div class="card__sliders">
+                    <div class="card__sliderNav-box">
+                        <div class="card__sliderNav-arrows"></div>
+                        <div class="card__sliderNav">
+                            {% if thumb or images %}
+                                <div class="card__sliderNav-item">
+                                    <img src="{{ thumb }}" alt="pic" width="70" height="70"></div>
+                                {% endif %}
+                                {% if images %}
+                                    {% for image in images %}
+                                        <div class="card__sliderNav-item">
+                                            <img src="{{ image.thumb }}" alt="pic" width="70" height="70"></div>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                            <div class="card__sliderFor-box" style="background-image: url(/front/dist/images/bg-contact-box.png)">
+                                {% if special %}
+                                    <div class="label">
+                                        <div class="label__sale">
+                                            sale
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="card__sliderFor">
+                                    {% if thumb or images %}
+
+                                        <div class="card__sliderFor-item">
+                                            <img src="{{ popup }}" alt="pic" width="250" height="250" data-zoom-image="{{ popup }}" />
+                                        </div>
+                                    {% endif %}
+                                    {% if images %}
+                                        {% for image in images %}
+
+                                            <div class="card__sliderFor-item">
+                                                <img src="{{ image.popup }}" alt="pic" width="250" height="250" data-zoom-image="{{ image.popup }}" />
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div id="product" class="box-card__desc">
+                            <h1 class="title">
+                                {{ heading_title }}
+                            </h1>
+
+                            <form action="#" class="card-form">
+                                <div class="card-form__holder">
+                                    <div class="amount">
+                                        <div class="amount__title">
+                                            {{ entry_qty }}
+                                            :
+                                        </div>
+                                        <div class="amount__holder">
+                                            <button type="button" class="amount__btn btn-minus_prod"></button>
+                                            <div class="amount__control">
+                                                <input name="quantity" type="text" class="amount__inp" value="{{ minimum }}" id="input-quantity">
+
+                                                    <input type="hidden" name="product_id" value="{{ product_id }}" />
+                                                </div>
+                                                <button type="button" class="amount__btn btn-plus_prod"></button>
+                                            </div>
+                                        </div>
+                                        <input style="display: none" name="quantity" type="number" class="str_qua " value="{{ minimum }}">
+
+                                            <div class="card-price {% if not special %} card-top {% endif %}">
+                                                <div class="card-price__title">
+                                                    Цена:
+                                                </div>
+                                                {% if special %}
+                                                    <div class="block-discount">
+                                                        <span class="old-price">
+                                                            {{ price }}
+                                                        </span>
+                                                        <strong class="new-price">
+                                                            {{ special }}
+                                                        </strong>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="box-sale__price">
+                                                        {{ price }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="more-beautiful">
+
+                                                {% if stock != 'Нет в наличии' %}
+                                                    <a id="button-cart" href="#" class="more-beautiful__btn btn btn-default popup-open" data-for="popup-added">
+                                                        <span>
+                                                            стать еще красивее
+                                                        </span>
+                                                    </a>
+                                                {% else %}
+                                                    <!--    <div class="stock_status" style="color: #cbcbcb;padding: 10px 20px;">{{ stock }}</div>-->
+
+                                                    <div class="stock_status btn_notify btn_notify_detail btn btn-default popup-open space-evenly" style="margin-right: 20px;" data-for="popup-notify" data-url="{{ (breadcrumbs|last).href }}">
+                                                        <img src="/catalog/view/theme/default/image/icons8-secured-letter-50.png" alt="Оповестить по поступлению" />
+                                                        <span>
+                                                            Оповестить по поступлению
+                                                        </span>
+                                                    </div>
+                                                <!--
+                                                    <div class="stock_status btn_notify btn_notify_mobile btn btn-default popup-open" style="margin-right: 20px;" data-for="popup-notify" data-url="{{ (breadcrumbs|last).href }}"></div>
+                                                -->
+                                                {% endif %}
+                                                <!--
+                                                    <div class="like">
+                                                    <span data-id="{{ product_id }}" onclick="{% if is_wishlist %} wishlist.remove('{{ product_id }}');  {% else %}wishlist.add('{{ product_id }}'); {% endif %}" class="like__icon-svg like__icon">
+                                                    <input type="checkbox" class="like__check cheked{{ product_id }}" {% if is_wishlist %} checked {% endif %}>
+                                                    <span class="like__fill-svg">
+                                                    <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9.07026 2.78763L9.49992 3.50967L9.92961 2.78765C10.7494 1.41015 12.2085 0.5 13.869 0.5C16.4115 0.5 18.5 2.63344 18.5 5.29959C18.5 6.74762 17.8793 8.03954 16.9041 8.9182L16.8914 8.92963L16.8795 8.94189L9.60893 16.4519C9.5772 16.4847 9.53767 16.5 9.49994 16.5C9.46221 16.5 9.42269 16.4847 9.39096 16.4519L2.12038 8.94189L2.10851 8.92963L2.09584 8.91821C1.12067 8.03955 0.5 6.74763 0.5 5.29959C0.5 2.63336 2.58791 0.5 5.1303 0.5C6.79086 0.5 8.25063 1.41022 9.07026 2.78763Z" stroke="#999999" fill="none" />
+                                                    </svg>
+                                                    </span>
+                                                    </span>
+                                                    </div>
+                                                    </div>
+                                                -->
+                                                <div class=""></div>
+                                            </div>
+                                            <div class="card-info">
+
+                                                {% if info %}
+                                                    <i class="card-info__icon">
+                                                        <img src="/front/dist/images/icon-info.svg" alt="icon" width="2" height="8"></i>
+                                                        <span class="card-info__text">
+                                                            {{ info }}
+                                                        </span>
+                                                    {% endif %}
+                                                    <img src="/catalog/view/theme/default/image/payer1.png?v=1.2" alt="payer" class="product_payer_img"></div>
+                                                </form>
+                                                <div class="box-card__text">
+                                                    {{ sub }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main-card">
+                                    <div class="container">
+                                        <div class="section-tabs">
+                                            <ul class="tabs-list">
+                                                <li class="tabs-items">
+                                                    <a class=" tabs-link active" href="#tab-1">
+                                                        Описание
+                                                    </a>
+                                                </li>
+                                                {% if triggers %}
+                                                    <li class="tabs-items">
+                                                        <a class=" tabs-link " href="#tab-2">
+                                                            Состав
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                <li class="tabs-items">
+                                                    <a class=" tabs-link " href="#tab-3">
+                                                        Способ применения
+                                                    </a>
+                                                </li>
+                                                <li class="tabs-items">
+                                                    <a class=" tabs-link " href="#tab-4">
+                                                        Отзывы
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                            <div class="tab" id="tab-1">
+                                                <div class="block-desc after-elem">
+                                                    <div class="block-desc__box before-elem">
+                                                        <div class="block-desc__holder">
+                                                            <div class="block-desc__title">
+                                                                {{ heading_title }}
+                                                            </div>
+                                                            <div class="block-desc__text">
+                                                                {{ description }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab" id="tab-2">
+                                                <div class="structure">
+                                                    {% for trigger in triggers %}
+                                                        <div class="structure__holder {% if loop.index%2==0 %} structure__holder--reverse {% endif %}">
+                                                            {% if trigger.image %}
+                                                                <div class="structure__pic">
+                                                                    <img src="{{ trigger.image }}" alt="pic"></div>
+                                                                {% endif %}
+                                                                <div class="structure__box after-elem">
+                                                                    <div class="structure__outer before-elem">
+                                                                        <div class="structure__title">
+                                                                            {{ trigger.title }}
+                                                                        </div>
+                                                                        <div class="structure__text scroll-text">
+                                                                            {{ trigger.description }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        {% endfor %}
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="tab" id="tab-3">
+                                                    <div class="structure">
+
+                                                        {% for application in applications %}
+                                                            <div class="structure__holder {% if loop.index%2==0 %} structure__holder--reverse {% endif %}">
+                                                                {% if application.image %}
+                                                                    <div class="structure__pic">
+                                                                        <img src="{{ application.image }}" alt="pic"></div>
+                                                                    {% endif %}
+                                                                    <div class="structure__box after-elem">
+                                                                        <div class="structure__outer before-elem">
+                                                                            <div class="structure__title">
+                                                                                {{ application.title }}
+                                                                            </div>
+                                                                            <div class="structure__text scroll-text">
+                                                                                {{ application.description }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            {% endfor %}
+
+                                                            {% if video_link %}
+                                                                <div class="structure__video">
+                                                                    <iframe width="100%" height="100%" src="{{ video_link }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                </div>
+
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="tab" id="tab-4"></div>
+                                                </div>
+                                                {% if related_product_listing %}
+                                                    <div class="section-sale">
+                                                        <div class="block-caption">
+                                                            <div class="title">
+                                                                Рекомендуем применять в комплексе
+                                                            </div>
+                                                            <div class="block-caption__arrows sale-arrows"></div>
+                                                        </div>
+                                                        <div class="sale-slider">
+                                                            {{ related_product_listing }}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                {{ content_bottom }}
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="popup popup-added">
+                                        <div class="popup__overlay"></div>
+                                        <div class="popup__holder">
+                                            <div class="popup__close">
+                                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F" />
+                                                    <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F" />
+                                                </svg>
+                                            </div>
+                                            <div class="popup__content">
+                                                <div class="items items-added">
+                                                    <div class="items__wrap after-elem">
+                                                        <div class="items__inner before-elem">
+                                                            <div class="items__border txt-elem">
+                                                                <form action="#" class="form form-added">
+                                                                    <div class="notific">
+                                                                        <i class="notific__icon">
+                                                                            <img src="/front/dist/images/added-icon.svg" alt="icon" width="18" height="14"></i>
+                                                                            <span class="notific__desc">
+                                                                                Вы добавили товар в корзину
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="added-items">
+                                                                            <a href="#" class="added-items__info">
+                                                                                <div class="added-items__pic">
+                                                                                    <img src="" alt="pic" width="70" height="70"></div>
+                                                                                    <div class="added-items__desc">
+                                                                                        Пуш-ап масло для упругости груди объемом 50 мл
+                                                                                    </div>
+                                                                                </a>
+                                                                                <div class="added-items__block">
+                                                                                    <div class="amount">
+                                                                                        <div class="amount__holder">
+                                                                                            <button type="button" class="amount__btn btn-minus_popups"></button>
+                                                                                            <div class="amount__control">
+                                                                                                <input value="{{ minimum }}" type="text" class="amount__inp" placeholder="1"></div>
+                                                                                                <button type="button" class="amount__btn btn-plus_popups"></button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="added-items__price">
+                                                                                            0
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-added__btns">
+                                                                                    <div style="position: inherit" class="btn btn-transp popup__close">
+                                                                                        продолжить покупки
+                                                                                    </div>
+                                                                                    <a href="{{ checkout }}" class="btn btn-default">
+                                                                                        в корзину
+                                                                                    </a>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <script><!--
+    $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
+        $.ajax({
+            url: 'index.php?route=product/product/getRecurringDescription',
+            type: 'post',
+            data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
+            dataType: 'json',
+            beforeSend: function () {
+                $('#recurring-description').html('');
+            },
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+
+                if (json['success']) {
+                    $('#recurring-description').html(json['success']);
+                }
+            }
+        });
+    });
+
+    // Change quantity (minus)
+    $(document).on('click', '.btn-minus_popups', function () {
+        var quantity = Number($(this).parent().find('input').val()) - 1;
+        var price = $(this).data('price')
+        if (quantity > 0) {
+            var id = $(this).attr('data-key')
+          $(this).parent().find('.amount__inp').val(quantity)
+         //   updateProdPopup(id,quantity);
+            price = Number(price) * Number(quantity)
+            $('.popup-added .added-items__price').text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' РУБ');
+            uppopup($(this),'minus');
+        }
+
+
+
+    });
+
+    // Change quantity (plus)
+    $(document).on('click', '.btn-plus_popups', function () {
+        var quantity = Number($(this).parent().find('input').val()) + 1;
+        var price = $(this).data('price')
+        $(this).parent().find('.amount__inp').val(quantity)
+           price = Number(price) * Number(quantity)
+            $('.popup-added .added-items__price').text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' РУБ');
+       uppopup($(this),'plus');
+
+
+    });
+
+    function updateProdPopup(key, quantity) {
+        $.ajax({
+            url: 'index.php?route=checkout/cart/edit',
+            type: 'post',
+            data: 'key=' + key + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
+            dataType: 'json',
+
+            success: function (json) {
+
+                if (json['success']) {
+                    $('[data-for=\'popup-basket\'] .cout__holder').text(json['total'])
+                    $.get("index.php?route=common/cart/info",'.popup-basket', function (data) {
+                        //	console.log(data);
+
+                        // $('[data-for=\'popup-basket\']').remove()
+                        // $('.popup.popup-basket').remove()
+                        // $('[data-for=\'popup-personal\']:last').after(data)
+                      	$(".popup-basket").html(data);
+
+                        $('.popup.popup-added').addClass('active')
+                        // $('.scroll-text').mCustomScrollbar();
+
+                    });
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+
+    function uppopup(element,action) {
+     	var url = 'index.php?route=checkout/cart/add';
+    	var data = $('#product input[type=\'text\'], #product input[type=\'hidden\'], .str_qua[name=\'quantity\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea');
+    	if(action == 'minus') {
+    		var quantity =  $('.popup.popup-basket').find('[data-key="' + element.data('key') + '"].btn-minus').data('quantity') - 1;
+    		url = 'index.php?route=checkout/cart/edit';
+    		data = 'quantity=' + quantity + '&key=' + element.data('key');
+    	}
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: data,
+            dataType: 'json',
+
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+                $('.form-group').removeClass('has-error');
+
+
+                if (json['error']) {
+                    if (json['error']['option']) {
+                        for (i in json['error']['option']) {
+                            var element = $('#input-option' + i.replace('_', '-'));
+
+                            if (element.parent().hasClass('input-group')) {
+                                element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+                            } else {
+                                element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+                            }
+                        }
+                    }
+
+                    if (json['error']['recurring']) {
+                        $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+                    }
+
+                    // Highlight any found errors
+                    $('.text-danger').parent().addClass('has-error');
+                }
+
+                if (json['success']) {
+                    $('[data-for=\'popup-basket\'] .cout__holder').text(json['total'])
+                    if (json['product']) {
+                        $('.popup-added .added-items__desc').text(json['product']['name']);
+
+
+                        // var price = Number(json['product']['price']) * Number(json['product']['quantity'])
+                        // $('.popup-added .amount__btn').attr('data-price', json['product']['price'])
+                        // $('.popup-added .added-items__price').text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' РУБ');
+
+                        $('.popup-added .amount__inp').attr('placeholder', json['product']['quantity']);
+                        $('.popup-added .added-items__pic img').attr('src', json['product']['image']);
+
+
+                    }
+
+                    $.get("index.php?route=common/cart/info", '.popup-basket', function (data) {
+                        // $('[data-for=\'popup-basket\']').remove()
+                        // $('.popup.popup-basket').remove()
+                        // $('[data-for=\'popup-personal\']:last').after(data)
+                        $(".popup-basket").html(data);
+                        // $('.scroll-text').mCustomScrollbar();
+
+                    });
+
+
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+
+    //--></script>
+
+                                                <script><!--
+    $('#button-cart').on('click', function () {
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'quantity\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+            dataType: 'json',
+
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+                $('.form-group').removeClass('has-error');
+
+
+                if (json['error']) {
+                    if (json['error']['option']) {
+                        for (i in json['error']['option']) {
+                            var element = $('#input-option' + i.replace('_', '-'));
+
+                            if (element.parent().hasClass('input-group')) {
+                                element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+                            } else {
+                                element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+                            }
+                        }
+                    }
+
+                    if (json['error']['recurring']) {
+                        $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+                    }
+
+                    // Highlight any found errors
+                    $('.text-danger').parent().addClass('has-error');
+                }
+
+                if (json['success']) {
+
+                    $('[data-for=\'popup-basket\'] .cout__holder').text(json['total'])
+                    if (json['product']) {
+                        $('.popup-added .added-items__desc').text(json['product']['name']);
+                        var price = Number(json['product']['price']) * Number(json['product']['quantity'])
+                        $('.popup-added .amount__btn').attr('data-price', json['product']['price'])
+                        $('.popup-added .added-items__price').text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' РУБ');
+                        $('.popup-added .amount__inp').attr('placeholder', json['product']['quantity']);
+                        $('.popup-added .amount__inp').val(json['product']['quantity']);
+                        $('.popup-added .added-items__pic img').attr('src', json['product']['image']);
+                        $('.popup-added .btn-minus_popups ').attr('data-key', json['cart_id']);
+                    }
+
+                    $.get("index.php?route=common/cart/info", '.popup-basket', function (data) {
+                        // $('[data-for=\'popup-basket\']').remove()
+                        // $('.popup.popup-basket').remove()
+                        // $('[data-for=\'popup-personal\']:last').after(data)
+
+                        $('.popup.popup-basket').html(data)
+                        // $('.scroll-text').mCustomScrollbar();
+
+                    });
+
+
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+
+
+    //--></script>
+                                                <script><!--
+    $('.date').datetimepicker({
+        language: '{{ datepicker }}',
+        pickTime: false
+    });
+
+    $('.datetime').datetimepicker({
+        language: '{{ datepicker }}',
+        pickDate: true,
+        pickTime: true
+    });
+
+    $('.time').datetimepicker({
+        language: '{{ datepicker }}',
+        pickDate: false
+    });
+
+    // Change quantity (minus)
+    $(document).on('click', '.btn-minus_prod', function () {
+        var quantity = Number($(this).parent().find('input').val()) - 1;
+
+        if (quantity > 0) {
+            $(this).parent().find('.amount__inp').val(quantity)
+        }
+
+
+    });
+
+    // Change quantity (plus)
+    $(document).on('click', '.btn-plus_prod', function () {
+
+        var quantity = Number($(this).parent().find('input').val()) + 1;
+        $(this).parent().find('.amount__inp').val(quantity)
+
+    });
+
+    $('button[id^=\'button-upload\']').on('click', function () {
+        var node = this;
+
+        $('#form-upload').remove();
+
+        $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+
+        $('#form-upload input[name=\'file\']').trigger('click');
+
+        if (typeof timer != 'undefined') {
+            clearInterval(timer);
+        }
+
+        timer = setInterval(function () {
+            if ($('#form-upload input[name=\'file\']').val() != '') {
+                clearInterval(timer);
+
+                $.ajax({
+                    url: 'index.php?route=tool/upload',
+                    type: 'post',
+                    dataType: 'json',
+                    data: new FormData($('#form-upload')[0]),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function () {
+                        $(node).button('loading');
+                    },
+                    complete: function () {
+                        $(node).button('reset');
+                    },
+                    success: function (json) {
+                        $('.text-danger').remove();
+
+                        if (json['error']) {
+                            $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+                        }
+
+                        if (json['success']) {
+                            alert(json['success']);
+
+                            $(node).parent().find('input').val(json['code']);
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            }
+        }, 500);
+    });
+    //--></script>
+                                                <script><!--
+    $('#tab-4').delegate('.pagination a', 'click', function (e) {
+        e.preventDefault();
+
+        $('#tab-4').fadeOut('slow');
+
+        $('#tab-4').load(this.href);
+        setTimeout(function () {
+            fancyInit();
+        }, 500)
+
+        $('#tab-4').fadeIn('slow');
+    });
+
+    $('#tab-4').load('index.php?route=product/product/review&product_id={{ product_id }}');
+
+    setTimeout(function () {
+        fancyInit();
+    }, 1000)
+
+
+    function fancyInit() {
+        $('[data-fancybox="images"]').fancybox({
+            loop: false,
+            infobar: true,
+            slideShow: false,
+            buttons: ['close'],
+            btnTpl: {
+                arrowLeft: '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left" title="{{ PREV }}"><div><svg width="18" height="34" viewBox="0 0 18 34" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 33L0.999999 17L17 0.999999" stroke="white"/></svg></div></button>',
+                arrowRight: '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right" title="{{ NEXT }}"><div><svg width="18" height="34" viewBox="0 0 18 34" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 0.999999L17 17L1 33" stroke="white"/></svg></div></button>',
+                close: '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{ CLOSE }}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/><path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/></svg></button>'
+            },
+            baseClass: 'base-feedback',
+            caption: function caption() {
+                return $(this).siblings('.box-review__info').html();
+            }
+        });
+    }
+
+
+    $('#button-review').on('click', function () {
+        $.ajax({
+            url: 'index.php?route=product/product/write&product_id={{ product_id }}',
+            type: 'post',
+            dataType: 'json',
+            data: $("#form-review").serialize(),
+            beforeSend: function () {
+                $('#button-review').button('loading');
+            },
+            complete: function () {
+                $('#button-review').button('reset');
+            },
+            success: function (json) {
+                $('.alert-dismissible').remove();
+
+                if (json['error']) {
+                    $('#review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+                }
+
+                if (json['success']) {
+                    $('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+
+                    $('input[name=\'name\']').val('');
+                    $('textarea[name=\'text\']').val('');
+                    $('input[name=\'rating\']:checked').prop('checked', false);
+                }
+            }
+        });
+    });
+
+    // $(document).ready(function() {
+    // 	$('.thumbnails').magnificPopup({
+    // 		type:'image',
+    // 		delegate: 'a',
+    // 		gallery: {
+    // 			enabled: true
+    // 		}
+    // 	});
+    // });
+    //--></script>
+                                                {{ footer }}
+                                                

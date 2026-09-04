@@ -1,0 +1,62 @@
+{% if payment_methods %}
+{% for payment_method in  payment_methods %}
+	<div class="radio">
+		<label>
+			{% if payment_method.code == code or not code %}
+			{% set code = payment_method.code %}
+			<input type="radio"  name="payment_method" value="{{ payment_method.code }}" checked="checked" />
+			{% else %}
+			<input type="radio"  name="payment_method" value="{{ payment_method.code }}" />
+			{% endif %}
+			
+			{% if title[payment_method['code']] %} 
+				{{title[payment_method['code']]}}
+				{% if image[payment_method['code']] %} <br/> <img src="{{image[payment_method['code']]}}" alt="pic" />{% endif %}
+			{% else %}
+				{{ payment_method.title }}
+				{% if image[payment_method['code']] %}
+					<img src="{{image[payment_method['code']]}}" alt="pic" />
+				{% endif %}
+			{% endif %}
+			{% if payment_method['terms'] %} 
+				({{payment_method['terms']}})
+			{% endif %}
+		</label>
+	</div>
+{% endfor %}
+{% endif %}
+{% if error_warning %}
+<div class="extalert balert-danger"><i class="fa fa-exclamation-circle"></i> {{error_warning}}</div>
+{% endif %}
+<script><!--
+if($('.payment-method-content input[name=\'payment_method\']:checked').val()==undefined){
+	$('.payment-method-content input[name=\'payment_method\']:first').prop('checked',true);
+}
+
+$('.payment-method-content input[name=\'payment_method\'], .payment-method-content input[name=\'payment_method\']').on('change', function(){
+	$.ajax({
+		url: 'index.php?route=extension/onepagecheckout/payment_method/savepayment',
+		type:'post',
+		data:$('.payment-method-content input[type="radio"]:checked'),
+		dataType: 'json',
+		success: function(json){
+			$('.alert, .text-danger').remove();
+			if(json['error']){
+				//$('.payment-method-content').before('<div class="alert alert-danger">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+			if(json['success']){
+				{% if onepagecheckout_payment_method_load_cart %}
+					LoadCartWithoutloader();
+				{% endif %}
+				
+				var account_type = ($('#onepagecheckout input[name=\'account_type\']:checked').val()) ? $('#onepagecheckout input[name=\'account_type\']:checked').val() : '';
+				LoadConfirmation(account_type);
+			}
+		}
+	})
+});
+
+$(document).ready(function(){
+ $('.payment-method-content input[name=\'payment_method\']:checked, .payment-method-content select[name=\'payment_method\']').trigger('change');
+});
+//--></script>

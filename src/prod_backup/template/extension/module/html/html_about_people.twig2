@@ -1,0 +1,22 @@
+<div class="section-special">
+
+    <div class="container">
+        <div class="block-caption">
+            <div class="title">{{ heading_title }}</div>
+           <!-- <div class="block-caption__arrows sale-arrows"></div>-->
+        </div>
+        <div class="sale-slider">
+            {% for trigger in triggers %}
+
+
+<div class="team-member">
+
+                <a href="{{ trigger.image }}" class="team-member__img" data-fancybox="images" data-for="magazine">
+                        <img src="{{ trigger.image }}" alt="pic" width="244" height="345">
+                </a>
+            </div>
+{% endfor %}
+        </div>
+    </div>
+</div>
+

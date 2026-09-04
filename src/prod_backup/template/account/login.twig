@@ -1,0 +1,70 @@
+{{ header }}
+
+<div class="main-wrapper">
+  <div class="main-registration container">
+
+    <div class="breadcrumbs">
+      <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+        {% for breadcrumb in breadcrumbs %}
+          {% if loop.last %}
+            <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+              <span  class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+            </li>
+          {% else %}
+            <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+              <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+            </li>
+          {% endif %}
+
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="block-caption">
+      <h1 class="title">Авторизация пользователя</h1>
+    </div>
+    {% if error_warning %}
+      <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+    {% endif %}
+    <div class="main-registration-block">
+      <div class="contact-box">
+        <div class="contact-box__wrap after-elem">
+          <div class="contact-box__inner before-elem">
+            <div class="contact-box__border txt-elem">
+              <form class="form-fix-login form" action="{{ action }}" method="post" enctype="multipart/form-data">
+                <div class="form__col">
+                  <div class="form__title">Личные данные</div>
+                  <div class="form__box">
+
+
+                    <div class="form__row">
+                      <input name="email" value="{{ email }}" type="email" class="form__control {% if error_email %} error-inp {% endif %}" placeholder="Email">
+
+                    </div>   {% if error_email %}
+                      <div class="text-danger">{{ error_email }}</div>
+                    {% endif %}
+                    <div class="form__box">
+                      <div class="form__row">
+                        <input type="password" name="password" value="{{ password }}" class="form__control {% if error_password %} error-inp {% endif %}" placeholder="Пароль*">
+
+                      </div>
+                      {% if error_password %}
+                        <div class="text-danger">{{ error_password }}</div>
+                      {% endif %}
+
+                  </div>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-default">Войти</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{{ footer }}

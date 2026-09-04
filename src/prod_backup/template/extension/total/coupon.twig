@@ -1,0 +1,53 @@
+{#<div style="display: none" class="panel panel-default">#}
+{#  <div class="panel-heading">#}
+{#    <h4 class="panel-title"><a href="#collapse-coupon" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion">{{ heading_title }} <i class="fa fa-caret-down"></i></a></h4>#}
+{#  </div>#}
+{#  <div id="collapse-coupon" class="panel-collapse collapse">#}
+{#    <div class="panel-body">#}
+{#      <label class="col-sm-2 control-label" for="input-coupon">{{ entry_coupon }}</label>#}
+{#      <div class="input-group">#}
+{#        <input type="text" name="coupon" value="{{ coupon }}" placeholder="{{ entry_coupon }}" id="input-coupon" class="form-control" />#}
+{#        <span class="input-group-btn">#}
+{#        <input type="button" value="{{ button_coupon }}"  data-loading-text="{{ text_loading }}"  class="btn btn-primary" />#}
+{#        </span></div>#}
+{#     #}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+
+
+
+<div class="promo-code__desc">Введите в данное поле код  специальный промо-код, для получения скидки или подарка. После ввода кода, нажмите кнопку «Применить промо-код».
+</div>
+<div class="form__row form__row-comment">
+  <input name="coupon" value="{{ coupon }}" id="input-coupon"  type="text" class="form__control" placeholder="Промо-код">
+</div>
+<button id="promo-send" class="promo-code__apply">Применить промо-код</button>
+<div class="popup popup-coupon">
+  <div class="popup__overlay"></div>
+  <div class="popup__holder">
+    <div class="popup__close">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.22001e-05 1L1.00003 0L10 9L9 10L3.22001e-05 1Z" fill="#57855F"/>
+        <path d="M9.99997 1L8.99997 0L0 9L0.999997 10L9.99997 1Z" fill="#57855F"/>
+      </svg>
+    </div>
+    <div class="popup__content popup__content--basket popup__content--thx">
+      <div class="items items-thx">
+        <div class="items__wrap after-elem">
+          <div class="items__inner before-elem">
+            <div class="items__border txt-elem">
+              <div class="thanks">
+                <div class="thanks__icon">
+                  <img src="/front/dist/images/thanks-icon.svg" alt="pic" width="72" height="74">
+                </div>
+                <div class="thanks__title">Данные успешно сохранены</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

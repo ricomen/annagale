@@ -1,0 +1,16 @@
+
+{% if payment_methods %}
+  {% set id = 1 %}
+  {% for payment_method in payment_methods %}
+<label class="convention">
+  <input type="radio" id="payment_{{ id }}" name="payment_method" value="{{ payment_method.code }}" type="radio" class="convention__check" {#{% if payment_method.code==code %} checked="checked"{% endif %}#} >
+  <i class="convention__mark"></i>
+  <p class="convention__text">
+    <span>{{ payment_method.title }}</span>
+  </p>
+</label>
+  {% set id = id + 1 %}
+  {% endfor %}
+
+{% endif %}
+

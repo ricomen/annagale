@@ -1,0 +1,62 @@
+<div id="active_robo" action="{{ payment_url }}" method="post">
+
+    <input type="hidden" name="MrchLogin" value="{{ robokassa_login }}"/>
+    <input type="hidden" name="OutSum" value="{{ out_summ }}"/>
+    <input type="hidden" name="InvId" value="{{ inv_id }}"/>
+    <input type="hidden" name="Desc" value="{{ order_desc }}"/>
+    {% if out_summ_currency %}
+        <input type="hidden" name="OutSumCurrency" value="{{ out_summ_currency }}"/>
+    {% endif %}
+ {% if robokassa_fiscal %}
+        <input type="hidden" name="Receipt" value="{{ receipt }}"/>
+    {% endif %}{#   #}
+    <input type="hidden" name="SignatureValue" value="{{ crc }}"/>
+    <input type="hidden" name="Shp_item" value="1"/>
+    {% if robokassa_test %}
+        <input type="hidden" name="IsTest" value="1"/>
+    {% endif %}
+    <input type="hidden" name="IncCurrLabel" value=""/>
+    <input type="hidden" name="Culture" value="ru"/>
+
+
+    <input  type="submit" value="{{ button_confirm }}" class=" btn btn-order btn-default onclup"/>
+
+</div>
+
+<script>
+
+    $(document).delegate('.onclup','click', function(e) {
+        e.preventDefault();
+
+        var age =$('input[name=\'agree\']:checked').val();
+        var convertion =$('input[name=\'convention2\']:checked').val();
+        $('.error-inp').removeClass('error-inp');
+        $('input[name=\'agree\']').parent().find('i').removeAttr('style');
+        $('input[name=\'convention2\']').parent().find('i').removeAttr('style');
+
+        if(typeof age !='undefined'&& typeof convertion !='undefined'){
+$('.onclup').removeClass('onclup').trigger('click')
+        }else{
+
+            if(typeof age =='undefined'){
+                $('input[name=\'agree\']').parent().find('i').addClass('error-inp').css({'border':'1px solid #e58182'});
+            }  if(typeof convertion =='undefined'){
+                $('input[name=\'convention2\']').parent().find('i').addClass('error-inp').css({'border':'1px solid #e58182'});
+            }
+
+
+        }
+
+    })
+
+
+    $(document).ready(function () {
+        $("#active_robo").replaceWith(function(index, oldHTML){
+            return $("<form>").html(oldHTML);
+        });
+        $('#confirm-block form').attr({'id':'active_robo','action':'{{ payment_url }}','method':'post'})
+        if($('.row-address input.error-inp').length) {
+            $('#confirm-block').find('.btn-order').addClass('disabled').prop('disabled',true);	
+        }
+    })
+</script>

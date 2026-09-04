@@ -1,0 +1,21 @@
+{% if fbstatus or gstatus %}
+<div class="extpanel extpanel-default">
+	<div class="extpanel-heading">
+		<h4 class="extpanel-title"><i class="fa fa-group"></i> {{text_social_login}}</h4>
+	</div>
+	<div class="extpanel-body">
+		<div class="row">
+			{% if fbstatus  %}
+			<div class="extsm-6">
+				<a href="{{flogin}}"><img src="catalog/view/theme/default/image/facebook_login.jpg" class="img-responsive" alt="Facebook Login"></a>
+			</div>
+			{% endif %}
+			{% if gstatus  %}
+			<div class="extsm-6">
+				<a href="{{glogin}}"><img src="catalog/view/theme/default/image/google_login.jpg" class="img-responsive" alt="Google Login"></a>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endif %}

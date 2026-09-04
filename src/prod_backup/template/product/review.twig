@@ -1,0 +1,27 @@
+{% if reviews %}
+
+  <div class="reviews-block">
+{% for review in reviews %}
+
+
+  <div class="box-review">
+    <div class="box-review__holder">
+      <a href="{{ review.popup }}" class="box-review__pic" data-fancybox="images">
+        <img src="{{ review.popup }}" alt="pic">
+      </a>
+      <div class="box-review__info">
+        <a href="{{ review.author }}" class="box-review__link" target="_blank">{{ review.text }}</a>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+  </div>
+  {{ pagination }}
+{% else %}
+<p>{{ text_no_reviews }}</p>
+
+
+
+
+{% endif %}

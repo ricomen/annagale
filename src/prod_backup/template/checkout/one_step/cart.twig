@@ -1,0 +1,60 @@
+<div class="all-items">
+    <div class="checkout-items__list">
+        <div class="basket-block__inner">
+            {% for product in products %}
+                <div class="basket-block__item">
+                    <div class="basket-block__delete remove" data-cart-id="{{ product.cart_id }}">{{ text_cart_remove }}</div>
+                    <div class="basket-block__image">
+                        <img src="{{ product.thumb }}" width="100" height="80" alt="{{ product.name }}">
+                    </div>
+                    <div class="basket-block__info">
+                        <div class="basket-block__title">
+                            <a href="{{ product.href }}">{{ product.name }}</a>
+                        </div>
+                        <div class="basket-block__article">
+                            {% if product.option %}
+                                {% for option in product.option %}
+                                    {{ option.value }} /
+                                {% endfor %}
+                            {% endif %}
+                            {{ column_model }} {{ product.model }}</div>
+                        <div class="basket-block__options">
+                            <div class="basket-block__quantity">
+                                <span>{{ column_quantity }}</span>
+                                <div class="product-quantity">
+                                    <button class="product-quantity__button product-quantity__minus decrement" data-id="{{ product.cart_id }}" data-quantity="{{ product.quantity }}"><svg xmlns="http://www.w3.org/2000/svg" width="7" height="1" viewBox="0 0 7 1"><rect  class="cls-1" width="7" height="1"/></svg></button>
+                                    <input class="product-quantity__input" type="number" name="quantity" value="{{ product.quantity }}" min="1" max="999" readonly>
+                                    <button class="product-quantity__button product-quantity__plus increment" data-id="{{ product.cart_id }}" data-quantity="{{ product.quantity }}"><svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7"><path d="M1308,350h7v1h-7v-1Zm3-3h1v7h-1v-7Z" transform="translate(-1308 -347)"/></svg></button>
+                                </div>
+                            </div>
+                            <div class="basket-block__price-box">
+                                <span>{{ column_total }}</span>
+                                <div class="basket-block__current-price">{{ product.total }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="basket-block__bottom">
+        <div class="basket-block__promocode">
+            {% if not coupon_total %}
+                <div class="basket-block__promocode-title" id="show-promo">{{ text_code }}</div>
+                <form class="basket-block__promocode-form" id="promo-form" style="display: none">
+                    <div class="form-block">
+                        <input class="basket-block__promocode-input" type="text" name="coupon" value="" placeholder="{{ text_code_enter }}">
+                    </div>
+                    <button type="submit" class="basket-block__promocode-button" id="promo-send">{{ text_code_submit }}</button>
+                </form>
+            {% else %}
+                <div class="basket-block__promocode-result" id="promo-total">{{ text_code_sale }} <span>{{ coupon_total.text|replace({'-': ""}) }}</span></div>
+            {% endif %}
+        </div>
+        {% if totals %}
+            {% for total in totals %}
+                <div class="basket-block__total">{{ total.title }}: <span>{{ total.text }}</span></div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

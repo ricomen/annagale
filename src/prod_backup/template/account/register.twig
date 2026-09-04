@@ -1,0 +1,262 @@
+{{ header }}
+
+
+<div class="main-wrapper">
+    <div class="main-registration container">
+
+        <div class="breadcrumbs">
+            <ul class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                {% for breadcrumb in breadcrumbs %}
+                    {% if loop.last %}
+                        <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                            <span  class="breadcrumbs__current">{{ breadcrumb.text }}</span>
+                        </li>
+                    {% else %}
+                        <li class="breadcrumbs__items" itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+                            <a href="{{ breadcrumb.href }}" class="breadcrumbs__link" itemprop="item">{{ breadcrumb.text }}</a>
+                        </li>
+                    {% endif %}
+
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="block-caption">
+            <h1 class="title">Регистрация нового пользователя</h1>
+        </div>
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+        {% endif %}
+        <div class="main-registration-block">
+            <div class="contact-box">
+                <div class="contact-box__wrap after-elem">
+                    <div class="contact-box__inner before-elem">
+                        <div class="contact-box__border txt-elem">
+                            <form id="registration-form" action="{{ action }}" method="post" enctype="multipart/form-data" class="form">
+                                <div class="form__col">
+                                    <div class="form__title">Личные данные</div>
+                                    <div class="form__box">
+                                        <div class="form__row">
+                                            <input type="text" name="firstname" value="{{ firstname }}" class="form__control {% if error_firstname %} error-inp {% endif %}" placeholder="Имя*">
+
+                                    </div>  {% if error_firstname %}
+											<div class="text-danger">{{ error_firstname }}</div>
+										{% endif %}
+
+
+                                        <div class="form__row">
+                                            <input type="text" name="lastname" value="{{ lastname }}" class="form__control {% if error_lastname %} error-inp {% endif %}" placeholder="Фамилия*">
+
+                                        </div>  {% if error_lastname %}
+											<div class="text-danger">{{ error_lastname }}</div>
+										{% endif %}
+
+                                        <div class="form__row">
+                                            <input name="email" value="{{ email }}" type="email" class="form__control {% if error_email %} error-inp {% endif %}" placeholder="Email*">
+
+                                        </div>   {% if error_email %}
+											<div class="text-danger">{{ error_email }}</div>
+										{% endif %}
+
+                                        <div class="form__row">
+                                            <input name="telephone" value="{{ telephone }}" type="text" class="form__control {% if error_telephone %} error-inp {% endif %}" placeholder="Телефон*">
+
+                                        </div>    {% if error_telephone %}
+											<div class="text-danger">{{ error_telephone }}</div>
+										{% endif %}
+                                    </div>
+                                </div>
+                                <div class="form__col">
+                                    <div class="form__title">Пароль</div>
+
+
+                                    <div class="form__box">
+                                        <div class="form__row">
+                                            <input type="password" name="password" value="{{ password }}" class="form__control {% if error_password %} error-inp {% endif %}" placeholder="Пароль*">
+
+                                        </div>
+										{% if error_password %}
+											<div class="text-danger">{{ error_password }}</div>
+										{% endif %}
+                                        <div class="form__row">
+                                            <input type="password" name="confirm" value="{{ confirm }}" class="form__control {% if error_confirm %} error-inp {% endif %}" placeholder="Повтор пароля*">
+
+                                        </div>  {% if error_confirm %}
+											<div class="text-danger">{{ error_confirm }}</div>
+										{% endif %}
+                                    </div>
+
+                                    {% if text_agree %}
+
+                                    <label class="convention">
+                                        {% if agree %}
+                                            <input class="convention__check" type="checkbox" name="agree" value="1" checked="checked" />
+                                        {% else %}
+                                            <input class="convention__check" type="checkbox" name="agree" value="1" />
+                                        {% endif %}
+
+                                        <i class="convention__mark"></i>
+                                        <span class="convention__text">
+                                            {{ text_agree }}
+                                        </span>
+                                    </label>
+                                    {% endif %}
+
+
+
+
+                                    <label class="convention">
+                                        <input name="newsletter" value="1" type="checkbox" class="convention__check" {% if newsletter %}checked="checked" {% endif %}>
+                                        <i class="convention__mark"></i>
+                                        <span class="convention__text">Я хочу получать уведомления о новинках, скидках, акциях</span>
+                                    </label>
+                                </div>
+                                <!-- invisible reCaptcha -->
+                                <div id="recaptcha-registration" class="recaptcha-block"></div>
+                                <button type="submit" class="btn btn-default">зарегистрироваться</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+	.text-danger {
+		font-size: 13px;
+		padding-bottom: 10px;
+		color: #e58182;
+	}
+	.alert.alert-danger.alert-dismissible {
+		color: #e58182;
+	}
+</style>
+<script>
+	// при отправке формы contact_form на сервер (id="registration-form")
+	$('#registration-form').submit(function (event) {
+	 	// отменим стандартную отправку формы на сервер
+	 	event.preventDefault();
+	 	// если форма прошла валидацию, то вызовем invisible reCaptcha
+		if($(this).find('[name="firstname"]').val().length && $(this).find('[name="lastname"]').val().length && $(this).find('[name="email"]').val().length && $(this).find('[name="telephone"]').val().length && $(this).find('[name="password"]').val().length && $(this).find('[name="confirm"]').val().length && $(this).find('[name="agree"]').prop("checked")) {
+	 		grecaptcha.execute(idCaptchaRegistration);
+		} else {
+			$(this).submit();
+		}
+	});
+	// функции, которая будет вызвана после окончания успешной проверки пользователя
+	function onSubmitReCaptchaRegistration() {
+		$('#registration-form').submit();
+	}
+	$('.form input').change(function () {
+	$('.alert-danger').remove();
+	$('.text-danger').remove();
+	$('.error-inp').removeClass('error-inp');
+	})
+</script>
+
+
+<script><!--
+// Sort the custom fields
+$('#account .form-group[data-sort]').detach().each(function() {
+	if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {
+		$('#account .form-group').eq($(this).attr('data-sort')).before(this);
+	}
+
+	if ($(this).attr('data-sort') > $('#account .form-group').length) {
+		$('#account .form-group:last').after(this);
+	}
+
+	if ($(this).attr('data-sort') == $('#account .form-group').length) {
+		$('#account .form-group:last').after(this);
+	}
+
+	if ($(this).attr('data-sort') < -$('#account .form-group').length) {
+		$('#account .form-group:first').before(this);
+	}
+});
+
+$('input[name=\'customer_group_id\']').on('change', function() {
+	$.ajax({
+		url: 'index.php?route=account/register/customfield&customer_group_id=' + this.value,
+		dataType: 'json',
+		success: function(json) {
+			$('.custom-field').hide();
+			$('.custom-field').removeClass('required');
+
+			for (i = 0; i < json.length; i++) {
+				custom_field = json[i];
+
+				$('#custom-field' + custom_field['custom_field_id']).show();
+
+				if (custom_field['required']) {
+					$('#custom-field' + custom_field['custom_field_id']).addClass('required');
+				}
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('input[name=\'customer_group_id\']:checked').trigger('change');
+//--></script> 
+<script><!--
+$('button[id^=\'button-custom-field\']').on('click', function() {
+	var element = this;
+
+	$('#form-upload').remove();
+
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+
+	$('#form-upload input[name=\'file\']').trigger('click');
+
+	if (typeof timer != 'undefined') {
+    	clearInterval(timer);
+	}
+
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'file\']').val() != '') {
+			clearInterval(timer);
+
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(element).button('loading');
+				},
+				complete: function() {
+					$(element).button('reset');
+				},
+				success: function(json) {
+					$(element).parent().find('.text-danger').remove();
+
+					if (json['error']) {
+						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
+
+					if (json['success']) {
+						alert(json['success']);
+
+						$(element).parent().find('input').val(json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+//--></script> 
+
+{{ footer }} 

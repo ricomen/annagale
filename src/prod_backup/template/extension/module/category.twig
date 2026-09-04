@@ -1,0 +1,14 @@
+<aside class="catalog-widget">
+  <div class="catalog-widget__title">Категории</div>
+  <ul class="catalog-widget__list">
+    {% for category in categories %}
+    <li class="catalog-widget__items">
+      {% if category.status == 1 %}
+        <span href="{{ category.href }}" class="catalog-widget__link">{{ category.name }}</span>
+      {% else %}
+      <a href="{{ category.href }}" class="catalog-widget__link {% if category.category_id == category_id %} active {% endif %}">{{ category.name }}</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</aside>

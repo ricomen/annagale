@@ -1,0 +1,8 @@
+<div class="ulogin_form">
+    {% if uloginid == '' %}
+        <div data-ulogin="display=panel;theme=flat;fields=first_name,last_name,email;optional=phone,city,country,nickname,sex,photo_big,bdate,photo;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri={{ redirect_uri }};callback={{ callback }}"></div>
+    {% else %}
+        <div data-uloginid="{{ uloginid }}" data-ulogin="redirect_uri={{ redirect_uri }};callback={{ callback }}"></div>
+    {% endif %}
+</div>
+<div style="clear:both"></div>

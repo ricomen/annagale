@@ -1,0 +1,43 @@
+<div class="extsm-12">
+	<div class="full-payment-method format_load">
+		<div class="content-delivery-method">
+			<div class="extpanel extpanel-default">
+				<div class="extpanel-heading">
+				   <h4 class="extpanel-title"><i class="fa fa-clock-o"></i> {{heading_title}}</h4>
+				</div>
+				<div class="extpanel-body delivery-Date-content ext-delivery-date">
+					<div class="form-group {{delivery_required ? 'required' : ''}}">
+						<label class="col-sm-3 control-label">{{label}}</label>
+						<div class="col-sm-7">
+							<div class="input-group date date-error">
+								<input type="text" name="delivery_date" value="{{delivery_date}}" data-date-format="YYYY-MM-DD"  class="form-control date" />
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+var disablesweeks = [];
+  {% for week in delivery_weekend %}
+	disablesweeks.push({{week}});
+  {% endfor %}
+  
+$('.date').datetimepicker({
+	pickTime: false,
+	minDate: moment().add('{{start}}', 'days'),
+    maxDate: moment().add('{{end}}', 'days'),
+	{% if  disable_days %}
+	disabledDates: {{disable_days}},
+	{% endif %}
+	daysOfWeekDisabled: disablesweeks,
+	useCurrent: false,
+	autoclose: 1,
+	defaultDate: '{{next_date}}',
+});
+</script>
