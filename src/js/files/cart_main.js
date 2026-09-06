@@ -491,17 +491,17 @@ export class MhzCart {
   renderCartSumm() {
     const summ = this.cartParts?.cartSumm;
     const total = this.cartJson?.totals?.total;
+    const step1 = document.querySelector('[data-step="1"]');
     const threeStepSumm = document.querySelector('[data-step="3"] .summ-cart');
     const toFreeShipping = this.cartJson?.toFreeShipping;
     const coupunFreeShipping = this.cartJson?.coupon_info?.shipping;
+    const couponApplied = Boolean(this.cartJson?.totals?.coupon);
 
     if (summ&&total) {
       let str = `
       <div class="summ-cart__row">
         <div class="summ-cart__key">${total.title.toUpperCase()}</div>
-        <div class="summ-cart__value">
-          ${total.text}
-        </div>
+        <div class="summ-cart__value">${total.text}</div>
       </div>\n
       `;
       
@@ -525,6 +525,21 @@ export class MhzCart {
       summ.innerHTML = str;
       if (threeStepSumm) {
         threeStepSumm.innerHTML = str;
+      }
+
+      if (step1) {
+        let firstStepSumm = step1.querySelector('.summ-cart');
+        if (couponApplied && total) {
+          if (!firstStepSumm) {
+            firstStepSumm = document.createElement('div');
+            firstStepSumm.className = 'products-cart__summ summ-cart';
+            const btn = step1.querySelector('[data-next-step]');
+            btn?.before(firstStepSumm);
+          }
+          firstStepSumm.innerHTML = str;
+        } else if (firstStepSumm) {
+          firstStepSumm.remove();
+        }
       }
     }
   }
