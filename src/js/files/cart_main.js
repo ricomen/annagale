@@ -3,6 +3,7 @@ import { tabs } from "./functions.js";
 import { mhzModules } from "./modules.js";
 import { gotoBlock } from "./scroll/gotoblock.js";
 import { CHECKOUT_BASE_URL, ENDPOINTS } from "./constants.js";
+import { applyCouponState, getPromoParts, setPromoWidgetsError } from "./coupon.js";
 
 let md2 = matchMedia('(max-width: 992px)');
 export class MhzCart {
@@ -165,32 +166,26 @@ export class MhzCart {
     }
   }
   setCommonHandlers() {
-    document.addEventListener('formSent', (e)=>{
-      const form = e.detail.form;
+    document.addEventListener('couponSent', (e)=>{
       const responseResult = e.detail.responseResult;
-      const thisForm = this.cartParts.cartCouponForm;
+      this.afterCouponSend(responseResult);
+      const cityInput = this.activeStepEl.querySelector('[data-name="city"]');
+      if (cityInput&&cityInput.value) this.getShippingMethod();
 
-      if (form.classList.contains('promo-cart')) {
-        this.afterCouponSend(thisForm, responseResult);
-        const cityInput = this.activeStepEl.querySelector('[data-name="city"]');
-        if (cityInput&&cityInput.value) this.getShippingMethod();
-
-        const checkedPaymentMethod = document.querySelector('[data-name="payment_method"]:checked');
-        const oformitBtn = document.querySelector('[data-oformit]');
-        if (checkedPaymentMethod) {
-          checkedPaymentMethod.checked = false;
-        }
-        if (oformitBtn) {
-          oformitBtn.hidden = true;
-        }
+      const checkedPaymentMethod = document.querySelector('[data-name="payment_method"]:checked');
+      const oformitBtn = document.querySelector('[data-oformit]');
+      if (checkedPaymentMethod) {
+        checkedPaymentMethod.checked = false;
+      }
+      if (oformitBtn) {
+        oformitBtn.hidden = true;
       }
     })
   }
-  async afterCouponSend(thisForm, responseResult) {
+  async afterCouponSend(responseResult) {
     if (responseResult.error) {
       setTimeout(() => {
-        thisForm.cartCouponForm.classList.add('_form-error');
-        // thisForm.cartCouponForm.insertAdjacentHTML('beforeend', `<div class="form__error">${responseResult.error}</div>`);
+        setPromoWidgetsError(true);
       }, 10);
     }
     await this.getCart();
@@ -369,15 +364,16 @@ export class MhzCart {
       let cartListActual = cartList.querySelector('.simplebar-content') ? cartList.querySelector('.simplebar-content') : cartList;
       const cartBottom = this.cartProducts.querySelector('.bottom-cart');
       const cartSumm = this.cartProducts.querySelector('.summ-cart');
-      const cartCouponForm = this.cartProducts.querySelector('.promo-cart');
-      let cartCouponInput;
-      let cartCouponButton;
-      let cartCouponButtonSuccess;
-      if (cartCouponForm) {
-        cartCouponInput = cartCouponForm.querySelector('.promo-cart__input');
-        cartCouponButton = cartCouponForm.querySelector('.promo-cart__button[type="submit"]');
-        cartCouponButtonSuccess = cartCouponForm.querySelector('.promo-cart__button[type="button"]');
+      let promoParts = getPromoParts(this.cartProducts);
+      if (!promoParts.cartCouponForm) {
+        promoParts = getPromoParts();
       }
+      const {
+        cartCouponForm,
+        cartCouponInput,
+        cartCouponButton,
+        cartCouponButtonSuccess
+      } = promoParts;
 
       this.cartParts = {
         cartTrigger,
@@ -533,22 +529,7 @@ export class MhzCart {
     }
   }
   renderCartForm() {
-    const cartCoupon = this.cartJson?.totals?.coupon;
-    const thisForm = this.cartParts?.cartCouponForm;
-    if (cartCoupon&&thisForm) {
-      let couponText = cartCoupon.title.split(':')[1].replaceAll(')','').trim();
-      if (couponText.length > 0) {
-        thisForm.cartCouponInput ? thisForm.cartCouponInput.value = couponText : null;
-        thisForm.cartCouponInput ? thisForm.cartCouponInput.setAttribute('readonly', '')  : null;
-        thisForm.cartCouponButton ? thisForm.cartCouponButton.hidden = true : null;
-        thisForm.cartCouponButtonSuccess ? thisForm.cartCouponButtonSuccess.hidden = false : null;
-      }
-    } else {
-      thisForm.cartCouponInput ? thisForm.cartCouponInput.value = '' : null;
-      thisForm.cartCouponInput ? thisForm.cartCouponInput.removeAttribute('readonly')  : null;
-      thisForm.cartCouponButton ? thisForm.cartCouponButton.hidden = false : null;
-      thisForm.cartCouponButtonSuccess ? thisForm.cartCouponButtonSuccess.hidden = true : null;
-    }
+    applyCouponState(this.cartJson?.totals?.coupon);
   }
   setCartItemStr(product) {
     let str = `

@@ -88,6 +88,7 @@ DynamicAdapt.prototype.mediaHandler = function (matchMedia, оbjects) {
 };
 // Функция перемещения
 DynamicAdapt.prototype.moveTo = function (place, element, destination) {
+	if (!element || !destination) return;
 	element.classList.add(this.daClassname);
 	if (place === 'last' || place >= destination.children.length) {
 		destination.insertAdjacentElement('beforeend', element);

@@ -1,4 +1,5 @@
 import { CHECKOUT_BASE_URL, ENDPOINTS, ROUTE_BASE } from "./constants.js";
+import { applyCouponState, getPromoParts, setPromoWidgetsError } from "./coupon.js";
 
 export class MhzCartSidebar {
   cartJson = {};
@@ -33,15 +34,16 @@ export class MhzCartSidebar {
   setCartParts() {
     const cartListEl = this.cartSidebar.querySelector('.products-cart__list');
     const cartList = cartListEl.querySelector('.simplebar-content') ? cartListEl.querySelector('.simplebar-content') : cartListEl;
-    const cartCouponForm = this.cartSidebar.querySelector('.promo-cart');
-    let cartCouponInput;
-    let cartCouponButton;
-    let cartCouponButtonSuccess;
-    if (cartCouponForm) {
-      cartCouponInput = cartCouponForm.querySelector('.promo-cart__input');
-      cartCouponButton = cartCouponForm.querySelector('.promo-cart__button[type="submit"]');
-      cartCouponButtonSuccess = cartCouponForm.querySelector('.promo-cart__button[type="button"]');
+    let promoParts = getPromoParts(this.cartSidebar);
+    if (!promoParts.cartCouponForm) {
+      promoParts = getPromoParts();
     }
+    const {
+      cartCouponForm,
+      cartCouponInput,
+      cartCouponButton,
+      cartCouponButtonSuccess
+    } = promoParts;
     const cartSumm = this.cartSidebar.querySelector('.summ-cart');
 
     this.cardParts = {
@@ -81,9 +83,12 @@ export class MhzCartSidebar {
       let md661 = matchMedia('(min-width:630px)');
       md661.matches ? this.cardParts.cartList.style.minWidth = '661px' : null;
       const button = document.querySelector('.products-cart__button');
-      const promo = document.querySelector('.promo-cart');
       button ? button.hidden = false : null;
-      promo ? promo.hidden = false : null;
+      document.querySelectorAll('.promo-cart[data-promo]').forEach((promo) => {
+        if (promo.closest('.boxes-cart') || promo.closest('.mhz-cart_sidebar') || promo.closest('.mhz-cart__products')) {
+          promo.hidden = false;
+        }
+      });
       let str = '';
       this.cartJson.products.forEach(product=>{
         str+=`
@@ -176,22 +181,7 @@ export class MhzCartSidebar {
   }
 
   renderCartCoupon() {
-    const cartCoupon = this.cartJson?.totals?.coupon;
-    const thisForm = this.cardParts?.cartCouponForm;
-    if (cartCoupon&&thisForm) {
-      let couponText = cartCoupon.title.split(':')[1].replaceAll(')','').trim();
-      if (couponText.length > 0) {
-        thisForm.cartCouponInput ? thisForm.cartCouponInput.value = couponText : null;
-        thisForm.cartCouponInput ? thisForm.cartCouponInput.setAttribute('readonly', '')  : null;
-        thisForm.cartCouponButton ? thisForm.cartCouponButton.hidden = true : null;
-        thisForm.cartCouponButtonSuccess ? thisForm.cartCouponButtonSuccess.hidden = false : null;
-      }
-    } else {
-      thisForm.cartCouponInput ? thisForm.cartCouponInput.value = '' : null;
-      thisForm.cartCouponInput ? thisForm.cartCouponInput.removeAttribute('readonly')  : null;
-      thisForm.cartCouponButton ? thisForm.cartCouponButton.hidden = false : null;
-      thisForm.cartCouponButtonSuccess ? thisForm.cartCouponButtonSuccess.hidden = true : null;
-    }
+    applyCouponState(this.cartJson?.totals?.coupon);
   }
 
   setHandlers() {
@@ -217,49 +207,19 @@ export class MhzCartSidebar {
           this.afterButtonCartListClick();
         }, 100);
       }
-
-      const cleanPromo = e.target.closest('[data-promo-clean]');
-      if (cleanPromo) {
-        this.cleanPromo(cleanPromo);
-      }
     })
 
 
-    document.addEventListener('formSent', (e)=>{
-      const form = e.detail.form;
+    document.addEventListener('couponSent', (e)=>{
       const responseResult = e.detail.responseResult;
-      const thisForm = this.cardParts.cartCouponForm;
-
-      if (form.classList.contains('promo-cart')) {
-        this.afterCouponSend(thisForm, responseResult);
-      }
+      this.afterCouponSend(responseResult);
     })
   }
 
-  cleanPromo(cleanPromo) {
-    const form = cleanPromo.closest('form.promo-cart');
-    if (form) {
-      const input = form.querySelector('input');
-      const submitBtn = form.querySelector('[type="submit"]');
-      if (input&&submitBtn) {
-        input.removeAttribute('readonly');
-        input.removeAttribute('data-required');
-        input.value = '';
-        cleanPromo.hidden = true;
-        submitBtn.hidden = false;
-        submitBtn.click();
-        setTimeout(() => {
-          input.setAttribute('data-required', '');
-        }, 500);
-      }
-    }
-  }
-
-  async afterCouponSend(thisForm, responseResult) {
+  async afterCouponSend(responseResult) {
     if (responseResult.error) {
       setTimeout(() => {
-        thisForm.cartCouponForm.classList.add('_form-error');
-        // thisForm.cartCouponForm.insertAdjacentHTML('beforeend', `<div class="form__error">${responseResult.error}</div>`);
+        setPromoWidgetsError(true);
       }, 10);
     }
     await this.getCart();

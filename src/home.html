@@ -163,21 +163,7 @@
                 </div>
               </div>
             </div>
-            <form data-ajax method="post" action="#" class="products-cart__promo promo-cart">
-              <input type="text" class="promo-cart__input" placeholder="Введите промокод или подарочный сертификат" autocomplete="off">
-              <button type="submit" class="promo-cart__button">
-                <svg width="43" height="24" viewBox="0 0 43 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M42.0607 13.0607C42.6464 12.4749 42.6464 11.5251 42.0607 10.9393L32.5147 1.3934C31.9289 0.807611 30.9792 0.807611 30.3934 1.3934C29.8076 1.97918 29.8076 2.92893 30.3934 3.51472L38.8787 12L30.3934 20.4853C29.8076 21.0711 29.8076 22.0208 30.3934 22.6066C30.9792 23.1924 31.9289 23.1924 32.5147 22.6066L42.0607 13.0607ZM6.55843e-09 13.5L41 13.5L41 10.5L-6.55843e-09 10.5L6.55843e-09 13.5Z" fill="white"/>
-                </svg>
-              </button>
-              <!-- При введённом промокоде -->
-              <!-- <input type="text" class="promo-cart__input" value="promocode" readonly autocomplete="off">
-              <button type="submit" class="promo-cart__button" disabled>
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-                  <path d="M11.0134 0L4.5134 7.44671L1.9867 4.55229L0 6.8288L4.51343 12L13 2.27656L11.0134 0Z" fill="#999"/>
-                </svg>
-              </button> -->
-            </form>
+            @@include('html/_promo-cart.htm',{})
             <div class="products-cart__summ summ-cart">
               <div class="summ-cart__row">
                 <div class="summ-cart__key">ИТОГО</div>
@@ -217,29 +203,32 @@
           <div class="mhz-cart__main main-cart">
             <form data-dev class="main-cart__boxes boxes-cart" data-step="1" data-simplebar>
               <h2 class="boxes-cart__title">ВЫБОР УПАКОВКИ</h2>
-              <div class="boxes-cart__item">
-                <input type="radio" checked name="boxes-cart__radio" value="standart" id="boxes-cart__radio_1" class="boxes-cart__radio">
-                <label for="boxes-cart__radio_1" class="boxes-cart__label">
-                  <div class="boxes-cart__image">
-                    <img src="@img/box_standart.png" alt="image">
-                  </div>
-                  <div class="boxes-cart__name">Стандартная коробка</div>
-                  <div class="boxes-cart__price">
-                    0 ₽
-                  </div>
-                </label>
-              </div>
-              <div class="boxes-cart__item">
-                <input type="radio" name="boxes-cart__radio" value="protect" id="boxes-cart__radio_2" class="boxes-cart__radio">
-                <label for="boxes-cart__radio_2" class="boxes-cart__label">
-                  <div class="boxes-cart__image">
-                    <img src="@img/box_protect.png" alt="image">
-                  </div>
-                  <div class="boxes-cart__name">Дополнительная защита коробки</div>
-                  <div class="boxes-cart__price">
-                    70 ₽
-                  </div>
-                </label>
+
+              <div class="boxes-cart__items">
+                <div class="boxes-cart__item">
+                  <input type="radio" checked name="boxes-cart__radio" value="standart" id="boxes-cart__radio_1" class="boxes-cart__radio">
+                  <label for="boxes-cart__radio_1" class="boxes-cart__label">
+                    <div class="boxes-cart__image">
+                      <img src="@img/box_standart.png" alt="image">
+                    </div>
+                    <div class="boxes-cart__name">Стандартная коробка</div>
+                    <div class="boxes-cart__price">
+                      0 ₽
+                    </div>
+                  </label>
+                </div>
+                <div class="boxes-cart__item">
+                  <input type="radio" name="boxes-cart__radio" value="protect" id="boxes-cart__radio_2" class="boxes-cart__radio">
+                  <label for="boxes-cart__radio_2" class="boxes-cart__label">
+                    <div class="boxes-cart__image">
+                      <img src="@img/box_protect.png" alt="image">
+                    </div>
+                    <div class="boxes-cart__name">Дополнительная защита коробки</div>
+                    <div class="boxes-cart__price">
+                      70 ₽
+                    </div>
+                  </label>
+                </div>
               </div>
               <div class="boxes-cart__postcard">
                 <div class="boxes-cart__postrow">
@@ -251,6 +240,9 @@
                 <div class="boxes-cart__postrow">
                   <input type="text" class="boxes-cart__input" name="boxes-cart__input" placeholder="Введите текст" data-required hidden autocomplete="off">
                 </div>
+              </div>
+              <div class="boxes-cart__promo-slot">
+                @@include('html/_promo-cart.htm',{})
               </div>
               <a href="#" data-next-step class="boxes-cart__button mhz-btn">ПРОДОЛЖИТЬ</a>
             </form>
@@ -714,6 +706,7 @@
                   </div>
                 </div>
               </div>
+              @@include('html/_promo-cart.htm',{})
               <div class="products-cart__bottom bottom-cart">
                 <div class="bottom-cart__row">
                   <div class="bottom-cart__key">СТОИМОСТЬ ТОВАРОВ</div>

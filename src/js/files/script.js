@@ -3,11 +3,13 @@ import { isMobile, _slideDown, _slideUp } from "./functions.js";
 // Подключение списка активных модулей
 import { MhzCart } from "./cart_main.js";
 import { MhzCartSidebar } from "./cart_sidebar.js";
+import { initCouponWidget } from "./coupon.js";
 import  "./modules.js";
 
 let cartSidebar = null;
 
 document.addEventListener("DOMContentLoaded", function () {
+  initCouponWidget();
   initSocialFixed();
   const header = document.querySelector('.header');
   const wrapper = document.querySelector('.wrapper');
@@ -29,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
       new MhzCart(cartMain, cartSteps, cartProducts, 1, true)
     }
   }
-
 
   const cartSidebarEl = document.querySelector('.mhz-cart_sidebar');
   if (cartSidebarEl) {
