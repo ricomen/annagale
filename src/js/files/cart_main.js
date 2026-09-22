@@ -486,6 +486,27 @@ export class MhzCart {
       if (threeStepBottom) {
         threeStepBottom.innerHTML = str;
       }
+
+      const step1 = document.querySelector('[data-step="1"]');
+      const couponApplied = Boolean(totals.coupon);
+
+      if (step1) {
+        let firstStepBottom = step1.querySelector('.bottom-cart');
+        if (couponApplied) {
+          if (!firstStepBottom) {
+            firstStepBottom = document.createElement('div');
+            firstStepBottom.className = 'bottom-cart';
+            step1.querySelector('[data-next-step]')?.before(firstStepBottom);
+          }
+          firstStepBottom.innerHTML = `
+          <div class="bottom-cart__row bottom-cart__row_small">
+            <div class="bottom-cart__key">${coupon.title.toUpperCase()}</div>
+            <div class="bottom-cart__value">${coupon.text}</div>
+          </div>\n`;
+        } else if (firstStepBottom) {
+          firstStepBottom.remove();
+        }
+      }
     }
   }
   renderCartSumm() {
@@ -532,7 +553,7 @@ export class MhzCart {
         if (couponApplied && total) {
           if (!firstStepSumm) {
             firstStepSumm = document.createElement('div');
-            firstStepSumm.className = 'products-cart__summ summ-cart';
+            firstStepSumm.className = 'summ-cart';
             const btn = step1.querySelector('[data-next-step]');
             btn?.before(firstStepSumm);
           }

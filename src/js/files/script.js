@@ -111,12 +111,11 @@ function initSocialFixed() {
   } catch (e) {}
 
   // if (!dismissed) {
-   // Попросили скрыть показ 01.09.2026
-    // window.setTimeout(() => {
-    //   if (root.classList.contains('is-open')) return;
-    //   root.classList.add('has-greeting');
-    //   if (bubble) bubble.setAttribute('aria-hidden', 'false');
-    // }, greetingDelay);
+    window.setTimeout(() => {
+      if (root.classList.contains('is-open')) return;
+      root.classList.add('has-greeting');
+      if (bubble) bubble.setAttribute('aria-hidden', 'false');
+    }, greetingDelay);
   // }
 }
 
