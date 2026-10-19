@@ -8,6 +8,14 @@
 	flex-direction: column;
 	gap: 10px;
 
+	.sidecart-open & {
+		z-index: 8;
+	}
+
+	body:has(.main-cart) & {
+		display: none;
+	}
+
 	@media (max-width: $mobile) {
 		left: 16px;
 		bottom: 16px;

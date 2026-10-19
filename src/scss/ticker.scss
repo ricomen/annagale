@@ -1,0 +1,42 @@
+.ticker {
+  overflow: hidden;
+  background: #4b601e;
+  color: #fff;
+  font-size: rem(14);
+  line-height: 1.2;
+  white-space: nowrap;
+
+  &:hover .ticker__track {
+    animation-play-state: paused;
+  }
+}
+
+.ticker__track {
+  display: flex;
+  width: max-content;
+  animation: ticker 28s linear infinite;
+}
+
+.ticker__set {
+  display: flex;
+  flex-shrink: 0;
+
+  span {
+    padding: rem(8) rem(24);
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track {
+    animation: none;
+  }
+}
