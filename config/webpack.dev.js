@@ -75,6 +75,7 @@ const config = {
 			`${paths.src}/**/*.html`,
 			`${paths.src}/**/*.pug`,
 			`${paths.src}/**/*.htm`,
+			`${paths.src}/index.css`,
 			`${paths.src}/img/**/*.*`
 		],
 	},
@@ -141,6 +142,11 @@ const config = {
 		new CopyPlugin({
 			patterns: [
 				{
+					// легаси-CSS: правится напрямую в src/index.css, копируется как есть
+					from: `${srcFolder}/index.css`, to: `css/index.css`,
+					noErrorOnMissing: true,
+					force: true
+				}, {
 					from: `${srcFolder}/img`, to: `img`,
 					noErrorOnMissing: true,
 					force: true

@@ -117,6 +117,10 @@ const config = {
 		new CopyPlugin({
 			patterns: [
 				{
+					// легаси-CSS: единственный источник — src/index.css
+					from: `${paths.src}/index.css`, to: `../css/index.css`,
+					noErrorOnMissing: true
+				}, {
 					from: `${paths.src}/files`, to: `../files`,
 					noErrorOnMissing: true
 				}, {
