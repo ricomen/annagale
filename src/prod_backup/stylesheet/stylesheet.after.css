@@ -1,0 +1,151 @@
+.btn-minus_popups_list::before, .btn-plus_popups_list::before, .btn-plus_popups_list::after {
+	content: '';
+	display: block;
+	width: 10px;
+	height: 2px;
+	background-color: #86b548;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%) scale(1);
+	transform: translate(-50%, -50%) scale(1);
+}
+.btn-plus_popups_list::after {
+	width: 2px;
+	height: 10px;
+}
+.main-partners .partners-video {
+	height: auto;
+}
+#button-cart {
+	background:url(/image/button-cart-background-green.svg) no-repeat;
+	height:46px;
+	width:196px;
+	border:none;
+}
+#button-cart:hover {
+	background:url(/image/button-cart-background.svg) no-repeat;
+}
+#button-cart span {
+	padding-left:3em;
+	font-size:0.94em;
+	white-space:nowrap;
+	color:#fff;
+}
+#button-cart:hover span {
+	color:#6d9b4b;
+}
+@media (min-width: 480px) {
+	.with-cart.box-sale__block .more-beautiful {
+		position: relative;
+		margin-top: 14px;
+	}
+	.with-cart.box-sale__block .more-beautiful .button-cart {
+		margin-left:auto;
+		margin-right:auto;
+		background:url(/image/button-cart-background.svg) no-repeat;
+		height:46px;
+		width:196px;
+		border:none;
+	}
+	.with-cart.box-sale__block .more-beautiful span {
+		padding-left:3em;
+		font-size:0.94em;
+		white-space:nowrap;
+		color:#6d9b4b;
+	}
+	.product 
+}
+@media (max-width: 479px) {
+	.with-cart.box-sale__block .more-beautiful {
+		position: absolute;
+		margin-right: 16px;
+		margin-left: calc(100% - 51px);
+		cursor: pointer;
+		margin-top: 0px;
+		display: block;
+		width: 35px;
+	}
+	.with-cart.box-sale__block .more-beautiful .button-cart {
+		display: block;
+		background-image: url(/image/icon-cart.svg);
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: center;
+		width: 35px;
+		height: 26px;
+		min-width: 35px;
+		padding: 0px;
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+	}
+	.with-cart.box-sale__block .more-beautiful span {
+		display: none;
+	}
+	.with-cart.box-sale__block {
+		position: relative;
+	}
+	.with-cart.box-sale__block form.like {
+		position: absolute;
+		right: 0px;
+		bottom: 0px;
+		margin-bottom: 16px;
+	}
+}
+
+h1.title {
+	margin-top: 0;
+}
+
+.header__holder .widget-elem { display: flex; }
+
+
+.box-sale__pic {
+    max-width: 250px;
+}
+.section-options {
+    padding-top: 10px;
+}
+.btn_notify {
+    background: #fff;
+    color: #5b8c32;
+    border: 1px solid #5b8c32;
+    white-space: nowrap;
+}
+.btn_notify:hover {
+    background-color: #5b8c32;
+    border: 1px solid #5b8c32;
+    color: #fff;
+}
+.btn_notify.btn_notify_mobile {
+    display:none;
+
+}
+.btn_notify img {
+    width: 20px;
+}
+.space-evenly {
+    justify-content: space-evenly;
+    min-width: 270px;
+}
+.with-cart.box-sale__block .more-beautiful .btn_notify span {
+    padding-left: 1em;
+}
+.with-cart.box-sale__block .more-beautiful .btn_notify {
+    min-width: unset;
+}
+@media (max-width: 479px) {
+    .btn_notify.btn-notify_hidden {
+        display:none;
+    }
+    .btn_notify.btn_notify_mobile {
+        display:block;
+        background: url(/catalog/view/theme/default/image/icons8-secured-letter-50.png) no-repeat;
+        border: 0;
+        background-size: contain;
+    }
+    .btn_notify.btn_notify_detail img {
+      
+    }
+}

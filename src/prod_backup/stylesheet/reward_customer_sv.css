@@ -1,0 +1,49 @@
+.coupon-thumb {
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  overflow: auto;
+  background-color: #FEF7EC;
+}
+
+.coupon-thumb.used {
+  background-color: #ECECEC;
+}
+
+.coupon-thumb .coupon-caption {
+  font-weight: 800;
+}
+
+.coupon-thumb  .coupon-description {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.coupon-thumb .coupon-code {
+  padding-left: 10px;
+  font-weight: 800;
+}
+
+.coupon-thumb .coupon-code i{
+  cursor: pointer;
+}
+
+.coupon-thumb .coupon-price {
+  padding-left: 10px;
+  font-weight: 600;
+}
+
+.coupon-thumb .coupon-used {
+  padding-left: 10px;
+}
+
+.coupon-thumb .cart {
+  margin-bottom: 10px;
+}
+
+#moadalCouponBuy .modal-header{
+  border-bottom-width: 0px !important;
+}
+
+#moadalCouponBuy .modal-footer{
+  border-top: none !important;
+}

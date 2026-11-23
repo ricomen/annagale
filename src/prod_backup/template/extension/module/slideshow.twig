@@ -13,7 +13,7 @@
             <div class="slideshow__subtitle">{{ banner.description }}</div>
             {% if banner.link %}
             <div class="btn-white">
-              <a href="{{ banner.link }}" class="btn-white__link">Заказать</a>
+              <a href="{{ banner.link }}" class="btn-white__link">{% if banner.buttonName %}{{ banner.buttonName }}{% else %}Заказать{% endif %}</a>
             </div>
             {% endif %}
           </div>

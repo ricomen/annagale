@@ -34,9 +34,23 @@
                                 <img src="/front/dist/images/checkout-icon.svg" alt="icon" height="104" width="104">
                             </div>
                             <div class="checkout-notific__title">Заказ №{{ order_id }} успешно оформлен</div>
-                            <div class="checkout-notific__subtitle">После отправки заказа, вам поступит уведомление с номером для отслеживания
+                            <div class="checkout-notific__subtitle">
+                        
+<!--
+                              <b>Испытайте удачу ✨</b><br>
+<b>Не закрывайте страницу — дождитесь загрузки Колеса Фортуны. </b><br><br>
+
+Оно появится ниже на этой странице.<br>
+Прокрутите колесо и узнайте свой подарок к заказу.<br><br>
+                            -->
+                            <small >После отправки заказа, вам поступит уведомление с номером для отслеживания</small>
+                           
                             </div>
-                            <a href="/" class="btn btn-default">На главную</a>
+                            {% if gamelead %}
+                                <div id="presentAfterPay"></div>
+                            {% endif %}
+                            <br>
+                            <a style="display:none" href="/" class="btn btn-default">На главную</a>
                         </div>
                     </div>
                 </div>
@@ -44,4 +58,18 @@
         </div>
     </div>
 </div>
+                            {% if gamelead %}
+		<script type='text/javascript'>
+		(function (d, w) {
+		var s = d.createElement('script');
+		s.type = 'text/javascript';
+		s.charset = 'utf-8';
+		s.async = true;
+		s.src = 'https://game-lead.ru/set/fc22bad177ff8981eaec41e048cfc73d';
+		var sc = d.getElementsByTagName('script')[0];
+		if (sc) sc.parentNode.insertBefore(s, sc);
+		else d.documentElement.firstChild.appendChild(s);
+		})(document, window);
+		</script>
+                            {% endif %}
 {{ footer }}

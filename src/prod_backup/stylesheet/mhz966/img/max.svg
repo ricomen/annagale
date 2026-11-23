@@ -1,0 +1,26 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_344_29068)">
+<mask id="mask0_344_29068" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="41">
+<circle cx="20" cy="20.0156" r="20" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_344_29068)">
+<path d="M30.0128 0H9.98724C4.47144 0 0 4.47144 0 9.98724V30.0128C0 35.5286 4.47144 40 9.98724 40H30.0128C35.5286 40 40 35.5286 40 30.0128V9.98724C40 4.47144 35.5286 0 30.0128 0Z" fill="url(#paint0_linear_344_29068)"/>
+<path d="M30.0128 0H9.98724C4.47144 0 0 4.47144 0 9.98724V30.0128C0 35.5286 4.47144 40 9.98724 40H30.0128C35.5286 40 40 35.5286 40 30.0128V9.98724C40 4.47144 35.5286 0 30.0128 0Z" fill="url(#paint1_radial_344_29068)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20.2414 31.091C18.0431 31.091 17.0216 30.7701 15.2459 29.4864C14.1226 30.9305 10.5658 32.0591 10.4107 30.1283C10.4107 28.6788 10.0898 27.454 9.72608 26.1168C9.29286 24.4694 8.80078 22.6349 8.80078 19.9766C8.80078 13.6279 14.0103 8.85156 20.1826 8.85156C26.3602 8.85156 31.2007 13.8632 31.2007 20.0355C31.2214 26.1123 26.3182 31.0586 20.2414 31.091ZM20.3324 14.3392C17.3265 14.1841 14.9838 16.2647 14.4649 19.5274C14.0371 22.2284 14.7966 25.5178 15.4437 25.6889C15.754 25.7638 16.5349 25.1327 17.0216 24.646C17.8264 25.202 18.7636 25.5359 19.7387 25.6141C22.8533 25.7639 25.5146 23.3927 25.7237 20.2815C25.8455 17.1637 23.4474 14.523 20.3324 14.3446V14.3392Z" fill="white"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_344_29068" x1="4.71388" y1="30.4214" x2="40" y2="20" gradientUnits="userSpaceOnUse">
+<stop stop-color="#44CCFF"/>
+<stop offset="0.662" stop-color="#5533EE"/>
+<stop offset="1" stop-color="#9933DD"/>
+</linearGradient>
+<radialGradient id="paint1_radial_344_29068" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-0.951632 -17.5674) rotate(51.356) scale(48.5407 20)">
+<stop stop-color="#0000FF"/>
+<stop offset="1" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="clip0_344_29068">
+<rect width="40" height="40" fill="white"/>
+</clipPath>
+</defs>
+</svg>
